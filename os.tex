@@ -10,7 +10,7 @@
 
 \begin{document}
 
-\title{BS Zusammenfassung}
+m\title{BS Zusammenfassung}
 \author{Benedict Hauck, Fedor Scholz}
 \maketitle
 
@@ -185,6 +185,76 @@ Beispiele:
 	\begin{itemize}
 		\item THE (Dijkstra), Multics(GE), VOCOS(EWSD)
 	\end{itemize}
+	
+\section{Monolitische Kernels}
+	\begin{center}
+		\includegraphics[scale=0.3] {monolithickernel.png}
+	\end{center}
+	Vorteile:
+		\begin{itemize}
+			\item "Gute" Performance
+			\item Ausreichender Schutz zwischen Anwendungen
+			\item Erweiterbar über Schnittstellen und statische/ladbare Module
+		\end{itemize}
+	Nachteile:
+		\begin{itemize}
+			\item Kein Schutz zwischen Kernel-Komponenten
+			\item Nebeneffekte durch undokumentierte Interfaces
+			\item Hohe Komplexität durch hohe gegenseitige Abhängigkeit
+		\end{itemize}
+	Beispiele
+		\begin{itemize}
+			\item Linux, Solaris
+		\end{itemize}
+
+\section{Microkernel Systeme}
+	\begin{center}
+		\includegraphics[scale=0.3] {microkernel.png}
+	\end{center}
+
+	\begin{itemize}
+		\item Möglichst viel des Kernels in den "Benutzer" space packen
+		\item Kommunikation erfolgt zwischen Benutzermodulen mit Nachrichtenweitergabe
+	\end{itemize}
+	
+	Vorteile:
+		\begin{itemize}
+			\item Einfacher einen Microkernel zu erweitern
+			\item Einfacher das Betriebssystem auf neue Architekturen zu portieren
+			\item Zuverlässiger (es läuft weniger Code im Kernel-Modul
+			\item Mehrere APIs vorhanden
+			\item Verbesserte Robustheit und Sicherheit
+			\item Einfacher zum Testen und Beweisen
+			\item Verbesserte Wartbarkeit
+		\end{itemize}
+	Nachteile:
+		\begin{itemize}
+			\item Performance Unkosten durch Kommunikation von Benutzerspace zum Kernelspace 
+			\item Zusätzliche Zersetzung
+			\item Schlechte Erfahrungen mit IBMs Workplace OS (1991-1995)
+		\end{itemize}
+
+\section{Virtuelle Maschinen}
+	\begin{itemize}
+		\item Eine virtuelle Maschine nimmt den mehrschichtigen Ansatz und behandelt Hardware sowie den Kernel des Betriebssystems so als wären sie Hardware
+		\item Eine virtuelle Maschine stellt ein identisches Interface zu der blanken, darunterliegenden Hardware
+		\item Der Betriebssystem-Host kreiert die Illusion das ein Prozess sein eigenen Prozessor und (virtuellen Speicher) hat.
+		\item Jeder Gast bekommt eine Kopie des darunterliegenden Computers zur Verfügung gestellt.
+	\end{itemize}
+	Vorteile:
+		\begin{itemize}
+			\item Mehrere Betriebssysteme können sich die gleiche Hardware teilen
+			\item Gegenseitiger Schutz
+			\item Nützlich für Development und Testen
+		\end{itemize}
+	\begin{center}
+		\includegraphics[scale=0.5] {virtualmachine.png}
+		\\
+		\includegraphics[scale=0.35] {vmwarearchi.png}
+		\\
+		\includegraphics[scale=0.3] {javavm.png}
+	\end{center}
+
 
 \chapter{03aProcess-management}
 \chapter{03bProcess-management-scheduling}
