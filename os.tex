@@ -33,6 +33,60 @@
 
 \chapter{01bCProgramming}
 \chapter{02OS}
+
+\section{Monolithisches System}
+Vorteile:
+	\begin{itemize} 
+		\item Einfacher Zugriff auf alle Systemdaten 
+		\item Kosten von Modulinteraktionen sind niedrig
+		\item Erweiterbar über Schnittstellen
+		\item Vorhersehbares Verhalten 
+	\end{itemize}
+Nachteile:
+	\begin{itemize}
+		\item Kein Schutz zwischen System und Anwendung
+		\item Instabil
+	\end{itemize}
+
+Beispiele:
+	\begin{itemize}
+		\item uCLinux, RTOSe, eCos
+	\end{itemize}
+	
+\section{Mehrschichtiger Ansatz}
+	\begin{itemize}
+		\item Betriebssystem ist in n Schichten aufgeteilt
+		\item Jede Schicht kann nur auf die Funktionen und Dienste von niedrigeren Schichten zugreifen 
+			\begin{itemize} 
+				\item Schicht 0 ist die Hardware
+				\item Schicht n ist das Benutzerinterface
+			\end{itemize}
+		\item Einfachere Migration zwischen Plattformen
+		\item Einfachere Evolution der Hardwareplattform
+		\item Niedrigere Schichten implementieren Mechanismen
+		\item Höhere Schichten implementieren meistens Policies
+	\end{itemize}
+
+\begin{center}
+\includegraphics[scale=0.15] {schichtenmodell.png} 
+\end{center}
+
+Vorteile:
+	\begin{itemize}
+		\item Jede Schicht kann unabhängig getestet und verfiziert werden
+		\item Korrektheit von Schicht n hängt nur von Schicht n-1 ab (einfacheres Debugging, einfachere Wartung)
+	\end{itemize}
+
+Nachteile:
+	\begin{itemize}
+		\item Nur unidirektionaler Schutz
+		\item Beiseitige Abhängigkeit von Schichten verhindert strikte Schichtenbildung
+	\end{itemize}
+Beispiele:
+	\begin{itemize}
+		\item THE (Dijkstra), Multics(GE), VOCOS(EWSD)
+	\end{itemize}
+
 \chapter{03aProcess-management}
 \chapter{03bProcess-management-scheduling}
 \chapter{04Process-coordination}
