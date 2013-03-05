@@ -260,6 +260,163 @@ Beispiele:
 \chapter{03bProcess-management-scheduling}
 \chapter{04Process-coordination}
 \chapter{05aMemoryManagement}
+\section{Background}
+\begin{itemize}
+\item Damit ein Programm laufen kann muss es von der Platte in den Speicher gebracht und innerhalb des Prozesses plaziert werden.
+
+\item Auf Hauptspeicher und Register kann nur die CPU direkt zugreifen.
+
+\item Ein Register Zugriff beträgt einen CPU Takt (oder weniger)
+
+\item Hauptspeicher kann einige Zyklen dauern.
+
+\item Cache liegt zwischen Hauptspeicher und CPU Registern
+
+\item Sicherheit des Speichers werden zur Sicherstellung korrek ausgeführter Operationen benötigt.
+
+\end{itemize}
+
+\subsection{Speicherpartitionierung}
+
+Hauptspeicher wird normalerweise in zwei Partitionen unterteilt :
+\begin{description}
+\item[Resident operating system]\ \\ werden normalerweise im "`low memory"' mit  \textit{interrupt vector} gespeichert
+\item[User processes]\ \\werden im "`high memory"' gespeichert
+\end{description}
+
+Register dienten dem Schutz der Benutzerprozesse untereinander und vor Veränderungen von Betriebssystemcode und Daten.
+\begin{itemize}
+\item "`Base register"' beinhalten den Wert der kleinsten physichen Adresse.
+\item "`Limit register"' beinhalten den Umfang der logischen Adressen.
+\end{itemize}
+
+\begin{center}
+		\includegraphics[scale=0.5] {baseandlimit.png}
+\end{center}
+
+\subsection{Einfacher Schutz mit \textit{base} und \textit{limit register}}
+
+Ein Paar aus base und limit Registern definieren einen logischen Adressraum
+
+\begin{center}
+\includegraphics[scale=0.5]{baseandlimitprotection.png}
+\end{center}
+
+
+\section{Swapping}
+\begin{itemize}
+\item Ein Prozess kann temporär aus dem Speicher in einen Zusatzspeicher gewechselt werden und dann wieder zurück um die Ausführung fortzusetzen
+\item \textbf{Zusatzspeicher (\textit{Backing store})} \ \\ Schneller Speicher, welcher groß genug ist um alle \textit{memory images} aller Nutzer unterzubringen. Er muss jedoch direkten Zugriff zu jenen bieten.
+\item \textbf{Roll out, roll in} \ \\ Eine Swapping Variation für prioritätsbasierte scheduling Algorithmen: Prozesse niedriger Priorität werden mit Prozessen hoher Priorität ausgewechselt um somit geladen und ausgeführt werden können.
+\item Hauptbestandteil der \textit{swap time} ist die \textit{transfer time}: Die totale Transferzeit ist direkt proportional zur Menge des ausgewechelten Speichers
+\item Modifizierte Versionen von ˆ\textit{swapping} wird auf vielen System gefunden (z.B UNIX, Linux und Windows)
+\item Das System führt eine \textit{ready queue} mit "`ready to run"'-Prozessen welche ein memory image im Speicher haben.
+
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{swapping.png}
+\caption{Schematik von Swapping}
+\end{figure}
+
+\section{Allocation}
+\subsection{Zusammenhängende Allokierung (\textit{contiguous allocation)}}
+\subsubsection{Multiple Partitions Allokierung}
+\begin{itemize}
+\item \textit{Hole}: Blöcke an verfügbarem Speicher. Löcher verschiedener Größe sind über den ganzen Speicher verteilt
+\item Bei Ankunft eines Prozesses, wird Speicher von einem Loch, welches groß genug ist um den Prozess aufzufassen, allokiert
+\end{itemize} Das Betriebssystem kümmert sich um Informationen über:
+
+\begin{itemize}
+\item[a)] allokierte Partitionen
+\item[b)] freie Partitionen (Löcher)
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{allocation.png}
+\caption{Schematik Speicherallokierung}
+\end{figure}
+
+\subsection{Dynamisches Speicher-Allokations Problem}
+\textbf{Problem:} Wie befreidigt man Anfragen der Größe n von einer Liste mit freien Löchern?
+\begin{itemize}
+\item \textit{First-fit}: Allokiert das erste Loch, welches groß genug ist: schnellste Allokierungsstrategie, hinterlässt jedoch Löcher unterschiedlicher Größe
+\item \textit{Best-fit}: Allokiert das kleinste passende Loch. Es muss jedoch die komplette Liste durchsucht werden, außer sie ist nach Größe sortiert. Hinterlässt die kleinsten Löcher.
+\item \textit{Worst-fit}: Allokiert das größte Loch. Es muss die gesammte Liste durchsucht werden, hinterlässt die größten Löcher
+\item \textit{Next-fit}: Nächst passendes Loch nach der letzten Allokierung
+\item \textit{Buddy System}:
+\begin{itemize}
+\item Die Löcher werden in k Listen so einsortiert, dass die i-te Liste jeweils Löcher der Länge gleich $2^i/$ für i = 1,...,k enthält
+\item Dabei können zwei benachbarte Löcher der i-ten Liste effizient zu einem  Loch der i+1-ten Liste zusammengefügt werden
+\item Umgekehrt kann ein Loch der i-ten Liste einfach in zwei Löcher der i-1-ten Listen aufgeteilt werden
+\item Löcher im Buddy-System können effizient mittels eines Binärbaumes dargestellt werden
+\item Laufzeitverhalten: Zuweisen und Freigabe Block schneller als first/best-fit. Fragmentierungsbehandlung ist aufwändiger. Deshalb Lazy-\textbf{Buddy:Zusammenfügen "`selten"'}
+\item Standard für Unix/Linux
+\end{itemize}
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.55]{allocationexample.png}
+\caption{Beispiel vor und nach Allokierung eines 16Mbyte Blocks}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.50]{buddysystem.png}
+\caption{Beispiel Buddysystem}
+\end{figure}
+  \ \\
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{buddysystemtree.png}
+\caption{Darstellung Buddysystem als Baum}
+\end{figure}
+\newpage
+
+\section{Relocation}
+\subsection{Fragmentierung}
+\begin{itemize}
+\item \textbf{Externe Fragmentierung} - Es ist genügend Speicher vorhanden um eine Anfrage zu befriedigen, jedoch nicht zusammenhängend.
+\item \textbf{Interne Fragmentierung} - Allokierter Speicher kann ein wenige größer als der angeforderte Speicher sein: Der Größenunterschied ist Speicherintern innerhalb einer Partition, wird jedoch nicht verwendet
+\item Reduzierung externer Fragmentierung durch Verdichtung (\textit{compatction}):
+\begin{itemize}
+\item Vermische den Speicherinhalt um alle freien Speicher in einem großen Block zu sammeln
+\item \textit{Compaction} ist nur dann möglich wenn die \textit{relocation} dynamisch und während der Durchführungszeit statt findet
+
+\end{itemize}
+\end{itemize}
+\subsection{Addressbinding und "`Data to Memory"'}
+
+\begin{itemize}
+\item \textbf{Compile time}: Wenn der Speicherstelle  a priori bekannt ist, kann ein absoluter Code generiert werden. Muss jedoch recompiliert werden wenn der Startpunkt verändert wir.
+\item \textbf{Load time}: Muss versetzbaren (engl.: \textit{relocatable}) Code generieren wenn die Speicherstelle zur Übersetzungszeit nicht bekannt ist.
+\item \textbf{Execution time}: \begin{LARGE}
+\textbf{lol wut kein plan, 5a, Folie 17}
+\end{LARGE}
+\end{itemize}
+
+\subsection{Logische vs. Physicher Adressraum}
+
+\begin{itemize}
+\item \textbf{logische Adresse} - CPU generiert, auch als virtuelle Adresse bezeichnet
+\item \textbf{physische Adresse} - von der Speichereinheit gesehene Adresse.
+
+Logische und physische Adressen sind im Sinne von Kompilierzeit und "`load-time adress-binding-schemes"' gleich. Unterschied liegt in der "`execution-time adress-binding scheme"'
+\end{itemize}
+
+\subsection{Memory-Management Unit (MMU)}
+\begin{itemize}
+\item Hardware Geräte welche virtuellen auf physikalischen Adressen abbilden
+\item Auf jede Adresse, die von einem Nutzerprozess generiert wurde, wird der Wert der relocation register addiert um die Hardwareadresse zu ermitteln.
+\item Das Endnutzerprogramm setzt sich mit den logischen Adressen auseinander, nie mit den real physischen.
+\end{itemize}
+
+
+\section{Segmentation}
+\section{Paging}
 \chapter{05bMemoryManagement}
 \chapter{05cMemoryManagement}
 \chapter{06aFileSystems}
