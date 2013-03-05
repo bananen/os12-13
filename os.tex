@@ -20,7 +20,6 @@
 \chapter{01aIntro}
 
 \section{Was ist ein Betriebssystem?}
-
 \begin{itemize}
 	\item Vermittler zwischen Benutzer und Computer
 	\item Ziele
@@ -45,17 +44,16 @@
 		\begin{itemize}
 			\item Kontrolle von Ausfuehrungen von Programmen um Fehler und ungeeignetes Benutzen des Computers zu verhindern
 		\end{itemize}
-	\item Das Programm, welches immer laeuft, ist der Kernel. Alles andere ist entweder ein System- oder Anwendungsprogramm
-	\item Das bootstrap program wird beim Starten oder Neustarten geladen
+	\item Immer laufendes Programm ist Kernel, Rest ist System- oder Anwendungsprogramm
+	\item Bootstrap program wird beim Starten oder Neustarten geladen
 		\begin{itemize}
-			\item Wird in ROM, EPROM oder FLASH als firmware gespeichert
+			\item In ROM, EPROM oder FLASH als firmware gespeichert
 			\item Initialisiert alle Aspekte des Systems, insbesondere die HW-Komponenten
 			\item Laedt den Kernel und startet die Ausfuehrung
 		\end{itemize}
 \end{itemize}
 
 \section{Organisation}
-
 \begin{itemize}
 	\item Ein oder mehr CPUs, device controllers verbinden sich ueber den Bus um Zugriff auf shared memory zu bekommen
 	\item I/O-Geraete und CPU koennen gleichzeitig ausfuehren
@@ -68,9 +66,7 @@
 
 
 \section{Interrupts}
-
 \subsection{Haeufige Funktionen von Interrupts}
-
 \begin{itemize}
 	\item interrupt gibt Kontrolle an interrupt service routine ueber einen interrupt vector, welcher die Adressen von allen service routines beinhaltet
 	\item interrupt architecture muss Adresse der unterbrochenen Intruktion speichern
@@ -80,7 +76,6 @@
 \end{itemize}
 
 \subsection{Timer interrupts}
-
 \begin{itemize}
 	\item Time interrupts um endlose Schleifen und Prozesse zu verhindern
 	\item Wird nach bestimmter Zeitspanne ausgefuehrt
@@ -89,7 +84,6 @@
 \end{itemize}
 
 \subsection{Interrupt Handling}
-
 \begin{itemize}
 	\item Betriebssystem merkt sich Status der CPU, indem es Register und Programmzaehler speichert
 	\item Legt Typ des interrupts fest
@@ -100,9 +94,7 @@
 \end{itemize}
 
 \section{I/O Struktur}
-
 \subsection{Synchrone oder blockende I/O}
-
 \begin{itemize}
 	\item Nachdem I/O beginnt, geht die Kontrolle erst nach Fertigstellung der I/O wieder zum Benutzerprogramm
 	\item Wait instruction laesst die CPU idlen
@@ -113,7 +105,6 @@
 \end{itemize}
 
 \subsection{Direct Memory Access Structure}
-
 \begin{itemize}
 	\item Fuer high-speed I/O, damit diese mit fast der Geschwindigkeit des Hauptspeichers Informationen uebertragen koennen
 	\item Device Controller uebertraegt Daten in Bloecken vom Puffer direkt in den Hauptspeicher ohne CPU Eingriff
@@ -122,9 +113,150 @@
 
 \includegraphics[scale=0.4]{dma.png}
 
+\section{Computer-System Architektur}
+\subsection{Multiprozessor-Systeme}
+\begin{itemize}
+	\item Auch parallel systems, tightly-coupled systems
+	\item Vorteile
+		\begin{itemize}
+			\item Erhoehter Durchsatz
+			\item Wirtschaftlichkeit durch große Serie
+			\item Erhoehte Zuverlaessigkeit - Fehlertoleranz
+		\end{itemize}
+	\item Zwei Typen
+		\begin{itemize}
+			\item Asymmetrische Mehrfachprozessorarchitektur
+			\item Symmetrische Mehrfachprozessorarchitektur
+		\end{itemize}
+	\item Typen von Multiprozessoren
+		\begin{itemize}
+			\item Multi-socket systems
+			\item Multi-Chip Module (MCM) (=Multi-Core)
+			\item Chip Multiprocessor (CMP) (=Multi-Core)
+			\item Simultaneous MultiThreading Processor (SMT)
+		\end{itemize}
+\end{itemize}
 
+\subsection{Geclusterte Systeme}
+Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 
+\begin{itemize}
+	\item Teilen sich meistens Speicher ueber storage-area network (SAN)
+	\item Ermoeglicht hochverfuegbare Services, welche Fehler ueberleben
+		\begin{itemize}
+			\item Asymmetrisches Clustern hat eine Maschine im hot-standby mode
+			\item Symmetrisches Clustern hat viele Maschinen mit laufenden Programmen, welche sich gegenseitig beobachten
+			\item Manche sind fuer hochperfomantes computing (HPC)
+		\end{itemize}
+\end{itemize}
 
+\section{Betriebssystem Struktur}
+\begin{itemize}
+	\item Multiprogramming ist noetig fuer Effizienz
+		\begin{itemize}
+			\item Einzelner Benutzer kann nicht CPU und I/O die ganze Zeit auslasten
+			\item Multiprogramming organisiert jobs, sodass CPU immer beschaeftigt ist
+			\item Untermenge aller Jobs ist im Hauptspeicher
+			\item Einer wird ausgewaehlt per job scheduling
+			\item Wenn dieser warten muss, wechselt OS den job
+		\end{itemize}
+	\item Timesharing (multitasking) laesst CPU so schnell jobs wechseln, sodass interaktives computing moeglich ist
+		\begin{itemize}
+			\item Response time < 1 Sekunde
+			\item Jeder Benutzer hat mindestens 1 Programm im Speicher, welches ausgefuehrt wird $\Rightarrow$ process
+			\item Wenn mehrere jobs bereit sind $\Rightarrow$ CPU scheduling
+			\item Wenn Prozess nicht in Speicher passt $\Rightarrow$ swapping
+			\item Virtueller Speicher erlaubt Ausfuehrung von Prozessen nicht komplett im Speicher
+		\end{itemize}
+\end{itemize}
+
+\section{Uebergang vom User zum Kernel Mode}
+\begin{itemize}
+	\item Interrupt gesteuert durch Hardware
+	\item Softwarefehler oder Anfrage erzeugt exception oder trap
+	\item Dual-mode erlaubt es OS, sich und andere Komponenten zu schuetzen
+	\item Mode bit bereitgestellt durch HW
+		\begin{itemize}
+			\item Zeigt an, ob System im User oder Kernel Mode ist
+			\item Manche previligierten Instruktionen sind nur im Kernel Mode moeglich
+			\item System call aendert Modus zu Kernel, Wiederkehr vom call aender Modus zu User
+		\end{itemize}
+\end{itemize}
+
+\section{Prozessverwaltung}
+\begin{itemize}
+	\item Prozess ist ein Programm waehrend der Ausfuehrung: Programm ist eine passive, Prozess eine aktive Einheit
+	\item Prozessbeedigung erfordert das freigeben von genutzten Ressourcen
+	\item Single-threaded process hat einen program counter und wird sequentiell ausgefuehrt
+	\item Multi-threaded process hat einen program counter pro thread
+	\item Das Betriebssystem ist dabei fuer folgendes zustaendig:
+		\begin{itemize}
+			\item Erschaffen und loeschen von Benutzer- und Systemprozessen
+			\item Suspenden und resumen von Prozessen
+			\item Bereitstellung von Mechanismen fuer Prozessynchronisation
+			\item Bereitstellung von Mechanismen fuer Prozeskommunikation
+			\item Bereitstellung von Mechanismen fuer das Behandeln von deadlocks
+		\end{itemize}
+\end{itemize}
+
+\section{Speicher}
+\subsection{Storage Structure}
+\begin{itemize}
+	\item Hauptspeicher - großer Speicher, auf welchen CPU direkt zugreifen kann
+	\item Zweitspeicher - Erweiterung des Hauptspeichers, welche groß und nicht fluechtig ist
+	\item Magnetische Disks - Oberflaeche in tracks geteilt, welche wiederum aus Sektoren bestehen
+\end{itemize}
+
+\subsection{Speicherverwaltung}
+\begin{itemize}
+	\item Alle Daten muessen vor und nach Verarbeitung im Speicher sein
+	\item Alle Instruktionen muessen in der Reihenfolge ihrer Ausfuehrung im Speicher sein
+	\item Aktivitaeten des OS
+		\begin{itemize}
+			\item Darauf achten, wer was im Speicher benutzt
+			\item Bestimmen, welche Prozesse und Daten in und aus dem Speicher gehen
+			\item Zuteilen und freigeben von Speicherplatz
+			\item Einheitlichen, logischen Ueberblick bieten
+				\begin{itemize}
+					\item Abstrahiert physikalischen Eigenschaften zu logischen Einheiten: Dateien
+					\item Jedes Medium wird von einem device kontrolliert
+				\end{itemize}
+		\end{itemize}
+	\item Dateisystemverwaltung
+		\begin{itemize}
+			\item Dateien haeufig in Ordner organisiert
+			\item Kontrolle ueber Zugriff
+			\item Aktivitaeten des OS
+				\begin{itemize}
+					\item Erstellen und Loeschen von Dateien und Ordnern
+					\item Grundsaetzliche Moeglichkeiten zum manipulieren von Dateien und Ordnern
+					\item Abbilden von Dateien in sekundaere Speicher
+					\item Sichern von Dateien auf nichtfluechtige Speicher
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+
+\subsection{Speicherhierarchie}
+Die Speicherhierarchie haengt von folgenden Punkten ab:
+\begin{itemize}
+	\item Geschwindigkeit
+	\item Kosten
+	\item Fluechtigkeit
+\end{itemize}
+
+\includegraphics[scale=0.4]{storage.png}
+
+\subsection{Caching}
+\begin{itemize}
+	\item Wichtiges Prinzip, taucht immer wieder auf (HW, OS, SW)
+	\item Benutzte Information wird temporaer von langsameren zu schnelleren Speichern bewegt
+	\item Zuerst wird im schnellen Speicher nach Information gesucht
+		\begin{itemize}
+			\item Wird sie gefunden, wird sie direkt benutzt
+			\item Ansonsten wird sie in Cache kopiert und dort benutzt
+		\end{itemize}
+	\item Cache ist kleiner als Speicher, welcher gecached wird
+\end{itemize}
 
 
 
