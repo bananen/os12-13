@@ -127,7 +127,11 @@
 	\item Nur ein interrupt pro Block
 \end{itemize}
 
+\begin{figure}[ht]
+\centering
 \includegraphics[scale=0.4]{dma.png}
+\caption{Direct Memory Access}
+\end{figure}
 
 \section{Computer-System Architektur}
 \subsection{Multiprozessor-Systeme}
@@ -260,7 +264,11 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 	\item Fluechtigkeit
 \end{itemize}
 
+\begin{figure}[ht]
+\centering
 \includegraphics[scale=0.4]{storage.png}
+\caption{Unterschiedliche Speicher und ihre Werte}
+\end{figure}
 
 \subsection{Caching}
 \begin{itemize}
@@ -298,7 +306,11 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 		\end{itemize}
 \end{itemize}
 
+\begin{figure}[ht]
+\centering
 \includegraphics[scale=0.5]{big_picture.png}
+\caption{Uebersicht}
+\end{figure}
 
 \section{Design und Implementierung von OS}
 \begin{itemize}
@@ -328,7 +340,11 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 		\end{itemize}
 \end{itemize}
 
+\begin{figure}[ht]
+\centering
 \includegraphics[scale=0.35]{services.png}
+\caption{Ort der Services}
+\end{figure}
 
 \subsection{System Calls}
 \begin{itemize}
@@ -338,13 +354,21 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 	\item Win32 API, POSIX API, Java API
 \end{itemize}
 
+\begin{figure}[ht]
+\centering
 \includegraphics[scale=0.3]{system_call.png}
+\caption{Aufrufsequenz eines Syscalls}
+\end{figure}
 
 \subsubsection{Beispiel fuer API}
 
 ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 
+\begin{figure}[ht]
+\centering
 \includegraphics[scale=0.4]{api.png}
+\caption{Head von ReadFile()}
+\end{figure}
 
 \begin{itemize}
 	\item HAND: Zu lesende Datei
@@ -361,11 +385,19 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 	\item Aufrufer braucht nichts ueber die Implementierung zu wissen
 \end{itemize}
 
+\begin{figure}[ht]
+\centering
 \includegraphics[scale=0.4]{syscall_os_relationship.png}
+\caption{Beziehung zwischen Syscalls und OS}
+\end{figure}
 
 \subsubsection{Beispiel fuer C Bibliothek}
 
+\begin{figure}[ht]
+\centering
 \includegraphics[scale=0.4]{printf.png}
+\caption{Aufruf von printf}
+\end{figure}
 
 \subsubsection{Parameter}
 Generell gibt es drei Methoden, Parameter an das OS zu uebergeben:
@@ -376,7 +408,11 @@ Generell gibt es drei Methoden, Parameter an das OS zu uebergeben:
 \end{itemize}
 
 \subsubsection{System Calls von Windows und Unix}
+\begin{figure}[ht]
+\centering
 \includegraphics[scale=0.3]{syscall_examples.png}
+\caption{Beispiele von Syscalls}
+\end{figure}
 
 \subsection{System Programs}
 Systemprogramme ermoeglichen angenehme Umgebung fuer Programmentwicklung und -ausfuehrung:
@@ -403,6 +439,35 @@ Meisten geht die Sicht des Benutzer ueber Systemprogramme anstatt ueber Systemca
 
 
 \chapter{01bCProgramming}
+
+Ein laufendes Programm:
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{running_program.png}
+\caption{Laufendes C-Programm}
+\end{figure}
+
+Etwas zu Pointern:
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{pointer.png}
+\caption{Pointer}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
 \chapter{02OS}
 
 \section{Monolithisches System}
@@ -529,6 +594,86 @@ Beispiele:
 
 
 \chapter{03aProcess-management}
+
+\section{Konzept}
+	Ein Betriebssystem führt
+	\begin{itemize}
+		\item Batch System - Jobs
+		\item und Zeitteilende Systeme - Benutzerprogramme oder -aufgaben
+	\end{itemize} 
+	aus.\\
+	Job oder Prozess := ein Programm in Ausführung
+\section{Process Structure (in memory)}
+	\begin{figure}[htbp]
+		\begin{minipage}[t]{10cm}
+			\vspace{0pt}
+			Ein Prozess beinhaltet
+			\begin{itemize}
+				\item einen Programmzähler
+				\item Register
+				\item den Code
+				\item einen Stack
+				\item Daten
+				\begin{itemize}
+					\item Rodata: lesen (read-only)
+					\item Data: lesen und schreiben
+					\item BSS: globale, statische Variablen auf 0 gesetzt
+				\end{itemize}
+				\item eine Heap
+			\end{itemize}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{4cm}
+			\vspace{0pt}
+			\centering
+			\includegraphics[scale = 0.3]{memory.png}\\
+		\end{minipage}
+	\end{figure}
+
+\section{Process Status}
+	Ein Prozess wechselt wie folgt zwischen verschiedenen Zuständen:\\ \\
+	\includegraphics[scale = 0.4]{prozess_status.png}
+\section{Process Control Block(PCB)}
+	Zu jedem Prozess gehört:
+	\begin{itemize}
+		\item ein Prozessstatus und eine ID
+		\item ein Programmzähler
+		\item CPU - Register
+		\item CPU - Scheduling Informationen
+		\item Berechtigungen
+		\item Ein- und Ausgabe Informationen
+	\end{itemize}
+\section{Context Switch}
+	:= Das Wechseln der Prozessinformationen beim Prozesswechsel in der CPU\\ \\
+	Dieser Kontext wird in PCB's gespeichert. Zeit zum Wechseln geht bei der Rechenzeit verloren.\\ \\
+	\includegraphics[scale = 0.6]{process_switch.png}\\
+\section{Process Creation}
+	\begin{itemize}
+		\item Prozesse bilden als Kinder- und Elternprozesse einen Prozessbaum
+		\item Prozesse werden durch einen Process Identifier (pid) erkannt und verwaltet
+		\item Resource Sharing
+		\begin{itemize}
+			\item Kinder und Eltern teilen \textbf{alle} Resourcen
+			\item Eltern teilen einen Teil ihrer Resourcen mit ihren Kindern
+			\item Kinder und Eltern teilen \textbf{keine} Resourcen
+		\end{itemize}
+		\item Synchornisation
+		\begin{itemize}
+			\item Eltern und Kinder werden zeitgleich ausgeführt
+			\item Eltern warten auf die Terminierung der Kinder
+		\end{itemize}
+		\item Adressraum
+		\begin{itemize}
+			\item Kind kopiert den Adressraum
+			\item Kind lädt ein Programm
+		\end{itemize}
+		\item UNIX Beispiele
+		\begin{itemize}
+			\item \underline{fork} SysCall erzeugt neuen Prozess
+			\item \underline{exec} SysCall benutzt nach \underline{fork} um neues Programm zu laden
+		\end{itemize}
+	\end{itemize}
+	\includegraphics[scale = 0.6]{process_fork.png}
 \chapter{03bProcess-management-scheduling}
 \chapter{04Process-coordination}
 
@@ -541,7 +686,7 @@ Beispiele:
 	Gründe für zusammenarbeitende Prozesse:
 	\begin{itemize}
 		\item Schnellere Berechnung
-		\item Kompfort/Einfachheit
+		\item Komfort/Einfachheit
 		\item Modularität
 		\item Teilen von Informationen
 	\end{itemize}
