@@ -529,6 +529,86 @@ Beispiele:
 
 
 \chapter{03aProcess-management}
+
+\section{Konzept}
+	Ein Betriebssystem führt
+	\begin{itemize}
+		\item Batch System - Jobs
+		\item und Zeitteilende Systeme - Benutzerprogramme oder -aufgaben
+	\end{itemize} 
+	aus.\\
+	Job oder Prozess := ein Programm in Ausführung
+\section{Process Structure (in memory)}
+	\begin{figure}[htbp]
+		\begin{minipage}[t]{10cm}
+			\vspace{0pt}
+			Ein Prozess beinhaltet
+			\begin{itemize}
+				\item einen Programmzähler
+				\item Register
+				\item den Code
+				\item einen Stack
+				\item Daten
+				\begin{itemize}
+					\item Rodata: lesen (read-only)
+					\item Data: lesen und schreiben
+					\item BSS: globale, statische Variablen auf 0 gesetzt
+				\end{itemize}
+				\item eine Heap
+			\end{itemize}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{4cm}
+			\vspace{0pt}
+			\centering
+			\includegraphics[scale = 0.3]{memory.png}\\
+		\end{minipage}
+	\end{figure}
+
+\section{Process Status}
+	Ein Prozess wechselt wie folgt zwischen verschiedenen Zuständen:\\ \\
+	\includegraphics[scale = 0.4]{prozess_status.png}
+\section{Process Control Block(PCB)}
+	Zu jedem Prozess gehört:
+	\begin{itemize}
+		\item ein Prozessstatus und eine ID
+		\item ein Programmzähler
+		\item CPU - Register
+		\item CPU - Scheduling Informationen
+		\item Berechtigungen
+		\item Ein- und Ausgabe Informationen
+	\end{itemize}
+\section{Context Switch}
+	:= Das Wechseln der Prozessinformationen beim Prozesswechsel in der CPU\\ \\
+	Dieser Kontext wird in PCB's gespeichert. Zeit zum Wechseln geht bei der Rechenzeit verloren.\\ \\
+	\includegraphics[scale = 0.6]{process_switch.png}\\
+\section{Process Creation}
+	\begin{itemize}
+		\item Prozesse bilden als Kinder- und Elternprozesse einen Prozessbaum
+		\item Prozesse werden durch einen Process Identifier (pid) erkannt und verwaltet
+		\item Resource Sharing
+		\begin{itemize}
+			\item Kinder und Eltern teilen \textbf{alle} Resourcen
+			\item Eltern teilen einen Teil ihrer Resourcen mit ihren Kindern
+			\item Kinder und Eltern teilen \textbf{keine} Resourcen
+		\end{itemize}
+		\item Synchornisation
+		\begin{itemize}
+			\item Eltern und Kinder werden zeitgleich ausgeführt
+			\item Eltern warten auf die Terminierung der Kinder
+		\end{itemize}
+		\item Adressraum
+		\begin{itemize}
+			\item Kind kopiert den Adressraum
+			\item Kind lädt ein Programm
+		\end{itemize}
+		\item UNIX Beispiele
+		\begin{itemize}
+			\item \underline{fork} SysCall erzeugt neuen Prozess
+			\item \underline{exec} SysCall benutzt nach \underline{fork} um neues Programm zu laden
+		\end{itemize}
+	\end{itemize}
+	\includegraphics[scale = 0.6]{process_fork.png}
 \chapter{03bProcess-management-scheduling}
 \chapter{04Process-coordination}
 
@@ -541,7 +621,7 @@ Beispiele:
 	Gründe für zusammenarbeitende Prozesse:
 	\begin{itemize}
 		\item Schnellere Berechnung
-		\item Kompfort/Einfachheit
+		\item Komfort/Einfachheit
 		\item Modularität
 		\item Teilen von Informationen
 	\end{itemize}
