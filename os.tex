@@ -195,14 +195,14 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 		\begin{itemize}
 			\item Zeigt an, ob System im User oder Kernel Mode ist
 			\item Manche previligierten Instruktionen sind nur im Kernel Mode moeglich
-			\item System call aendert Modus zu Kernel, Wiederkehr vom call aender Modus zu User
+			\item System call aendert Modus zu Kernel, Wiederkehr vom call aendert Modus zu User
 		\end{itemize}
 \end{itemize}
 
 \section{Prozessverwaltung}
 \begin{itemize}
 	\item Prozess ist ein Programm waehrend der Ausfuehrung: Programm ist eine passive, Prozess eine aktive Einheit
-	\item Prozessbeedigung erfordert das freigeben von genutzten Ressourcen
+	\item Prozessbeedigung erfordert das Freigeben von genutzten Ressourcen
 	\item Single-threaded process hat einen program counter und wird sequentiell ausgefuehrt
 	\item Multi-threaded process hat einen program counter pro thread
 	\item Das Betriebssystem ist dabei fuer folgendes zustaendig:
@@ -210,7 +210,7 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 			\item Erschaffen und loeschen von Benutzer- und Systemprozessen
 			\item Suspenden und resumen von Prozessen
 			\item Bereitstellung von Mechanismen fuer Prozessynchronisation
-			\item Bereitstellung von Mechanismen fuer Prozeskommunikation
+			\item Bereitstellung von Mechanismen fuer Prozesskommunikation
 			\item Bereitstellung von Mechanismen fuer das Behandeln von deadlocks
 		\end{itemize}
 \end{itemize}
@@ -219,7 +219,7 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 \subsection{Storage Structure}
 \begin{itemize}
 	\item Hauptspeicher - großer Speicher, auf welchen CPU direkt zugreifen kann
-	\item Zweitspeicher - Erweiterung des Hauptspeichers, welche groß und nicht fluechtig ist
+	\item Zweitspeicher - Erweiterung des Hauptspeichers, welcher groß und nicht fluechtig ist
 	\item Magnetische Disks - Oberflaeche in tracks geteilt, welche wiederum aus Sektoren bestehen
 \end{itemize}
 
@@ -276,23 +276,23 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 
 \section{I/O Subsystem}
 \begin{itemize}
-	\item Betriebssysteme verstehen Eigenheiten der HW vor dem Nutzer
+	\item Betriebssysteme verstecken Eigenheiten der HW vor dem Nutzer
 	\item I/O Subsystem ist verantwortlich fuer
 		\begin{itemize}
 			\item Speicherverwaltung der I/O inklusive Puffern, Cachen, Spoolen
-			\item generelles Geraetetreiber-Schnittstelle
+			\item generelle Geraetetreiber-Schnittstelle
 			\item Treiber fuer bestimmte Hardwaregeraete
 		\end{itemize}
 \end{itemize}
 
 \section{Schutz und Sicherheit}
 \begin{itemize}
-	\item Schutz - Jeder Mechanismus, welches den Zugriff von Prozessen und Nutzern auf Ressourcen kontrolliert
+	\item Schutz - Jeder Mechanismus, welcher den Zugriff von Prozessen und Nutzern auf Ressourcen kontrolliert
 	\item Sicherheit - Verteildigung des System gegen interne und externe Attacken
 	\item Systeme unterscheiden meistens zunaechst nach Nutzer
 		\begin{itemize}
 			\item Nutzeridentitaeten (user IDs) behinhalten Namen und Nummer
-			\item User ID ist mit alles Dateien und Prozessen verknuepft, auf die der Nutzer zugreifen darf
+			\item User ID ist mit allen Dateien und Prozessen verknuepft, auf die der Nutzer zugreifen darf
 			\item Gruppenidentitaeten (group IDs) erlauben den Zugriff einer Menge von Benutzern
 			\item Privilege escalation erlaubt es Nutzern, die ID zu wechseln
 		\end{itemize}
@@ -312,7 +312,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 	\item Programmausfuehrung
 	\item I/O Operationen
 	\item Dateisystemmanipulationen
-	\item Kommunikationen: Prozesse tauschen Informationen aus (shared memory oder message passing)
+	\item Kommunikation: Prozesse tauschen Informationen aus (shared memory oder message passing)
 	\item Fehlererkennung
 		\begin{itemize}
 			\item Findet in CPU, Speicher, I/O Geraeten und Benutzerprogrammen statt
@@ -333,7 +333,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 \subsection{System Calls}
 \begin{itemize}
 	\item Schnittstelle zu den Services vom OS
-	\item Meisten in hoeher Sprache geschrieben
+	\item Meistens in hoeherer Sprache geschrieben
 	\item Meistens ueber ein Application Program Interface (API) genutzt
 	\item Win32 API, POSIX API, Java API
 \end{itemize}
