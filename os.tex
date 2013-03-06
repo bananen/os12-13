@@ -440,6 +440,8 @@ Meisten geht die Sicht des Benutzer ueber Systemprogramme anstatt ueber Systemca
 
 \chapter{01bCProgramming}
 
+\section{Laufende Programme}
+
 Ein laufendes Programm:
 
 \begin{figure}[ht]
@@ -447,6 +449,8 @@ Ein laufendes Programm:
 \includegraphics[scale=0.6]{running_program.png}
 \caption{Laufendes C-Programm}
 \end{figure}
+
+\section{Pointer}
 
 Etwas zu Pointern:
 
@@ -839,6 +843,74 @@ Logische und physische Adressen sind im Sinne von Kompilierzeit und "`load-time 
 \chapter{05bMemoryManagement}
 \chapter{05cMemoryManagement}
 \chapter{06aFileSystems}
+
+\section{Das Konzept von Dateien}
+\begin{itemize}
+	\item Ziel: Moeglichkeit, große Mengen von Daten zu speichern
+	\item Datei: Zusammenhaengender logischer Adressraum
+	\item Dateitypen
+		\begin{itemize}
+			\item Daten: Numerisch, character, binaer
+			\item Programm
+		\end{itemize}
+	\item Speichern von Daten und Programmen
+		\begin{itemize}
+			\item Persistent
+			\item Konsistent: Berechenbare Verhalten beim gleichzeitigem Zugriff
+		\end{itemize}
+	\item Nach vorher gespeicherten Daten sehen
+\end{itemize}
+
+\section{Dateisysteme}
+\begin{itemize}
+	\item OS soll Unordnung auf physikalischen Geraeten verbergen
+		\begin{itemize}
+			\item Low-level device control (Lesen veranlassen, etc.)
+			\item High-level abstractions (Datei lesen, etc.)
+		\end{itemize}
+	\item U.u. ermoeglicht OS unterschiedlichen Level von Zugriffen fuer unterschiedliche Programme
+		\begin{itemize}
+			\item Physical disk (surface, cylinder, sector)
+			\item Logical disk = partition (disk block\#)
+			\item Logical volume = multiple partitions (volume block\#)
+			\item Logical file (file block, record, byte\#)
+		\end{itemize}
+\end{itemize}
+
+\section{Festplatten}
+\begin{itemize}
+	\item Stapel von Platten, welche sich mit 3.600-15.000 RPM drehen
+	\item Arme rotieren um den Drehpunkt, Koepfe lesen und schreiben
+	\item Platten sind in konzentrische Tracks aufgeteilt
+	\item Ein Stack mit Tracks fester Groeße ist ein Zylinder
+	\item Meistens nur ein Kopf gleichzeitig aktiv
+	\item Zugriffszeit besteht aus zwei Komponenten
+		\begin{itemize}
+			\item Seek time: Zeit, die die Platte braucht, um den Kopf zu dem entsprechenden Zylinder zu bewegen
+			\item Rotational delay: Zusaetzliche Zeit, die die Platte braucht, um den entsprechenden Sektor zum Kopf zu bewegen
+		\end{itemize}
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{harddisk.png}
+\caption{Zylinder, Tracks und Sektoren}
+\end{figure}
+
+\subsection{Das Positionierungssystem}
+\begin{itemize}
+	\item Suche besteht aus 4 Phasen
+		\begin{itemize}
+			\item speedup - Auf Hoechstgeschwindigkeit beschleunigen (oder die Haelfte)
+			\item coast - Hoechstgeschwindigkeit bei langen Suchen
+			\item slowdown-stops - Arm nahe dem Ziel
+			\item settle - Kopf auf entsprechenden Track legen
+		\end{itemize}
+	\item Sehr kurze Suchen haengen von settle time ab (1 ms)
+	\item Kurze Suchen (200-400 cyl.) haengen von speedup ab
+
+
+
 \chapter{06bFileSystems}
 \chapter{07aImplementingFileSystems}
 \chapter{07bImplementingFileSystems}
