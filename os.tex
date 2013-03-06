@@ -598,6 +598,86 @@ Beispiele:
 
 
 \chapter{03aProcess-management}
+
+\section{Konzept}
+	Ein Betriebssystem führt
+	\begin{itemize}
+		\item Batch System - Jobs
+		\item und Zeitteilende Systeme - Benutzerprogramme oder -aufgaben
+	\end{itemize} 
+	aus.\\
+	Job oder Prozess := ein Programm in Ausführung
+\section{Process Structure (in memory)}
+	\begin{figure}[htbp]
+		\begin{minipage}[t]{10cm}
+			\vspace{0pt}
+			Ein Prozess beinhaltet
+			\begin{itemize}
+				\item einen Programmzähler
+				\item Register
+				\item den Code
+				\item einen Stack
+				\item Daten
+				\begin{itemize}
+					\item Rodata: lesen (read-only)
+					\item Data: lesen und schreiben
+					\item BSS: globale, statische Variablen auf 0 gesetzt
+				\end{itemize}
+				\item eine Heap
+			\end{itemize}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{4cm}
+			\vspace{0pt}
+			\centering
+			\includegraphics[scale = 0.3]{memory.png}\\
+		\end{minipage}
+	\end{figure}
+
+\section{Process Status}
+	Ein Prozess wechselt wie folgt zwischen verschiedenen Zuständen:\\ \\
+	\includegraphics[scale = 0.4]{prozess_status.png}
+\section{Process Control Block(PCB)}
+	Zu jedem Prozess gehört:
+	\begin{itemize}
+		\item ein Prozessstatus und eine ID
+		\item ein Programmzähler
+		\item CPU - Register
+		\item CPU - Scheduling Informationen
+		\item Berechtigungen
+		\item Ein- und Ausgabe Informationen
+	\end{itemize}
+\section{Context Switch}
+	:= Das Wechseln der Prozessinformationen beim Prozesswechsel in der CPU\\ \\
+	Dieser Kontext wird in PCB's gespeichert. Zeit zum Wechseln geht bei der Rechenzeit verloren.\\ \\
+	\includegraphics[scale = 0.6]{process_switch.png}\\
+\section{Process Creation}
+	\begin{itemize}
+		\item Prozesse bilden als Kinder- und Elternprozesse einen Prozessbaum
+		\item Prozesse werden durch einen Process Identifier (pid) erkannt und verwaltet
+		\item Resource Sharing
+		\begin{itemize}
+			\item Kinder und Eltern teilen \textbf{alle} Resourcen
+			\item Eltern teilen einen Teil ihrer Resourcen mit ihren Kindern
+			\item Kinder und Eltern teilen \textbf{keine} Resourcen
+		\end{itemize}
+		\item Synchornisation
+		\begin{itemize}
+			\item Eltern und Kinder werden zeitgleich ausgeführt
+			\item Eltern warten auf die Terminierung der Kinder
+		\end{itemize}
+		\item Adressraum
+		\begin{itemize}
+			\item Kind kopiert den Adressraum
+			\item Kind lädt ein Programm
+		\end{itemize}
+		\item UNIX Beispiele
+		\begin{itemize}
+			\item \underline{fork} SysCall erzeugt neuen Prozess
+			\item \underline{exec} SysCall benutzt nach \underline{fork} um neues Programm zu laden
+		\end{itemize}
+	\end{itemize}
+	\includegraphics[scale = 0.6]{process_fork.png}
 \chapter{03bProcess-management-scheduling}
 \chapter{04Process-coordination}
 
@@ -610,7 +690,7 @@ Beispiele:
 	Gründe für zusammenarbeitende Prozesse:
 	\begin{itemize}
 		\item Schnellere Berechnung
-		\item Kompfort/Einfachheit
+		\item Komfort/Einfachheit
 		\item Modularität
 		\item Teilen von Informationen
 	\end{itemize}
@@ -811,14 +891,12 @@ Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 
 \end{itemize}
 \end{itemize}
-\subsection{Addressbinding und "`Data to Memory"'}
+\subsection{Adressabbildung und "`Data to Memory"'}
 
 \begin{itemize}
 \item \textbf{Compile time}: Wenn der Speicherstelle  a priori bekannt ist, kann ein absoluter Code generiert werden. Muss jedoch recompiliert werden wenn der Startpunkt verändert wir.
 \item \textbf{Load time}: Muss versetzbaren (engl.: \textit{relocatable}) Code generieren wenn die Speicherstelle zur Übersetzungszeit nicht bekannt ist.
-\item \textbf{Execution time}: \begin{LARGE}
-\textbf{lol wut kein plan, 5a, Folie 17}
-\end{LARGE}
+\item \textbf{Execution time}: Verzögerung der Abbildung während der Laufzeit, wenn der der Prozess während der Ausführung von einem Speichersegment zu einem anderen bewegt werden kann. 
 \end{itemize}
 
 \subsection{Logische vs. Physicher Adressraum}
@@ -837,9 +915,129 @@ Logische und physische Adressen sind im Sinne von Kompilierzeit und "`load-time 
 \item Das Endnutzerprogramm setzt sich mit den logischen Adressen auseinander, nie mit den real physischen.
 \end{itemize}
 
+\subsection{Dynamic Loading}
+\begin{itemize}
+\item Routine wird nicht geladen bis es aufgerufen wird
+\item Routine wird auf der Platte in einem verlagerbaren Zustand format behalten
+\item Nützlich wenn große  Mengen an Code unregeläßig auftretende Fälle behandelt werden müssen
+\item Es wird keine besondere Unterstützung durch das Betriebssystem benötigt: Service wird vom "`relocatable linking loader"' bereitgestellt
+\item Bessere Nutzung von Speicherraum
+\begin{itemize}
+\item Ungenutzte Routinen werden nie geladen
+\item Überlagerung macht das Laden von Modulen für die momentane Ausführungsphase möglich \begin{tiny}
+(the hell does that mean?)
+\end{tiny}
+\end{itemize}
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.50]{overlays.png}
+\caption{Überlagerung (\textit{overlays})}
+\end{figure}
+
+\subsection{Dynamic Linking (Share Libraries)}
+\begin{itemize}
+\item Routine wird nicht gelinked bis es aufgerufen wird (linking wird aufgeschoben (engl.: \textit{postponed}))
+\item Kleinere Teile an Code, sogenannte Stubs, dienen dazu die angemessene "`memory-resident library routine"' festzustellen (oder wie man die routine library lädt)
+\item Stub ersetzt sich selbst mit der Adresse der Routine und führt es dann aus
+\item Betriebssystem muss checken ob sich die Routine  bereits im Speicherraum anderer Prozesse befindet
+\item Dynamisches Linken ist vorallem für die Updates von Libraries stützend.
+\end{itemize}
 
 \section{Segmentation}
+\begin{itemize}
+\item Speicherverwaltungs Schema, welches Nutzeransicht des Speichers fördert.
+\item Ein Proramm ist eine Sammlung an Segmenten. Segmente sind z.B
+\begin{itemize}
+\item \textit{main program}
+\item \textit{procedure}
+\item \textit{function}
+\item \textit{method}
+\item \textit{object}
+\item \textit{local/global variables}
+\item \textit{common block}
+\item \textit{stack}
+\item \textit{symbol table}
+\item \textit{arrays}
+
+\end{itemize}
+\end{itemize}
+\subsection{Architektur}
+\begin{itemize}
+\item Logische Adresse besteht aus einem Tupel:
+\begin{itemize}
+\item <segment-nummer, offset>
+\item offset = Abstand (\textit{displacement (d)})
+\end{itemize}
+
+\item \textbf{Segment table} : Bildet zwei-dimensionale physikalische Adressen ab. Bestehen aus
+\begin{itemize}
+\item \textbf{base} - behinaltet die physikalische Startadresse wo sich das Segment im Speicher befindet.
+\item \textbf{limit} - spezifiziert die Länge des Segments
+\end{itemize}
+
+\item \textbf{Segment-table base register (STBR)}: Zeigt auf die Stelle des Segment Tables im Speicher
+
+\item \textbf{Segment-table length register (STLR)}: Zeigt die Anzahl vom Programm genutzten Segmente an. Diese Nummer s ist gültig wenn s < STLR
+
+\item Protection
+\begin{itemize}
+\item Mit jedem Eintrag im Segment Table in Verbindung gebracht:
+\begin{itemize}
+\item Validierungs bit = 0 => Illegales Segment
+\item Lese/Schreib/Ausführungs Rechte
+\end{itemize}
+\end{itemize}
+
+ \item Protection bits mit Segmenten in Verbindung gebracht, da "`code sharing"' auf Segment Level auftritt
+ 
+ \item Da sich Segmente in ihrer Größe unterscheiden ist die Speicherallokierung ein "`dynamic storage-allocation" Problem
+ 
+ \begin{figure}[ht]
+\centering
+\includegraphics[scale=0.50]{segmentierung1.png}
+\caption{Segmentierung Beispiel}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.50]{segmentierung2.png}
+\caption{Segmentierung Beispiel 2}
+\end{figure}
+\end{itemize}
+
 \section{Paging}
+\begin{itemize}
+\item Logische Adressräume eines Prozesses könnten nicht zusammenhängend sein: Einem Prozess wird physikalischer Speicher allokiert sobald Letzteres vorhanden ist
+\item Physikalischer Speicher wird in Blöcke fixer größe eingeteilt, sogenannte \textbf{frames} (Größe ist 2er Potenz, zwischen 512 Bytes und 8192 Bytes)
+\item In Blöcke gleicher Größe aufgeteilter logischer Speicher heißt \textbf{pages}
+\item Überwachung aller freien frames
+\item Um ein Programm der Größe n pages auszuführen, werden n freie Frames benötigt
+\item Aufbauen eines \textit{page table} um logische in physikalische Adressen zu übersetzen
+\item Interne Fragmentierung
+\end{itemize}
+
+\subsection{Adressübersetzungs}
+Von der CPU generierte Adressen werden wie folgt aufgeteilt:
+\begin{itemize}
+\item \textbf{Page number (p)} - Wird als Index in einem Page Table, welche Basisadressen jeder page im physikalischen Speicher hat, benutzt.
+\item \textbf{Page offset (d)} - Zusammen mit der Basisadresse bildet sie physikalische Speicheradresse welche zur Speichereinheit gesendet wird
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.50]{numberoffset.png}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.50]{paging1.png}
+\caption{Paging}
+\end{figure}
+
+\subsection{Auswahl der Pagegröße}}
+
 \chapter{05bMemoryManagement}
 \chapter{05cMemoryManagement}
 \chapter{06aFileSystems}
