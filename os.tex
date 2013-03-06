@@ -1091,7 +1091,7 @@ Von der CPU generierte Adressen werden wie folgt aufgeteilt:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{harddisk.png}
+\includegraphics[scale=0.3]{harddisk.png}
 \caption{Zylinder, Tracks und Sektoren}
 \end{figure}
 
@@ -1108,7 +1108,150 @@ Von der CPU generierte Adressen werden wie folgt aufgeteilt:
 	\item Kurze Suchen (200-400 cyl.) haengen von speedup ab
 \end{itemize}
 
+\subsubsection{Details zur Suche}
+\begin{itemize}
+	\item Kopf wechselt vergleichsweise zu kurzen Suchen (hae?)
+		\begin{itemize}
+			\item Moeglicherweise muss der Kopf angepasst werden
+			\item Ansetzen dauert beim Schreiben laenger als beim Lesen
+			\item Weicht das Lesen vom Track ob, wird mit Checksumme Fehler erkannt und es wird erneut versucht
+			\item Kommt man beim Schreiben vom Track ab, zerstoert man einen anderen
+		\end{itemize}
+	\item Disk speichert Tabelle mit Drechachsenmotorleistung
+		\begin{itemize}
+			\item Bildet Distanz auf Leistung und Zeit ab
+			\item Disk erweitert Eintraege
+			\item Tabelle wird gesetzt von periodischer thermischeir Rekalibrierung (hae?)
+		\end{itemize}
+\end{itemize}
 
+\subsection{Sektoren}
+\begin{itemize}
+	\item Disk-Schnittstelle gibt lineares Array von Sektoren (LBA)
+	\item Disk bildet logische Sektoren \#s auf physikalische Sektoren ab (CHS)
+		\begin{itemize}
+			\item Zoning: Mehr Sektoren auf laengere Tracks packen
+			\item Track skewing: Sektor 0 Position haengt vom Track ab
+			\item Sparing: Fehlerhafte Sektoren werden woanders hingemapt
+		\end{itemize}
+	\item OS kennt nicht logisches (LBA) oder physikalisches Sektor (CHS) mapping
+		\begin{itemize}
+			\item Große Unterschiede in der logischen Sektorenanzahl verlaengern Suche
+			\item Hoechst nichtlineare Beziehung
+			\item OS weißt nichts von Rotationspositionen
+			\item Kann epirisch Tabelle bilden um Zeit abzuschaetzen
+		\end{itemize}
+\end{itemize}
+
+\subsection{Disk Schnittstelle}
+\begin{itemize}
+	\item Kontrolliert HW, vermittelt Zugriffe
+	\item Computer und Disk oft durch Bus verbunden (z.B. SATA)
+		\begin{itemize}
+			\item U.u. viele Geraete ein einem Bus
+			\item Ggf. Geraete ueber Netz verbunden (z.B. SAN)
+		\end{itemize}
+	\item Disk/Schnittstellen features
+		\begin{itemize}
+			\item Trennen vom Bus waehrend Anfragen
+			\item Warteschlange fuer Befehle: Mehrere Anfragen, kann geschedulet werden
+			\item Vorauslesen in den Cache, sonst wuerden ganze Umdrehungen pro sequentielles Lesen gebraucht
+			\item Cache fuers Schreiben
+		\end{itemize}
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{san.png}
+\caption{SAN}
+\end{figure}
+
+\subsection{Disk Leistung}
+\begin{itemize}
+	\item Das Setzen und Ordnen von Anfragen ist ein großes Problem
+		\begin{itemize}
+			\item Sequentielle I/O wesentlich schneller als zufaellige
+			\item Lange Suchen wesentlich langsamer als kurze
+			\item Strom kann wegfallen, dann inkonsistenter Zustand
+		\end{itemize}
+	\item Vorsicht bei Reihenfolge zur Wiederherstellung
+	\item Moeglichst zusammenhaegende Zugriffe
+	\item Versuche, Anfragen zu sortieren, um seek times gering zu halten
+\end{itemize}
+
+\section{SSDs}
+\begin{itemize}
+	\item Komplett stabiler Zustand, keine bewegenden Teile
+		\begin{itemize}
+			\item Speichert Daten in Form von Ladungen
+			\item Weniger Stromverbrauch und Hitze
+			\item Keine mechanischen Suchzeiten
+		\end{itemize}
+	\item Beschraenkte Anzahl an Ueberschreibungen
+		\begin{itemize}
+			\item Bloecke nutzen nach 1.000-100.000 Loeschungen ab
+			\item Brauch flash translation layer (FTL), damit wiederholtes Schreiben auf logischen Block nicht physikalischen Block abnutzt
+			\item FTL kann Performance stark beeinflussen
+			\item Zufaelliges Schreiben teuer
+		\end{itemize}
+	\item Limitierte Haltbarkeit
+		\begin{itemize}
+			\item Ladung nimmt ab
+			\item Ausschalten fuer ein Jahr kann Datenverlust hervorrufen
+		\end{itemize}
+\end{itemize}
+
+\subsection{Typen von Flash-Speichern}
+\begin{itemize}
+	\item NAND flash (meistens anzutreffen)
+		\begin{itemize}
+			\item Hoehere Dichte
+			\item Schnelles Loeschen und Schreiben
+			\item Mehr interne Fehler $\Rightarrow$ Fehlerbehebung erforderlich
+		\end{itemize}
+	\item NOR flash
+		\begin{itemize}
+			\item Schnelleres Lesen bei kleinen Dateneinheiten
+			\item Kann direkt ausgefuehrt werden
+			\item Signifikant langsameres Loeschen
+		\end{itemize}
+	\item Single-level cell (SLC) vs. Multi-Level cell (MLC)
+		\begin{itemize}
+			\item MLC codiert viele Bits
+			\item MLC langsamer als SLC
+		\end{itemize}
+\end{itemize}
+
+\subsection{NAND flash Uebersicht (Uebliches Geraet)}
+\begin{itemize}
+	\item Hat 2112-byte Seiten (2048 Bytes Daten + 64 Bytes Metadaten \& ECC)
+	\item Block hat 64 (SLC) oder 128 (MLC) Seiten
+	\item Blocks in 2-4 Ebenen (planes) unterteilt
+	\item Kann eine Seite auf einmal lesen
+	\item Muss kompletten Block loeschen, bevor dieser ueberschrieben werden kann (teuer)
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{ssd.png}
+\caption{SSD Logik}
+\end{figure}
+
+\subsection{SSD Performance Optimierung}
+\begin{itemize}
+	\item Freie Bloecke
+		\begin{itemize}
+			\item SSD Controller haelt immer eine Menge von freien Blocken
+			\item Bei eine re-write wird freie Block zum Schreiben benutzt, alter wird freigegeben
+			\item Loeschen findet im Hintergrund statt, wenn SSD nichts zu tun hat
+		\end{itemize}
+	\item trim Befehl
+		\begin{itemize}
+			\item OS gibt SSD controller unbenutzte logische Bloecke an
+			\item Diese muessen bei eine re-write nicht kopiert werden
+			\item Sie erhoehen den Pool der freien Bloecke nach gargabe collection
+		\end{itemize}
+\end{itemize}
 
 \chapter{06bFileSystems}
 \chapter{07aImplementingFileSystems}
