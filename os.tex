@@ -1007,6 +1007,8 @@ Logische und physische Adressen sind im Sinne von Kompilierzeit und "`load-time 
 \end{figure}
 \end{itemize}
 
+
+\newpage
 \section{Paging}
 \begin{itemize}
 \item Logische Adressräume eines Prozesses könnten nicht zusammenhängend sein: Einem Prozess wird physikalischer Speicher allokiert sobald Letzteres vorhanden ist
@@ -1027,17 +1029,128 @@ Von der CPU generierte Adressen werden wie folgt aufgeteilt:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.50]{numberoffset.png}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
+\includegraphics[scale=0.40]{numberoffset.png}
 \includegraphics[scale=0.50]{paging1.png}
 \caption{Paging}
 \end{figure}
 
-\subsection{Auswahl der Pagegröße}
 
+Bei der Auswahl der Pagegröße muss auf folgenes geachtet werden:
+\begin{itemize}
+\item Fragmentation
+\item Table size
+\item I/O overhead
+\item Locality
+\end{itemize}
+
+\subsection{Assoziativspeicher}
+\begin{itemize}
+\item TLB = Assoziativer Cache für Adressübersetzungen.
+\item Assoziativspeicher findet mit Hilfe paralleler Suche die translation(p,d)
+\begin{itemize}
+\item Wenn p im Assoziativregister: Besorge die Framenumber
+\item Ansonsten hole die Framenumber vom Pagetable im Speicher
+\end{itemize}
+\end{itemize}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.40]{tlb.png}
+\end{figure}
+
+
+>> Implementierung von PageTables ausgelassen<<
+\subsubsection{Effective Access Time (EAT)}
+\begin{itemize}
+\item Assoziative Suche dauert $\tau$ Zeiteinheiten (z.B 1 ns)
+\item Annahme: Ein Speicherzyklus dauert $\mu$ Zeiteinheiten (z.B 300 ns)
+\item Hit-ratio $\alpha$, Anzahl der gefundene Pagenummern im Assoziativregister (in Prozent). 
+$EAT = (\tau + \mu)  \alpha + (\tau + 2\mu) (1-\alpha) = \tau +2\mu - \mu\alpha$
+\end{itemize}
+
+\subsubsection{TLB Coverage}
+\begin{itemize}
+\item TLB Reach - Menge an Speicher, die für den TLB zugänglich sind
+\item TLB Rech = (TLB Size) x (Page Size)
+
+\item Erhöht die Page Size -> kann zu erhöhter Fragmentierung führen
+\item Bietet multiple Page Sizes -> Programm können größere Page Sizes verwenden ohne erhöhte Fragmentierung zu riskieren
+\end{itemize}
+
+\subsection{Valid/Invalid Bit}
+\begin{itemize}
+\item Speicherschutz wird durch ein "`protection bit"' in jedem Frame erreicht
+\item Jedem Eintrag im Page Table wird ein \textbf{Valid-invalid bit} angehängt
+\begin{itemize}
+\item valid deutet an, dass sich die im Zusammenhang stehende Page im logischen Adressraums des Prozesses befindet
+\item invalid analog
+
+\end{itemize}
+\end{itemize}
+
+\subsection{Shared Pages}
+\subsubsection{Shared code}
+\begin{itemize}
+\item Eine Kopie von read-only Code wird unter Prozessen geteilt
+\item Geteilter Code muss an der selben stelle im logischen Adressraum aller Prozesse auftauchen
+\end{itemize}
+\subsubsection{Shared Data}
+\begin{itemize}
+\item Daten mit Zeigern müssen an der selben Stelle im logischen Adressraum aller Prozesse auftauchen
+\item Daten ohne  Zeige können überall im logische Adressraum sein
+\item Synchronisation wird für konsistenten read/write Zugriff benötigt
+\end{itemize}
+\subsubsection{Private Code and Data}
+\begin{itemize}
+\item Jeder Prozess behält eine separate Kopie des Codes und der Daten
+\item Pages für private Codes/Daten können überall im logischen Adressraum sein
+\end{itemize}
+
+\subsection{Page Table}
+\subsubsection{Hierarchial Paging}
+
+\begin{itemize}
+\item Aufbrechen des logischen Adressraumes in viele page tables
+\item Einfachstes Beispiel, two-level page table:
+\begin{itemize}
+\item Eine 32-bit große logische Adresse mit 1K page size wird unterteilt in
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{twolevelpage.png}
+\caption{Two Level Paging}
+\end{figure}
+
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{topdownadress.png}
+\caption{Top-Down Address-Translation Scheme}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{topdownthreelevel.png}
+\caption{Top-Down three-Level Paging Scheme}
+\end{figure}
+
+\end{itemize}
+
+\subsubsection{Hashed Page Tables}
+\begin{itemize}
+\item Üblich in Adressräumen der größe > 32 bits
+\item Die virtuelle Pagenummer wird in einen Pagetable gehashed. Dieses Pagetable beinhaltet ein eKette an Elementen, die alle an die selbe Stelle gehashed wurden.
+\item Virtuelle Pagenummern werden mit den Elementen der Kette auf Gleichheit überprüft. Wenn eine Übereinstimmung gefunden wurde, wird der entsprechende physische Frame entnommen.
+\end{itemize}
+
+\subsubsection{Inverted Page Tables}
+\begin{itemize}
+\item Ein Eintrag pro echter Page im Speicher
+\item Entry consists of the virtual address of the page stored in that real 
+memory location, with information about the process that owns that 
+page < Fuck this shit, not gonna translate it
+\item Reduziert den benötigten Speicher für ein page table, erhöht jedoch die Zeit um den Table zu finden
+
+\end{itemize}
 \chapter{05bMemoryManagement}
 \chapter{05cMemoryManagement}
 \chapter{06aFileSystems}
@@ -1094,7 +1207,6 @@ Von der CPU generierte Adressen werden wie folgt aufgeteilt:
 \includegraphics[scale=0.3]{harddisk.png}
 \caption{Zylinder, Tracks und Sektoren}
 \end{figure}
-
 \subsection{Das Positionierungssystem}
 \begin{itemize}
 	\item Suche besteht aus 4 Phasen
