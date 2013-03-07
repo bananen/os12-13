@@ -779,8 +779,126 @@ Beispiele:
 					\item Semaphore emptry = N
 				\end{itemize}
 		\end{itemize}
-	\includegraphics[scale=1] {boundedbufferprob.png}
-
+	\includegraphics[scale=0.75] {boundedbufferprob.png}
+	
+	\subsection{Readers-Writers Probleme}
+		\begin{itemize}
+			\item Ein Datenset wird zwischen einer Anzahl nebenläufiger Prozesse geteilt
+			\begin{itemize}
+				\item Readers - Können nur das Datenset lesen (führen KEINE Updates durch)
+				\item Writers - Können das Datenset lesen und beschreiben
+			\end{itemize}
+			\item Problem - erlaube mehreren Readers zur gleichen Zeit zu lesen. Lediglich ein Writer kann auf die shared data zur gleichen Zeit zugreifen
+		\end{itemize}
+			
+			\subsubsection{First-Readers-Writers Problem}
+				\begin{itemize}
+					\item Kein Reader sollte warten wenn ein shared date gelesen werden kann
+				\end{itemize}	
+			\includegraphics[scale=0.6] {readerwriterprob.png}
+			
+			\subsubsection{2nd und 3rd Readers-Writers Problem}
+				\begin{itemize}
+					\item 2nd Readers-Writers Problem: Kein Writer, der einmal einer Warteschlange hinzugefügt wurde, sollte nicht länger als absolut nötig warten
+					\item 3rd Readers-Writers Problem: Keinem Thread sollte es erlaubt sein zu verhungern (starve)
+				\end{itemize}
+		\subsection{Philosophenproblem}
+			\begin{itemize}
+				\item 5 Philosophen
+				\item Zyklischer Ablauf
+				\item => Deadlock
+			\end{itemize}
+			\includegraphics[scale=0.35] {philprob.png}
+	\section{Deadlocks}
+		\subsection{Das Deadlock Problem}
+			\begin{itemize}
+				\item Ein Set von geblockten Prozessen die eine Ressource halten und auf eine andere Ressource die von einem anderen Prozess gehalten wird warten
+				\item Beispiel: P1 und P2 halten jeweils ein disk drive, benötigen und warten auf das das jeweils andere
+			\end{itemize}
+		\subsection{System Model}
+			\begin{itemize}
+				\item Ressourcentypen: R1, R2, ..., Rm (CPU Zyklen, Speicherplatz, I/O Geräte)
+				\item Jeder Ressourcen Typ Ri hat Wi Instanzen
+				\item Jeder Prozess verwendet eine Ressource mit: "request", "use" und "release"
+			\end{itemize}
+		\subsection{Deadlock Charakterisierung}
+			\begin{itemize}
+				\item Mutual exclusion: Zu einer Zeit kann nur ein Prozess eine Ressource benutzen
+				\item Hold and wait: Ein Prozess hält mindestiens eine Ressource und wartet auf zusätzliche Ressource die von anderen Prozesse gehalten werden
+				\item No preemption: Eine Ressource kann nur freiwillig von einem Prozess der sie hält, nachdem der Prozess seine Aufgabe beendet hat, freigegeben werden
+				\item Circular wait: Set von wartenden Prozesse (P0, P1, ..., P1) und P0 wartet auf eine Ressource die P1 hält, P1 auf eine Ressource die P2 hält, ..., Pn wartet auf eine Ressource die P0 hält
+			\end{itemize}
+		\subsection{Resource-Allocation Graph}
+			\begin{itemize}
+				\item request edge - Kante von P1 nach Rj
+				\item assignment edge - Kante von Rj nach Pi
+			\end{itemize}
+		\includegraphics[scale=0.7]{resallograph.png}
+			\begin{itemize}
+				\item Graph beinhaltet kein Zyklus => kein Deadlock
+				\item Graph beinhaltet Zyklus =>
+					\begin{itemize}
+						\item Falls jeweils nur eine Instanz pro Ressource, Deadlock
+						\item Falls mehrere Instanzen pro Ressource, Deadlock möglich
+					\end{itemize}
+			\end{itemize}
+		\subsection{Methoden für Handling Deadlocks}
+			\begin{itemize}
+				\item Sicherstellen das, dass System nie in einen Deadlockzustand eintritt
+				\item Dem System den Eintritt in einen Deadlockzustand erlauben und dann recovern
+				\item Problem ignorieren und annehmen das Deadlocks nie auftreten (wird von den meisten Betriebssystemen verwendet)
+			\end{itemize}
+		\subsection{Deadlock Vorbeugung}
+			\begin{itemize}
+				\item Mutual Exclusion: wird nicht für teilbare Ressource benötigt; muss gehalten werden für nicht teilbare Ressourcen
+				\item Hold and Wait: musst garantieren das jederzeit wenn ein Prozess eine Ressource anfrägt, der Prozess selbst keine anderen Ressourcen hält
+				\item No Preemption: 
+					\begin{itemize}
+						\item Wenn ein Prozess einige Ressource hält und eine andere anfrägt und diese nicht gleich bekommt, dann werden alle Ressource die gerade gehalten werden freigegeben
+						\item Preempted Ressourcen werden zu einer Liste von Ressourcen hinzugefügt für welche der Prozess wartet
+						\item Prozess restartet nur wenn er seine alten Ressourcen sowie die neue bekommt
+					\end{itemize}
+				\item Circular Wait: Führe eine totale Ordnung von allen Ressourcentypen ein und veranlasse das jeder Prozess Ressourcen in einer aufsteigenden Ordnung von Aufzählungen anfrägt
+			\end{itemize}
+		
+		\subsection {Deadlock Vermeidung}
+			\begin{itemize}
+				\item Das einfachste und nützlichste Modell benötigt das jeder Prozess ein Maximum an Ressourcen von jedem Typ die er benötigt deklariert
+				\item Der deadlock-avoidance Algorithmus untersucht den resource-allocation Zustand, um sicherzustellen das es nie eine circular-wait condition gibt
+				\item Resource-allocation state ist durch die Anzahl der verfügbaren und alloziierten Ressourcen und den maximal Zugriffen auf Prozesse definiert 
+			\end{itemize}
+			
+			\subsubsection{Safe State}
+				\begin{itemize}
+					\item Wenn ein Prozess eine verfügbare Ressource anfrägt, muss das System sicherstellen das die unmittelbare Allokation das System in einem safe state lääst
+					\item Ein System ist in einem safe state, wenn eine Sequenz <P1, P2, ..., Pn> von allen Prozessen existiert und das System für jeden Prozess Pi die Ressourcen die Pi anfragen kann gerade verfügbar sind. (and resources held by all the Pj with j < l)
+				\end{itemize}
+				\begin{itemize}
+					\item System ist in safe state => keine Deadlocks
+					\item System ist in unsafe state => Deadlocks möglich
+					\item Vermeidung => sicherstellen das ein System nie in einen unsafe state eintreten kann
+				\end{itemize}
+				\includegraphics[scale=0.15] {state.png}
+			
+			\subsubsection{Vermeidungsalgorithmen}
+				\begin{itemize}
+					\item Eine Instanz von jedem Ressourcentyp => resource-allocation graph benutzen
+					\item Mehr Instanzen von jeden Ressourcentyp => banker's Algorithmus
+				\end{itemize}
+	\subsection{Recovery from Deadlock}
+				\begin{itemize}
+					\item Process Termination
+						\begin{itemize}
+							\item Abbruch aller deadlocked Prozesse
+							\item Prozess nach Prozess wird abgebrochen bis der Deadlockzyklus eliminiert wurde
+						\end{itemize}
+					\item Resource Preemption
+						\begin{itemize}
+							\item Wähle ein "Opfer" - minimieren kosten
+							\item Wiederherstellung - zu einem safe state zurückkehren, die Prozesse für den Zustand neustarten
+							\item Starvation - Gleicher Prozess könnt immer als Opfer ausgewählt werden, Anzahl der Wiederherstellungen im Kostenfaktor berücksichtigen
+						\end{itemize}
+				\end{itemize}
 \chapter{05aMemoryManagement}
 \section{Background}
 \begin{itemize}
