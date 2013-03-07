@@ -1170,20 +1170,7 @@ page < Fuck this shit, not gonna translate it
 \item Reduziert den benötigten Speicher für ein page table, erhöht jedoch die Zeit um den Table zu finden
 
 \end{itemize}
-\chapter{05bMemoryManagement - Cache Management}
-\section{Basisoperationen}
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.4]{operation.png}
-\end{figure}
-
-
-
-\section{Virtuell indizierter, virtuell getaggter Cache}
-\section{Virtuell inizierter, physikalisch gtaggter Caseh}
-\section{Physikalisch indizierter Cache}
-\section{•}
-
+\chapter{05bMemoryManagement}
 \chapter{05cMemoryManagement}
 \chapter{06aFileSystems}
 
@@ -1398,34 +1385,6 @@ page < Fuck this shit, not gonna translate it
 \end{itemize}
 
 \chapter{06bFileSystems}
-
-\section{Dateien}
-\begin{itemize}
-	\item Eine Datei ist eine Sammlung von Informationen
-		\begin{itemize}
-			\item Ausfuehrbares Programm
-			\item Textdateien
-			\item Komprimierte Binaer-images
-			\item Strukturierte Dokumente
-		\end{itemize}
-	\item Eine Datei hat eine Menge von Attributen (sprich (OS) meta data)
-	\item Attribute haengen von OS und FS ab, z.B.
-		\begin{itemize}
-			\item Name, ID
-			\item TypSSD Logik
-			\item Ort (physikalische Adresse auf Geraet)
-			\item Groeße (Anzahl Bytes oder Blocks)
-			\item Schutz (wer kann wie zugreifen)
-		\end{itemize}
-\end{itemize}
-
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.3]{file_attributes.png}
-\caption{Typische Dateiattribute}
-\end{figure}
-
-
 \chapter{07aImplementingFileSystems}
 \chapter{07bImplementingFileSystems}
 \chapter{08SecondaryStorageStructure}
