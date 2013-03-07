@@ -761,144 +761,7 @@ Beispiele:
 			\item Starvation - Ein Prozess könnte nie von einer Semaphorewarteschlange entfernt werden
 			\item Priority Inversion - Scheduling-Problem, wenn ein Prozess niedriger Priorität einen Platz hält den ein Prozess höherer Priorität braucht
 		\end{itemize}
-		
-\section{Klassische Probleme der Synchronisation}
-		\begin{itemize}
-			\item Bounded-Buffer Problem
-			\item (First-, Second-, Third-) Readers und Writers Problem
-			\item Philosophenproblem
-			\item Weitere Probleme: "The Art for Multiprocessor Programming"
-		\end{itemize}
-		
-	\subsection{Bounded-Buffer Problem}
-		\begin{itemize}
-			\item N Buffer, jeder kann ein Item halten. Init:
-				\begin{itemize}
-					\item Semaphore mutex = 1
-					\item Semaphore full = 0
-					\item Semaphore emptry = N
-				\end{itemize}
-		\end{itemize}
-	\includegraphics[scale=0.75] {boundedbufferprob.png}
-	
-	\subsection{Readers-Writers Probleme}
-		\begin{itemize}
-			\item Ein Datenset wird zwischen einer Anzahl nebenläufiger Prozesse geteilt
-			\begin{itemize}
-				\item Readers - Können nur das Datenset lesen (führen KEINE Updates durch)
-				\item Writers - Können das Datenset lesen und beschreiben
-			\end{itemize}
-			\item Problem - erlaube mehreren Readers zur gleichen Zeit zu lesen. Lediglich ein Writer kann auf die shared data zur gleichen Zeit zugreifen
-		\end{itemize}
-			
-			\subsubsection{First-Readers-Writers Problem}
-				\begin{itemize}
-					\item Kein Reader sollte warten wenn ein shared date gelesen werden kann
-				\end{itemize}	
-			\includegraphics[scale=0.6] {readerwriterprob.png}
-			
-			\subsubsection{2nd und 3rd Readers-Writers Problem}
-				\begin{itemize}
-					\item 2nd Readers-Writers Problem: Kein Writer, der einmal einer Warteschlange hinzugefügt wurde, sollte nicht länger als absolut nötig warten
-					\item 3rd Readers-Writers Problem: Keinem Thread sollte es erlaubt sein zu verhungern (starve)
-				\end{itemize}
-		\subsection{Philosophenproblem}
-			\begin{itemize}
-				\item 5 Philosophen
-				\item Zyklischer Ablauf
-				\item => Deadlock
-			\end{itemize}
-			\includegraphics[scale=0.35] {philprob.png}
-	\section{Deadlocks}
-		\subsection{Das Deadlock Problem}
-			\begin{itemize}
-				\item Ein Set von geblockten Prozessen die eine Ressource halten und auf eine andere Ressource die von einem anderen Prozess gehalten wird warten
-				\item Beispiel: P1 und P2 halten jeweils ein disk drive, benötigen und warten auf das das jeweils andere
-			\end{itemize}
-		\subsection{System Model}
-			\begin{itemize}
-				\item Ressourcentypen: R1, R2, ..., Rm (CPU Zyklen, Speicherplatz, I/O Geräte)
-				\item Jeder Ressourcen Typ Ri hat Wi Instanzen
-				\item Jeder Prozess verwendet eine Ressource mit: "request", "use" und "release"
-			\end{itemize}
-		\subsection{Deadlock Charakterisierung}
-			\begin{itemize}
-				\item Mutual exclusion: Zu einer Zeit kann nur ein Prozess eine Ressource benutzen
-				\item Hold and wait: Ein Prozess hält mindestiens eine Ressource und wartet auf zusätzliche Ressource die von anderen Prozesse gehalten werden
-				\item No preemption: Eine Ressource kann nur freiwillig von einem Prozess der sie hält, nachdem der Prozess seine Aufgabe beendet hat, freigegeben werden
-				\item Circular wait: Set von wartenden Prozesse (P0, P1, ..., P1) und P0 wartet auf eine Ressource die P1 hält, P1 auf eine Ressource die P2 hält, ..., Pn wartet auf eine Ressource die P0 hält
-			\end{itemize}
-		\subsection{Resource-Allocation Graph}
-			\begin{itemize}
-				\item request edge - Kante von P1 nach Rj
-				\item assignment edge - Kante von Rj nach Pi
-			\end{itemize}
-		\includegraphics[scale=0.7]{resallograph.png}
-			\begin{itemize}
-				\item Graph beinhaltet kein Zyklus => kein Deadlock
-				\item Graph beinhaltet Zyklus =>
-					\begin{itemize}
-						\item Falls jeweils nur eine Instanz pro Ressource, Deadlock
-						\item Falls mehrere Instanzen pro Ressource, Deadlock möglich
-					\end{itemize}
-			\end{itemize}
-		\subsection{Methoden für Handling Deadlocks}
-			\begin{itemize}
-				\item Sicherstellen das, dass System nie in einen Deadlockzustand eintritt
-				\item Dem System den Eintritt in einen Deadlockzustand erlauben und dann recovern
-				\item Problem ignorieren und annehmen das Deadlocks nie auftreten (wird von den meisten Betriebssystemen verwendet)
-			\end{itemize}
-		\subsection{Deadlock Vorbeugung}
-			\begin{itemize}
-				\item Mutual Exclusion: wird nicht für teilbare Ressource benötigt; muss gehalten werden für nicht teilbare Ressourcen
-				\item Hold and Wait: musst garantieren das jederzeit wenn ein Prozess eine Ressource anfrägt, der Prozess selbst keine anderen Ressourcen hält
-				\item No Preemption: 
-					\begin{itemize}
-						\item Wenn ein Prozess einige Ressource hält und eine andere anfrägt und diese nicht gleich bekommt, dann werden alle Ressource die gerade gehalten werden freigegeben
-						\item Preempted Ressourcen werden zu einer Liste von Ressourcen hinzugefügt für welche der Prozess wartet
-						\item Prozess restartet nur wenn er seine alten Ressourcen sowie die neue bekommt
-					\end{itemize}
-				\item Circular Wait: Führe eine totale Ordnung von allen Ressourcentypen ein und veranlasse das jeder Prozess Ressourcen in einer aufsteigenden Ordnung von Aufzählungen anfrägt
-			\end{itemize}
-		
-		\subsection {Deadlock Vermeidung}
-			\begin{itemize}
-				\item Das einfachste und nützlichste Modell benötigt das jeder Prozess ein Maximum an Ressourcen von jedem Typ die er benötigt deklariert
-				\item Der deadlock-avoidance Algorithmus untersucht den resource-allocation Zustand, um sicherzustellen das es nie eine circular-wait condition gibt
-				\item Resource-allocation state ist durch die Anzahl der verfügbaren und alloziierten Ressourcen und den maximal Zugriffen auf Prozesse definiert 
-			\end{itemize}
-			
-			\subsubsection{Safe State}
-				\begin{itemize}
-					\item Wenn ein Prozess eine verfügbare Ressource anfrägt, muss das System sicherstellen das die unmittelbare Allokation das System in einem safe state lääst
-					\item Ein System ist in einem safe state, wenn eine Sequenz <P1, P2, ..., Pn> von allen Prozessen existiert und das System für jeden Prozess Pi die Ressourcen die Pi anfragen kann gerade verfügbar sind. (and resources held by all the Pj with j < l)
-				\end{itemize}
-				\begin{itemize}
-					\item System ist in safe state => keine Deadlocks
-					\item System ist in unsafe state => Deadlocks möglich
-					\item Vermeidung => sicherstellen das ein System nie in einen unsafe state eintreten kann
-				\end{itemize}
-				\includegraphics[scale=0.15] {state.png}
-			
-			\subsubsection{Vermeidungsalgorithmen}
-				\begin{itemize}
-					\item Eine Instanz von jedem Ressourcentyp => resource-allocation graph benutzen
-					\item Mehr Instanzen von jeden Ressourcentyp => banker's Algorithmus
-				\end{itemize}
-	\subsection{Recovery from Deadlock}
-				\begin{itemize}
-					\item Process Termination
-						\begin{itemize}
-							\item Abbruch aller deadlocked Prozesse
-							\item Prozess nach Prozess wird abgebrochen bis der Deadlockzyklus eliminiert wurde
-						\end{itemize}
-					\item Resource Preemption
-						\begin{itemize}
-							\item Wähle ein "Opfer" - minimieren kosten
-							\item Wiederherstellung - zu einem safe state zurückkehren, die Prozesse für den Zustand neustarten
-							\item Starvation - Gleicher Prozess könnt immer als Opfer ausgewählt werden, Anzahl der Wiederherstellungen im Kostenfaktor berücksichtigen
-						\end{itemize}
-				\end{itemize}
+
 \chapter{05aMemoryManagement}
 \section{Background}
 \begin{itemize}
@@ -1289,18 +1152,298 @@ page < Fuck this shit, not gonna translate it
 
 \end{itemize}
 \chapter{05bMemoryManagement - Cache Management}
-\section{Basisoperationen}
+\section{Basics}
+\subsection{Operationen}
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.4]{operation.png}
 \end{figure}
 
+\begin{itemize}
+\item Pufferspeicher zur Ausnutzung zeitlicher und räumlicher Lokalität
+\item Niedrige Latenz, hohe Bandbreite 
+\item Zugriffe auf den Hauptspeicher verringern
+\item Puffer für asynchrone geprefetchte Operationen
+\end{itemize}
+
+\subsection{Zugriff}
+
+\begin{itemize}
+\item Cache miss
+\begin{itemize}
+\item \textit{Compulsory} (Cold Start, first reference) - Datenblock wurde zuvor nicht gecached
+\item \textit{Capacity} - Die benötigten Daten passen nicht all in den Cache
+\item \textit{Conflict} (collision, interference) - Abhängig von der Organisation könnten Daten miteinander in Konflikt geraten
+\end{itemize}
+\item Cache hit
+\item Hit ratio
+\end{itemize}
+
+\begin{description}
+\item[Neuman Architektur]\ \\ Befehle und Operanden liegen im selben Speicher. CPU braucht daher 2 Lesezyklen.
+\item[Harvard Architektur]\ \\ Befehle und Operanden in jeweils unterschiedlichen Speichern. Ermöglicht gleichzeitiges Lesen von Befehl und Operanden
+\item[Gemischter oder modifizierter Harvard]\ \\Separater Cache für Befehl und Operanden, aber selber Hauptspeicher
+\end{description}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{modifiedharvard.png}
+\caption{modifizierte Harvard Architektur}
+\end{figure}
+
+\begin{itemize}
+\item Im Cache wird mit Hilfe von Hashing oder dem Vergleichen von Adressen gesucht.
+\item Write Policies:
+\begin{itemize}
+\item Cache Hit
+\begin{itemize}
+\item \textbf{write-through}: Hauptspeicher immer auf dem neusten Stand, Schreiben braucht dafür seine Zeit.
+\item \textbf{write-back}: Daten werden nur in den Cache geschrieben, der Hauptspeicher ist daher in einem temporär inkonsistenten Zustand.
+\end{itemize}
+\item Cache Miss
+\begin{itemize}
+\item \textbf{write-allocate}: Zu schreibende Daten werden vom Hauptspeicher in den Cache eingelesen. Geschrieben wird danach nach der vorliegenden "`write policy"'
+\item \textbf{write-to-memory}: Es werden nur im Hauptspeicher Veränderungen vorgenommen.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsection{Cacheorganisation}
+\begin{itemize}
+\item \textbf{Voll Assoziativ}
+\begin{itemize}
+\item Jeder Speicherzeile kann mit jeder Cachezeile in Verbindung gebracht werden
+\item Adressen im Cache werden via Hashing gefunden
+\end{itemize}
+\item \textbf{Direktes Mapping}
+\begin{itemize}
+\item Eine page befindet sich im Cache mit allen ihren Zeilen
+\item Adressen im Cache werden via Vergleich gefunden
+\end{itemize}
+\item \textbf{N-way set Assoziativ}
+\begin{itemize}
+\item n pages befindet sich im Cache
+\item Um eine Adresse im Cache zu finden werden n Vergleiche benötigt
+\end{itemize}
+\item Cache Zeilen mit fixer Länge (z.B 32/64 Bytes)
+\item Adressen werden auf die Cachezeilen abgebildet
+\item Daten werden durch ihr \textit{tag-field} identifiziert. Tags repräsentieren die Adresse des Datums im Speicher
+\end{itemize}
+
+\subsection{Hash Algorithmen}
+\begin{itemize}
+\item Modulo Hashing z.B  0. bis 5. bits als byte offset innerhalb der Cachezeile. 6. bis 18. bits um die Cachezeile auszuwählen und 19. bis 31. Bit als tag
+\item Nehme zufällig gewählte Abschnitte der Adresse um die Cachezeile zu bestimmen. Wird nicht benutzt, da suboptimales Abbilduen von Adressen auf Cachezeilen.
+\end{itemize}
+
+\subsection{Synchronisation von Cache und Speicher}
+\begin{description}
+\item[Leeren des Caches] \ \\ Stellt Konsitenz sicher. Validiert Speicher indem es modifizierte Cachezeilen zurückschreibt und leert Cache
+\item[Ungepufferte Operationen] \ \\ Benötigt z.B für Speichergemappte Register von I/O Geräten. 
+\end{description}
+\subsection{Cache Leistung}
+\begin{itemize}
+\item Bei Temporärer Lokalität wird eine \textit{write-back} Strategie bevorzugt.
+\item Bei kleinen Caches  wird eien set-assoziative Implementierung mit großen Sets genommen.
+\item Räumliche Lokalität bevorzugt lange Zeilen
+\item Leistungssteigerung hängt vom Betriebssystem ab
+\end{itemize}
+
+\subsection{Cache Design Parameter}
+\begin{itemize}
+\item Größe
+\item Zeilenlänge
+\item Setgröße
+\item Verwendung von virtuellen oder physikalische Adressen für Tagging/Indizierung
+\item Austauschstrategie
+\item Nutzung von \textit{write-allocate}
+\item \textit{Write-through} oder \textit{write-back}
+
+\end{itemize}
+\subsection{Cache Anordnung}
+\begin{itemize}
+\item Länge der Cachezeilen hat Einfluss auf die Datenstruktur
+\item \textit{Problem}: Mehrfache Misses werden durch "`nicht-angeordnete"' Datenstrukturen die mehrere Cachezeilen umfassen verursacht.
+\item \textit{Lösung}:  Struktur wird zu einem mehrfachen der Zeilenlänge aufgefüllt
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{cachealignment.png}
+\end{figure}
+
+\item In der Praxis treten Cacheanordnungs Probleme kaum auf
+\item Einträge sind Blöcke. Speicher wird Blockweise vom Speicher in den Cache kopiert
+\item Daraus folgt: Wenn Block = Zeile, sind die Zeilen voll
+\end{itemize}
+
+\subsection{Index und Tags}
+\begin{itemize}
+\item Adressen im Cache werden mit Hilfe eines Index gefunden, welcher der Zeilennummer entspricht
+\item  Tag bestimmt ob ein Speicherblock von der CPU benötigt wird.
+\item  CPUs benutzen oft virtuelle Adressen
+\end{itemize}
+
+\section{Virtuell indizierter, virtuell getaggter Cache (VIVT)}
+\begin{itemize}
+\item Kein MMU Zugriff benötigt für Cachezugriff
+\item Alte ARM Architektur
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{VIVT.png}
+\end{figure}
+
+MMU sitzt hinter dem Cache, jedoch nur virtuell/virtuell Möglich.
+
+\begin{itemize}
+\item \textbf{Ambiguity Problem}: Zwei identische virtuelle Adressen zeigen auf unterschiedliche physikalische Adressen zu zwei verschiedenen Zeitpunkten
+\item \textbf{Alias Problem}: Unterschiedliche virtuelle Adressen zeigen auf die selbe physikalische Speicherstelle
+\end{itemize}
+
+\begin{description}
+\item \textbf{Context Switch} \ \\ Cache muss geleert werden, da identische virtuelle Adresse von unterschiedlichen Adressräumen auf unterschiedliche physikalische Adressen weisen können (und mit hoher wahrscheinlichkeit auch tun werden)
+
+\item \textbf{fork()} \ \\Das Kind benötigt eine komplette Kopie des Elterns Adressraum.
+\item \textbf{exec()} \ \\ leert Cache um amibguities zu verhindern. Wird nicht beim Zurückschreiben benötigt, da der Speicher eh überschrieben wird.
+
+\item \textbf{exit()} \ \\ leert den Cache
+\item \textbf{brk() and sbrk()} \ \\ "`Growing"' benötigt keine Aktion, "`shrinking"' benötigt selektive Cache leerung.
+\end{description}
+
+\subsection{Shared Memory und Memory mapped files}
+\begin{itemize}
+\item Das Problem mit  Aliases ist, dass mehr virtuelle Adressen benutzt werden um auf die selben pysikalischen Speicherstellen zu verweisen
+\item Also: Nicht erlauben und nicht cachen.
+\item Erlaube nur adressen die auf die selbe Cachezeile mappen (wenn der Cache direkt gemapped und write-allocate verwendet)
+\item Jeder Frame ist von exakt einer virtuellen Adresse zu jedem Zeitpunkt erreichtbar
+\end{itemize}
+
+ Gepufferte I/O machen keine Probleme, Ungepufferte hingegen schon, da:
+ \begin{itemize}
+ 
+\item Schreiben: Information könnten immer noch im Cache sein
+\item Lesen: Cache muss geleert werden
+ \end{itemize}
+
+\subsection{User-Kernel Data Ambiguities (Doppeldeutigkeit,Missverständnis)}
+\begin{itemize}
+\item Schreibe Systemdateien zurück bevor man in den usermode zurück kehrt.
+\item Cache leeren before man in den user mode zurück kehrt
+\end{itemize}
+
+\subsection{Echzeit Charakteristik}
+
+\begin{itemize}
+\item Schnell da die MMU nur bei Cache Misses benötigt wird
+\item Konstante  Ausführungszeit eines Prozesses mit festem Speichermapping
+\item Variable Ausführungszeit im Falle von dynamischer Speicherallokierung (werden durch conflict misses ausgelöst, wenn ein voller Assoziativcache verwendet wird)
+\item Teure Kontextwechsel und I/O da der Cache geleert werden muss
+\end{itemize}
+
+\section{Virtuell indizierter, physikalisch getaggter Cache(VIPT)}
+\begin{itemize}
+\item MMU Zugriff benötigt
+\item Intel Core++ Prozessor
+\item Instruktions Cache ARM Cortex
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{VIPT.png}
+\end{figure}
+
+\item Wird oft als first-level Cache verwendet (z.B UltraSPARC II)
+\item \textbf{Cache Management}
+\begin{itemize}
+\item Keine Mehrdeutigkeiten
+\item Keine Cacheleerung bei Kontextwechsel
+\item Virtuelle Startadressen müssen auf die selbe Cachezeile gemapped sein
+\end{itemize}
+
+\item Es könnten Konflike entstehen wenn Datenstrukturen, der Abstand der Adressen ein Vielfaches der Cachegröße beträgt auf die selbe Cachezeile gemapped sind. Dies kann durch n-way caching behoben werden.
+\end{itemize}
+\subsection{Laufzeit Eigenschaften}
+\begin{itemize}
+\item Schnelle Kontextwechsel, Interrupt-handlig und System Calls, da Cache flushes die meiste Zeit verhindert werden
+\item Verzögerte Write-Back nach einem Kontextwechsel. 
+\item Unterschiedliche Ausführungszeit im Falle von dynamischem Speichermanagement, welche durch Conflict misses verursacht werden
+\item  Variable Suchdauer, welche durch die Adressübersetzung der MMU verursacht wird.
+\item Problematik bei multiprozessor Systemen mit shared memory: Welche Zeile leeren?
+\end{itemize}
 
 
-\section{Virtuell indizierter, virtuell getaggter Cache}
-\section{Virtuell inizierter, physikalisch gtaggter Caseh}
-\section{Physikalisch indizierter Cache}
-\section{•}
+\section{Physikalisch indizierter, physikalisch getaggter Cache (PIPT)}
+
+\begin{itemize}
+\item Daten Cache ARM Cortex
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{PIPT.png}
+\end{figure}
+
+\textbf{Vorteile}
+\begin{itemize}
+\item Komplett transparent für den Prozessor
+\item Keine Unterstützung für Performanz-kritische Systeme benötigt.
+\item SMP mit shared memory kann ein in der Hardware implementiertes Kohärenzprotokoll benutzen
+\end{itemize}
+\section{Physikalisch indizierter, virtuell getaggter Cache (PIVT)}
+\begin{huge}
+\textbf{>>>>>>SINNLOS!<<<<<<} 
+\end{huge}
+\begin{small}
+Daher nicht praktiziert...
+\end{small}
+
+\section{Page Conflicts}
+
+Werden durch zufällige Allokierungen von physikalischem Speicher verursacht
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{pageconflict.png}
+\end{figure}
+ \ \\
+Angrenzend virtueller Speicher wird normallerweise auf beliebig freie physikalische pages abgebildet.
+
+\subsection{Page Colouring}
+Problem von zufälliger Page Färbung : Benachbarte Codes/Daten könnten nicht auf den selben Cache abgebildet werden, wenn sie auf die selbe Zeile hashen.
+
+Lösung1: 
+
+\begin{itemize}
+\item Folgen von zufälligem page coloring:
+\begin{itemize}
+\item Cache Conflicts
+\item Cache nur teilweise benutzt
+\item Signifikante unterschiede in der Laufzeit \\
+$X(p \in bin) = {P \choose p} (\frac{1}{C})^p(1-\frac{1}{C})^{P-p} $
+P: Anzahl von allokierten Pages
+p: p pages die der selben Cachezeile entsprechen
+C: Nummer der Farbe
+\end{itemize}
+\end{itemize}
+
+
+\subsection{Cache Konflikte vermeiden}
+\subsubsection{Cachepartitionierung}
+\begin{itemize}
+\item Unterteile den physikalischen Speicher in disjunkte  Teilmengen. Alle Pages einer Teilmenge werden auf die selbe Cachepartition abgebildet.\\
+\textit{Beispiel:} \\
+\item Alle roten und blauen Pages fürs Betriebssystem
+\item Alle gelben Pages für die echtzeit Anwendung
+\item Alle grünen Pages für die Hintergrundprozesse.
+\end{itemize}
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{pagecoloring.png}
+\caption{Analyse von Zugriffsmustern und Page coloring}
+\end{figure}
+
 
 \chapter{05cMemoryManagement}
 \chapter{06aFileSystems}
