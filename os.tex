@@ -1618,7 +1618,7 @@ page < Fuck this shit, not gonna translate it
 \caption{Interaktionen zwischen einem Programm und dem Dateisystem}
 \end{figure}
 
-\section{Ziele der Dateiverwaltung}
+\subsection{Ziele der Dateiverwaltung}
 \begin{itemize}
 	\item Liefer ueberzeugendes Namenschema fuer Dateien
 	\item Liefer einheitlichen I/O Support fuer unterschiedliche Speichergeraetetypen
@@ -1629,8 +1629,142 @@ page < Fuck this shit, not gonna translate it
 	\item Liefer akzeptierbare Performance
 \end{itemize}
 
+\subsection{Dateinamen}
+\begin{itemize}
+	\item Textuelle Namen
+	\item Eingeschraenktes Alphabet
+		\begin{itemize}
+			\item Nur bestimmte characters
+			\item Eingeschraenkte Laenge
+			\item Case (in)sensitive
+		\end{itemize}
+	\item Nur bestimmte Formate, z.B.
+		\begin{itemize}
+			\item DOS: 8 character string.xyz character suffix
+			\item XP: 255 character string.xyz character suffix
+		\end{itemize}
+	\item Namen mussen bestimmte weitere Eigenschaften einhalten, z.B. Erweiterungen xyz.c, wenn der C-Compiler laufen soll
+\end{itemize}
 
+\subsection{Oeffnen von Dateien}
+Unterschiedliche Metadaten werden gebraucht, um das Oeffnen von Dateien zu verwalten
+\begin{itemize}
+	\item file pointer: Zeiger auf die letzte Lese-/Schreibaktion, pro Prozess, der die Datei offen hat
+	\item access rights: Pro Prozess/Task gibt es Zugriffsinformationen
+	\item file-open count: Zaehler, welcher angibt, wie oft die Datei offen ist, um Entfernen von Daten aus der Datei zu ermoeglichen, wenn der letzte Prozess beendet ist
+	\item disk location: Cache mit Datenzugriffsinformationen
+\end{itemize}
 
+\subsection{Dateizugriff}
+\begin{itemize}
+	\item Strikt sequentieller Zugriff (fruehere Systeme)
+		\begin{itemize}
+			\item Lies alle Bytes von Anfang an
+			\item Keine Spruenge moeglich, nur zurueck
+			\item Ausreichend, solange Tapes benutzt wurden
+		\end{itemize}
+	\item Zufaelliger Zugriff (aktuelle System)
+		\begin{itemize}
+			\item Lies Bytes in beliebiger Reihenfolge
+			\item Essenziell fuer Datenbankensysteme
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Dateiorganisation und Zugriff}
+Moegliche Zugriffsmuster:
+\begin{itemize}
+	\item Lies komplette Datei
+	\item Lies individuelle Block einer Datei
+	\item Lies Bloecke mit den folgenden oder vorangehenden
+	\item Finde eine Untermenge an records wieder auf
+	\item Schreibe/update eine komplette Datei sequenziell
+	\item Einfuegen/Loeschen/Updaten eines records in einer Datei
+	\item Update Bloecke in eine Datei
+\end{itemize}
+
+\subsubsection{Dateizugriffsmethoden}
+\begin{itemize}
+	\item Sequenzieller Zugriff
+		\begin{itemize}
+			\item read next
+			\item write next
+			\item rewind
+			\item no read after last write
+			\item append
+		\end{itemize}
+	\item Direkter Zugriff
+		\begin{itemize}
+			\item read n
+			\item write n
+			\item position to n
+			\item read next
+			\item write next
+		\end{itemize}
+	\item n = relative Position
+	\item Einfache (unstrukturierte) Datei
+		\begin{itemize}
+			\item Einheit: Byte (manchmal Block)
+			\item Will eine Applikation einen Datencontainer strukturieren moechte, so hat es die interne Struktur zu implementieren
+		\end{itemize}
+	\item Strukturierte Datei
+		\begin{itemize}
+			\item Einheit: record (oder user type object, ...)
+		\end{itemize}
+	\item Seit Unix bieten OSes nur noch plain file, Programme und Bibliotheken koennen darauf spezielle Strukturen implementieren
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{sequential_access.png}
+\caption{Ein sequenzieller Zugriff auf eine Datei}
+\end{figure}
+
+\subsubsection{Operationen auf unstrukturierten Dateien}
+\begin{itemize}
+	\item CreateFile(pathname)
+	\item DestroyFile(pathname)
+	\item OpenFile(pathname, read/write)
+	\item ReadFile(FID, byte-range, memory location)
+	\item WriteFile(FID, byte-range, memory location)
+	\item CloseFile(FID)
+	\item PositionPointer(FID, position for pointer)
+\end{itemize}
+
+memory location ist die data area im AS des aufrufenden Prozesses (z.B. im Heap oder Stack)
+
+\subsection{Plain File}
+\begin{itemize}
+	\item Definition: Plain File ist eine Sequenz von Bytes, meisten auf der Disk
+	\item Characteristic: Man kann auf jedes Byte in einer unstrukturierten Datei zugreifen, wenn der Zeiger richtig gesetzt ist
+	\item Problem: Disks koennen nicht auf Bytes sondern nur auf Bloecke zugreifen
+	\item Solution: Buffer file blocks (klassische Methode) oder ganze Dateien (auf den Speicher abgebildete Dateien) im Hauptspeicher
+\end{itemize}
+
+\subsection{Strukturierte Datei}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{structured_file.png}
+\caption{Strukturierte Datei}
+\end{figure}
+
+\begin{itemize}
+	\item Records = logische Einheiten streng an eine Applikation gebunden
+	\item Records mit gleicher Groeße oder nicht
+	\item Records mit einem speziellen Schluesselfeld ($\Rightarrow$ etwas Ordnung in der Datei)
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{file_operation.png}
+\caption{Datei Operation 1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{file_operation2.png}
+\caption{Datei Operation 2}
+\end{figure}
 
 \chapter{07aImplementingFileSystems}
 \chapter{07bImplementingFileSystems}
