@@ -1421,9 +1421,97 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{file_attributes.png}
+\includegraphics[scale=0.25]{file_attributes.png}
 \caption{Typische Dateiattribute}
 \end{figure}
+
+\subsection{Dateistruktur 1}
+\begin{itemize}
+	\item Keine - Sequenz von Woertern/Bytes
+	\item Simple record Struktur
+		\begin{itemize}
+			\item Zeilen
+			\item Feste Laenge
+			\item Variable Laenge
+		\end{itemize}
+	\item Kompexe Struktur
+		\begin{itemize}
+			\item Formattiertes Dokument
+			\item Verschiebbares ausfuehrbares Objekt
+		\end{itemize}
+\end{itemize}
+
+\subsection{Dateistruktur 2 (OS Ansicht)}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{file_structure.png}
+\caption{Datei Struktur}
+\end{figure}
+
+\begin{itemize}
+	\item Drei Arten von Dateien
+		\begin{itemize}
+			\item Byte Sequenz (ermoeglicht maximale Flexibilitaet)
+			\item record Sequenz (haeufig mit fester Groeße)
+			\item Baum (manchmal mit variabler Groeße)
+		\end{itemize}
+\end{itemize}
+
+\subsection{Dateitypen}
+\begin{itemize}
+	\item Regulaere Dateien: ausfuehrbar, dll, object, source, text
+	\item Spezielle Dateien: Ordner, Geraete (character, block), Links
+	\item Dateityp kann an folgenden Stellen stehen:
+		\begin{itemize}
+			\item interne Sturktur im FS (z.B. Unix): Inode
+			\item Nmane (z.B. Dateinamenserweiterungen in Windows): .com, .exe..
+			\item Inhalt (z.B. Unix, media files): Magic number oder initial character (z.B. \#! fuer Shellscripts)
+		\end{itemize}
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{regular_filetypes.png}
+\caption{Regulaere Dateitypen 1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{regular_filetypes2.png}
+\caption{Regulaere Dateitypen 2}
+\end{figure}
+
+\subsection{Abstrakte Dateioperationen}
+\begin{itemize}
+	\item create()
+	\item write()
+	\item read()
+	\item reposition() (innerhalb einer Datei)
+	\item delete()
+	\item truncate()
+	\item open($F_i$): suche in Ordnerstruktur nach $F_i$ und bewege die Metadaten in den Speicher
+	\item close($F_i$): bewege gecachte Metadaten von Eintrag $F_i$ im Speicher in die Ordnerstruktur
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{filesystem_interaction.png}
+\caption{Interaktionen zwischen einem Programm und dem Dateisystem}
+\end{figure}
+
+\section{Ziele der Dateiverwaltung}
+\begin{itemize}
+	\item Liefer ueberzeugendes Namenschema fuer Dateien
+	\item Liefer einheitlichen I/O Support fuer unterschiedliche Speichergeraetetypen
+	\item Liefer standardisierte Menge an I/O Schnittstellenfunktionen
+	\item Minimiere Verlust oder Verfaelschung von Dateien
+	\item Liefer I/O Support und Zugriffskontrolle fuer mehrere Benutzer
+	\item Erweiter Systemadministration (z.B. Backup)
+	\item Liefer akzeptierbare Performance
+\end{itemize}
+
+
 
 
 \chapter{07aImplementingFileSystems}
