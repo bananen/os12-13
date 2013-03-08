@@ -1942,4 +1942,43 @@ memory location ist die data area im AS des aufrufenden Prozesses (z.B. im Heap 
 \chapter{08SecondaryStorageStructure}
 \chapter{09IoSystems}
 
+\section{Ziele des Gerätemanagements}
+\begin{itemize}
+	\item \textbf{Abstraktion} von Details der physischen Gerätemanagements
+	\item \textbf{Uniform Naming} das nicht von Hardware-Details abhängt
+	\item \textbf{Serialisierung} von I/O-Operationen durch gleichzeitige Anwendungen
+	\item \textbf{Schutz} von Standard-Geräten vor unberechtigten Zugriffen 
+	\item \textbf{Puffern}, wenn Daten von/zu einem Gerät nicht im Zielverzeichnis gespeichert werden können 
+	\item \textbf{Fehlerbehandlung} von unregelmäßigen Gerätefehlern
+	\item \textbf{Virtualisierung} physischer Geräte mit Hilfe von Speicher- und Zeitmultiplexen (z.B. pty, RAM Disk)
+\end{itemize}
+
+\section{Charakteristiken von I/O-Geräten}
+\begin{itemize}
+	\item \textbf{Block-Geräte} enthalten Plattenlaufwerke
+	\subitem Befehle enthalten read, write, seek
+	\subitem "Roher" I/O- or FS-Zugriff
+	\subitem Speicherabgebildeter(Memory-mapped) Datenzugriff möglich
+	\item \textbf{Charakter-Geräte} enthalten Tastaturen, Mäuse und serieller Ports
+	\subitem Befehle enthalten get, put
+	\item \textbf{Netzwerkgeräte} unterscheiden sich stark genug von Block und Charakter-Geräten um ihre eigene Schnittstelle  zu haben.
+	\subitem Windows und UNIX enthalten Socket-Interface("Sockelschnittstelle")
+\end{itemize}
+\includegraphics[scale=0.6]{chapter9_1.png}
+\section{I/O Hardware}
+\begin{itemize}
+	\item Übliche Komponenten
+		\subitem Controller
+		\subitem Port (externer Verbindgungspunkt)
+		\subitem Bus (verkette Hardwarekomponenten oder geteilter direkter Zugriff)
+	\item Geräte haben Adressen, die von folgenden Komponenten verwendet werden:
+		\subitem Direkte I/O Anweisungen 
+		\subitem Memory-mapped I/O
+	\item Geräteadressen zeigen normalerweise aufgefüllt	
+		\subitem Status Register
+		\subitem Control Register
+		\subitem Data-in Register
+		\subitem Data-out Register
+\end{itemize}
+
 \end{document}
