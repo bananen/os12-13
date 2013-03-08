@@ -129,7 +129,7 @@
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{dma.png}
+\includegraphics[scale=0.4]{graphics/dma.png}
 \caption{Direct Memory Access}
 \end{figure}
 
@@ -266,7 +266,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{storage.png}
+\includegraphics[scale=0.4]{graphics/storage.png}
 \caption{Unterschiedliche Speicher und ihre Werte}
 \end{figure}
 
@@ -308,7 +308,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{big_picture.png}
+\includegraphics[scale=0.5]{graphics/big_picture.png}
 \caption{Uebersicht}
 \end{figure}
 
@@ -342,7 +342,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.35]{services.png}
+\includegraphics[scale=0.35]{graphics/services.png}
 \caption{Ort der Services}
 \end{figure}
 
@@ -356,7 +356,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{system_call.png}
+\includegraphics[scale=0.3]{graphics/system_call.png}
 \caption{Aufrufsequenz eines Syscalls}
 \end{figure}
 
@@ -366,7 +366,7 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{api.png}
+\includegraphics[scale=0.4]{graphics/api.png}
 \caption{Head von ReadFile()}
 \end{figure}
 
@@ -387,7 +387,7 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{syscall_os_relationship.png}
+\includegraphics[scale=0.4]{graphics/syscall_os_relationship.png}
 \caption{Beziehung zwischen Syscalls und OS}
 \end{figure}
 
@@ -395,7 +395,7 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{printf.png}
+\includegraphics[scale=0.4]{graphics/printf.png}
 \caption{Aufruf von printf}
 \end{figure}
 
@@ -410,7 +410,7 @@ Generell gibt es drei Methoden, Parameter an das OS zu uebergeben:
 \subsubsection{System Calls von Windows und Unix}
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{syscall_examples.png}
+\includegraphics[scale=0.3]{graphics/syscall_examples.png}
 \caption{Beispiele von Syscalls}
 \end{figure}
 
@@ -446,7 +446,7 @@ Ein laufendes Programm:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.6]{running_program.png}
+\includegraphics[scale=0.6]{graphics/running_program.png}
 \caption{Laufendes C-Programm}
 \end{figure}
 
@@ -456,7 +456,7 @@ Etwas zu Pointern:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.6]{pointer.png}
+\includegraphics[scale=0.6]{graphics/pointer.png}
 \caption{Pointer}
 \end{figure}
 
@@ -630,13 +630,13 @@ Beispiele:
 		\begin{minipage}[t]{4cm}
 			\vspace{0pt}
 			\centering
-			\includegraphics[scale = 0.3]{memory.png}\\
+			\includegraphics[scale = 0.3]{graphics/memory.png}\\
 		\end{minipage}
 	\end{figure}
 
 \section{Process Status}
 	Ein Prozess wechselt wie folgt zwischen verschiedenen Zuständen:\\ \\
-	\includegraphics[scale = 0.4]{prozess_status.png}
+	\includegraphics[scale = 0.4]{graphics/prozess_status.png}
 \section{Process Control Block(PCB)}
 	Zu jedem Prozess gehört:
 	\begin{itemize}
@@ -650,7 +650,7 @@ Beispiele:
 \section{Context Switch}
 	:= Das Wechseln der Prozessinformationen beim Prozesswechsel in der CPU\\ \\
 	Dieser Kontext wird in PCB's gespeichert. Zeit zum Wechseln geht bei der Rechenzeit verloren.\\ \\
-	\includegraphics[scale = 0.6]{process_switch.png}\\
+	\includegraphics[scale = 0.6]{graphics/process_switch.png}\\
 \section{Process Creation}
 	\begin{itemize}
 		\item Prozesse bilden als Kinder- und Elternprozesse einen Prozessbaum
@@ -677,7 +677,7 @@ Beispiele:
 			\item \underline{exec} SysCall benutzt nach \underline{fork} um neues Programm zu laden
 		\end{itemize}
 	\end{itemize}
-	\includegraphics[scale = 0.6]{process_fork.png}
+	\includegraphics[scale = 0.6]{graphics/process_fork.png}
 \chapter{03bProcess-management-scheduling}
 \chapter{04Process-coordination}
 
@@ -833,7 +833,7 @@ Beispiele:
 				\item request edge - Kante von P1 nach Rj
 				\item assignment edge - Kante von Rj nach Pi
 			\end{itemize}
-		\includegraphics[scale=0.7]{resallograph.png}
+		\includegraphics[scale=0.7]{graphics/resallograph.png}
 			\begin{itemize}
 				\item Graph beinhaltet kein Zyklus => kein Deadlock
 				\item Graph beinhaltet Zyklus =>
@@ -940,7 +940,7 @@ Register dienten dem Schutz der Benutzerprozesse untereinander und vor Veränder
 Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 
 \begin{center}
-\includegraphics[scale=0.5]{baseandlimitprotection.png}
+\includegraphics[scale=0.5]{graphics/baseandlimitprotection.png}
 \end{center}
 
 
@@ -957,7 +957,7 @@ Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.6]{swapping.png}
+\includegraphics[scale=0.6]{graphics/swapping.png}
 \caption{Schematik von Swapping}
 \end{figure}
 
@@ -976,7 +976,7 @@ Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.6]{allocation.png}
+\includegraphics[scale=0.6]{graphics/allocation.png}
 \caption{Schematik Speicherallokierung}
 \end{figure}
 
@@ -1000,19 +1000,19 @@ Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.55]{allocationexample.png}
+\includegraphics[scale=0.55]{graphics/allocationexample.png}
 \caption{Beispiel vor und nach Allokierung eines 16Mbyte Blocks}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.50]{buddysystem.png}
+\includegraphics[scale=0.50]{graphics/buddysystem.png}
 \caption{Beispiel Buddysystem}
 \end{figure}
   \ \\
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{buddysystemtree.png}
+\includegraphics[scale=0.5]{graphics/buddysystemtree.png}
 \caption{Darstellung Buddysystem als Baum}
 \end{figure}
 \newpage
@@ -1070,7 +1070,7 @@ Logische und physische Adressen sind im Sinne von Kompilierzeit und "`load-time 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.50]{overlays.png}
+\includegraphics[scale=0.50]{graphics/overlays.png}
 \caption{Überlagerung (\textit{overlays})}
 \end{figure}
 
@@ -1134,13 +1134,13 @@ Logische und physische Adressen sind im Sinne von Kompilierzeit und "`load-time 
  
  \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.50]{segmentierung1.png}
+\includegraphics[scale=0.50]{graphics/segmentierung1.png}
 \caption{Segmentierung Beispiel}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.50]{segmentierung2.png}
+\includegraphics[scale=0.50]{graphics/segmentierung2.png}
 \caption{Segmentierung Beispiel 2}
 \end{figure}
 \end{itemize}
@@ -1167,8 +1167,8 @@ Von der CPU generierte Adressen werden wie folgt aufgeteilt:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.40]{numberoffset.png}
-\includegraphics[scale=0.50]{paging1.png}
+\includegraphics[scale=0.40]{graphics/numberoffset.png}
+\includegraphics[scale=0.50]{graphics/paging1.png}
 \caption{Paging}
 \end{figure}
 
@@ -1192,7 +1192,7 @@ Bei der Auswahl der Pagegröße muss auf folgenes geachtet werden:
 \end{itemize}
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.40]{tlb.png}
+\includegraphics[scale=0.40]{graphics/tlb.png}
 \end{figure}
 
 
@@ -1253,7 +1253,7 @@ $EAT = (\tau + \mu)  \alpha + (\tau + 2\mu) (1-\alpha) = \tau +2\mu - \mu\alpha$
 \item Eine 32-bit große logische Adresse mit 1K page size wird unterteilt in
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{twolevelpage.png}
+\includegraphics[scale=0.3]{graphics/twolevelpage.png}
 \caption{Two Level Paging}
 \end{figure}
 
@@ -1261,13 +1261,13 @@ $EAT = (\tau + \mu)  \alpha + (\tau + 2\mu) (1-\alpha) = \tau +2\mu - \mu\alpha$
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{topdownadress.png}
+\includegraphics[scale=0.4]{graphics/topdownadress.png}
 \caption{Top-Down Address-Translation Scheme}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{topdownthreelevel.png}
+\includegraphics[scale=0.3]{graphics/topdownthreelevel.png}
 \caption{Top-Down three-Level Paging Scheme}
 \end{figure}
 
@@ -1294,7 +1294,7 @@ page < Fuck this shit, not gonna translate it
 \subsection{Operationen}
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{operation.png}
+\includegraphics[scale=0.4]{graphics/operation.png}
 \end{figure}
 
 \begin{itemize}
@@ -1325,7 +1325,7 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{modifiedharvard.png}
+\includegraphics[scale=0.4]{graphics/modifiedharvard.png}
 \caption{modifizierte Harvard Architektur}
 \end{figure}
 
@@ -1406,7 +1406,7 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{cachealignment.png}
+\includegraphics[scale=0.4]{graphics/cachealignment.png}
 \end{figure}
 
 \item In der Praxis treten Cacheanordnungs Probleme kaum auf
@@ -1429,7 +1429,7 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{VIVT.png}
+\includegraphics[scale=0.4]{graphics/VIVT.png}
 \end{figure}
 
 MMU sitzt hinter dem Cache, jedoch nur virtuell/virtuell Möglich.
@@ -1487,7 +1487,7 @@ MMU sitzt hinter dem Cache, jedoch nur virtuell/virtuell Möglich.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{VIPT.png}
+\includegraphics[scale=0.5]{graphics/VIPT.png}
 \end{figure}
 
 \item Wird oft als first-level Cache verwendet (z.B UltraSPARC II)
@@ -1518,7 +1518,7 @@ MMU sitzt hinter dem Cache, jedoch nur virtuell/virtuell Möglich.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{PIPT.png}
+\includegraphics[scale=0.5]{graphics/PIPT.png}
 \end{figure}
 
 \textbf{Vorteile}
@@ -1541,7 +1541,7 @@ Werden durch zufällige Allokierungen von physikalischem Speicher verursacht
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{pageconflict.png}
+\includegraphics[scale=0.5]{graphics/pageconflict.png}
 \end{figure}
  \ \\
 Angrenzend virtueller Speicher wird normallerweise auf beliebig freie physikalische pages abgebildet.
@@ -1578,7 +1578,7 @@ C: Nummer der Farbe
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{pagecoloring.png}
+\includegraphics[scale=0.5]{graphics/pagecoloring.png}
 \caption{Analyse von Zugriffsmustern und Page coloring}
 \end{figure}
 
@@ -1652,7 +1652,7 @@ C: Nummer der Farbe
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{harddisk.png}
+\includegraphics[scale=0.3]{graphics/harddisk.png}
 \caption{Zylinder, Tracks und Sektoren}
 \end{figure}
 \subsection{Das Positionierungssystem}
@@ -1722,7 +1722,7 @@ C: Nummer der Farbe
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{san.png}
+\includegraphics[scale=0.4]{graphics/san.png}
 \caption{SAN}
 \end{figure}
 
@@ -1793,7 +1793,7 @@ C: Nummer der Farbe
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{ssd.png}
+\includegraphics[scale=0.3]{graphics/ssd.png}
 \caption{SSD Logik}
 \end{figure}
 
@@ -1837,7 +1837,7 @@ C: Nummer der Farbe
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.25]{file_attributes.png}
+\includegraphics[scale=0.25]{graphics/file_attributes.png}
 \caption{Typische Dateiattribute}
 \end{figure}
 
@@ -1861,7 +1861,7 @@ C: Nummer der Farbe
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{file_structure.png}
+\includegraphics[scale=0.3]{graphics/file_structure.png}
 \caption{Datei Struktur}
 \end{figure}
 
@@ -1888,13 +1888,13 @@ C: Nummer der Farbe
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{regular_filetypes.png}
+\includegraphics[scale=0.3]{graphics/regular_filetypes.png}
 \caption{Regulaere Dateitypen 1}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{regular_filetypes2.png}
+\includegraphics[scale=0.4]{graphics/regular_filetypes2.png}
 \caption{Regulaere Dateitypen 2}
 \end{figure}
 
@@ -1912,7 +1912,7 @@ C: Nummer der Farbe
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.35]{filesystem_interaction.png}
+\includegraphics[scale=0.35]{graphics/filesystem_interaction.png}
 \caption{Interaktionen zwischen einem Programm und dem Dateisystem}
 \end{figure}
 
@@ -2013,7 +2013,7 @@ Moegliche Zugriffsmuster:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.15]{sequential_access.png}
+\includegraphics[scale=0.15]{graphics/sequential_access.png}
 \caption{Ein sequenzieller Zugriff auf eine Datei}
 \end{figure}
 
@@ -2042,7 +2042,7 @@ memory location ist die data area im AS des aufrufenden Prozesses (z.B. im Heap 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.2]{structured_file.png}
+\includegraphics[scale=0.2]{graphics/structured_file.png}
 \caption{Strukturierte Datei}
 \end{figure}
 
@@ -2054,13 +2054,13 @@ memory location ist die data area im AS des aufrufenden Prozesses (z.B. im Heap 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{file_operation.png}
+\includegraphics[scale=0.4]{graphics/file_operation.png}
 \caption{Datei Operation 1}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{file_operation2.png}
+\includegraphics[scale=0.4]{graphics/file_operation2.png}
 \caption{Datei Operation 2}
 \end{figure}
 
@@ -2114,7 +2114,7 @@ memory location ist die data area im AS des aufrufenden Prozesses (z.B. im Heap 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.2]{single_level_directory.png}
+\includegraphics[scale=0.2]{graphics/single_level_directory.png}
 \caption{Single-Level Ordner}
 \end{figure}
 
@@ -2129,7 +2129,7 @@ memory location ist die data area im AS des aufrufenden Prozesses (z.B. im Heap 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.2]{two_level_directory.png}
+\includegraphics[scale=0.2]{graphics/two_level_directory.png}
 \caption{Two-Level Ordner}
 \end{figure}
 
@@ -2142,7 +2142,7 @@ Prizipielle Struktur eines modernen Dateisystems
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{tree_structured_directories.png}
+\includegraphics[scale=0.3]{graphics/tree_structured_directories.png}
 \caption{Baumstrukturierte Ordner}
 \end{figure}
 
@@ -2171,7 +2171,7 @@ Prizipielle Struktur eines modernen Dateisystems
 	\item Beispiel: Programmsystem
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.2]{program_system.png}
+\includegraphics[scale=0.2]{graphics/program_system.png}
 \caption{Ein Programmsystem}
 \end{figure}
 	\item Wenn man ein Programmsystem bewegt, muss man alle absoluten Pfade aendern, die relativen koennen aber erhalten bleiben
@@ -2180,7 +2180,7 @@ Prizipielle Struktur eines modernen Dateisystems
 \subsubsection{Hierarchisches FS}
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.25]{hierarchical_fs.png}
+\includegraphics[scale=0.25]{graphics/hierarchical_fs.png}
 \caption{Hierarchisches Dateisystem}
 \end{figure}
 Eindeutige Dateinamen ueber Pfadnamen, z.B. /bin/passwd $\neq$ /etc/passwd
@@ -2206,7 +2206,7 @@ Komplexere Stuktur als Baum, hat geteilte Unterordner und Dateien
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.25]{acyclic_graph_directories.png}
+\includegraphics[scale=0.25]{graphics/acyclic_graph_directories.png}
 \caption{Azyklischen Graphen Ordner}
 \end{figure}
 
@@ -2286,7 +2286,7 @@ Komplexere Stuktur als Baum, hat geteilte Unterordner und Dateien
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.25]{unix_access_rights.png}
+\includegraphics[scale=0.25]{graphics/unix_access_rights.png}
 \caption{Klassische Unix Zugriffsrechte}
 \end{figure}
 
@@ -2406,7 +2406,7 @@ setfacl -m user:name:permissions file\\\\
 	\item \textbf{Netzwerkgeräte} unterscheiden sich stark genug von Block und Charakter-Geräten um ihre eigene Schnittstelle  zu haben.
 	\subitem Windows und UNIX enthalten Socket-Interface("Sockelschnittstelle")
 \end{itemize}
-\includegraphics[scale=0.6]{chapter9_1.png}
+\includegraphics[scale=0.6]{graphics/chapter9_1.png}
 \section{I/O Hardware}
 \begin{itemize}
 	\item Übliche Komponenten
