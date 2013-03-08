@@ -2382,7 +2382,7 @@ setfacl -m user:name:permissions file\\\\
 \chapter{07aImplementingFileSystems}
 \chapter{07bImplementingFileSystems}
 \chapter{08SecondaryStorageStructure}
-\chapter{09IoSystems}
+\chapter{09I/O-Systems}
 
 \section{Ziele des Gerätemanagements}
 \begin{itemize}
@@ -2422,5 +2422,43 @@ setfacl -m user:name:permissions file\\\\
 		\subitem Data-in Register
 		\subitem Data-out Register
 \end{itemize}
-
+\section{Memory-mapped I/O}
+\includegraphics[scale=0.5]{graphics/chapter9_2.png}
+\begin{itemize}
+	\item Trenne I/O-Adressraum und Speicher-Adressraum
+		\subitem Trennt Folgen von I/O-Anweisungen für jeden einzelnen Raum
+		\subitem oder eine Folge von Anweisungen mit "space-flags"
+	\item Memory-mapped I/O
+	\item Hybrid(Pentium)
+\end{itemize}
+\includegraphics[scale=0.25]{graphics/chapter9_3.png}
+\begin{itemize}
+\item (a) Single-bus architecture (Einzel-Bus-Architektur)
+\item (b) Dual-bus memory architecture (Doppel-Bus Speicherarchitektur)
+\end{itemize}
+\section{I/O-Management Techniken}
+\begin{itemize}
+	\item Programmierter I/O (synchron)
+		\subitem Thread is busy-waiting for the I/O-operation to complete, processor
+cannot be used elsewhere
+		\subitem Kernel-Faden frägt den Zustand eines I/O Gerätes ab (command-ready, busy, error)
+	\item Interrupt-driven I/O (synchron)
+		\subitem I/O-Befehl wird ausgegeben
+		\subitem Prozessor führt Anweisungen weiter auseinander
+		\subitem I/O-Gerät sendet einen Interrupt(Unterbrechung) sobald I/O-Befehl fertig ist
+	\item Direkter Speicherzugriff(DMA)(asynchron)
+		\subitem DMA Modul kontrolliert Datenaustausch zwischen Hauptspeicher und I/O-Geräte	\subitem Prozessor wird unterbrochen nachdem gesamter Block übertragen wurden	
+		\subitem Umgeht CPU, um Daten direkt zwischen I/O-Gerät und Speicher zu übertragen
+\end{itemize}
+\section{Interrupts}
+\includegraphics[scale=0.7]{graphics/chapter9_4.png}
+\subsection{Interrupts im Detail}
+\includegraphics[scale=0.9]{graphics/chapter9_5.png}
+\subsection{Asynchroner Interrupt-Driven I/O Zyklus}
+\includegraphics[scale=0.3]{graphics/chapter9_6.png}
+\subsection{Schritte zum Behandeln eines Interrupts}
+\begin{itemize}
+	\item (1) Register des laufenden Prozesses speichern
+	\item (2) 
+\end{itemize}
 \end{document}
