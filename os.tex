@@ -1895,7 +1895,7 @@ C: Nummer der Farbe
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{filesystem_interaction.png}
+\includegraphics[scale=0.35]{filesystem_interaction.png}
 \caption{Interaktionen zwischen einem Programm und dem Dateisystem}
 \end{figure}
 
@@ -1996,7 +1996,7 @@ Moegliche Zugriffsmuster:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{sequential_access.png}
+\includegraphics[scale=0.15]{sequential_access.png}
 \caption{Ein sequenzieller Zugriff auf eine Datei}
 \end{figure}
 
@@ -2025,7 +2025,7 @@ memory location ist die data area im AS des aufrufenden Prozesses (z.B. im Heap 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{structured_file.png}
+\includegraphics[scale=0.2]{structured_file.png}
 \caption{Strukturierte Datei}
 \end{figure}
 
@@ -2071,7 +2071,290 @@ memory location ist die data area im AS des aufrufenden Prozesses (z.B. im Heap 
 \subsection{Ordner}
 \begin{itemize}
 	\item Ordner ist ein node in einem FS, welcher zu einem authorisierten Subjekt gehoert und Informationen ueber die Datein im FS enthaelt
-	\item 
+	\item Sowohl Order als auch Dateien sind auf Disk
+	\item Backups von Ordnern und Dateien werden auf tapes gemacht
+	\item Die Sammlung von Ordnern und Dateien bringen eine hierarchische FS-Struktur
+	\item In Linux gibt es ein paar spezielle Order, z.B.
+		\begin{itemize}
+			\item root
+			\item home
+			\item working
+		\end{itemize}
+	\item Prinzipielle Stuktur eines modernen FS ist ein gewurzelter Baum
+		\begin{itemize}
+			\item Pfadnamen helfen, Dateien zu identifizieren
+			\item Ermoeglicht das Abbilden von Dateiennamen auf Dateien
+		\end{itemize}
+	\item Prozess der Dateiabfrag = Navigation
+\end{itemize}
+
+\subsubsection{Single-Level Ordner}
+\begin{itemize}
+	\item Einzelner Ordner fuer alle Benutzer
+	\item Namensproblem
+	\item Gruppierungsproblem
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.2]{single_level_directory.png}
+\caption{Single-Level Ordner}
+\end{figure}
+
+\subsubsection{Two-Level Ordner}
+\begin{itemize}
+	\item Separate Ordner fuer jeden Benutzer
+	\item Pfadname
+	\item Koennen gleichen Dateinamen bei unterschiedlichen Nutzern haben
+	\item Effizientes Suchen
+	\item Keine Moeglichkeit zur Gruppierung
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.2]{two_level_directory.png}
+\caption{Two-Level Ordner}
+\end{figure}
+
+\subsubsection{Baumstrukturierte Ordner}
+Prizipielle Struktur eines modernen Dateisystems
+\begin{itemize}
+	\item Effizientes Suchen
+	\item Gesamte Unterbaeume koennen einfach bewegt oder geloescht werden
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{tree_structured_directories.png}
+\caption{Baumstrukturierte Ordner}
+\end{figure}
+
+\subsubsection{Rolle vom Working Directory}
+\begin{itemize}
+	\item Absolute Pfadnamen koennen ermuedend werden
+	\item Idee eines aktuellen working directory cwd
+		\begin{itemize}
+			\item Datei wird ueber hoffentlich langsameren relativen Pfadnamen referenziert
+			\item cwb gehoert zu der Ausfuehrungsumgebung einen Prozesses
+			\item Anfaengliches cwd wird oft home genannt
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Relative vs. absolute Pfadnamen}
+\begin{itemize}
+	\item Absolute Pfadnamen: Pfad von der Wurzel bis zur Datei
+	\item Relative Pfadnamen: Pfad von cwd zur Datei
+	\item . zeigt auf aktuelles Verzeichnis
+	\item .. zeigt auf darueberliegendes Verzeichnis
+\end{itemize}
+
+\subsubsection{Vorteile relativer Pfadnamen}
+\begin{itemize}
+	\item Bessere Portabilitaet
+	\item Beispiel: Programmsystem
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.2]{program_system.png}
+\caption{Ein Programmsystem}
+\end{figure}
+	\item Wenn man ein Programmsystem bewegt, muss man alle absoluten Pfade aendern, die relativen koennen aber erhalten bleiben
+\end{itemize}
+
+\subsubsection{Hierarchisches FS}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.25]{hierarchical_fs.png}
+\caption{Hierarchisches Dateisystem}
+\end{figure}
+Eindeutige Dateinamen ueber Pfadnamen, z.B. /bin/passwd $\neq$ /etc/passwd
+
+\subsection{Operationen auf Ordnern in Unix}
+\begin{itemize}
+	\item opendir
+	\item closedir
+	\item readdir
+	\item mkdir
+	\item rmdir
+\end{itemize}
+
+\subsection{Unix Link}
+\begin{itemize}
+	\item Direkter Zugriff auf Datei ohne Navigation
+	\item Unix hard link: ln filename linkname (Anderer Name zu gleicher Datei, also gleiche Inode, die Datei wird nur geloescht, wenn der letzte hardlink geloescht wird, ungueltige links sind nicht moeglich
+	\item Symbolischer Link: ln -s filename linkname (Neues Linkname mit einem Link zu eine Datei mit Dateinamen, dessen Datei u.U. nicht gemountet ist oder nicht existiert)
+\end{itemize}
+
+\subsubsection{Azyklischen Graphen Ordner}
+Komplexere Stuktur als Baum, hat geteilte Unterordner und Dateien
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.25]{acyclic_graph_directories.png}
+\caption{Azyklischen Graphen Ordner}
+\end{figure}
+
+\begin{itemize}
+	\item Fuehrt zu aliasing (unterschiedliche Namen) von Dateien und Ordnern
+	\item Gefahr von dangling pointers (baumelnde Zeiger), welche auf unkontrollierte Orte im FS zeigen
+	\item Loesungen:
+		\begin{itemize}
+			\item Backpointers, so we can delete all pointers Variable size recors a problem
+			\item New Ordnereintragtyp
+				\begin{itemize}
+					\item Link - ein anderer name (Zeiger) auf existente Datei
+					\item Resolve the link - folge dem Zeiger um die Datei zu lokalisieren
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+
+\section{Datentausch}
+\begin{itemize}
+	\item In Mehrbenutzersystemen koennen Dateien mit mehreren Nutzern geteilt werden
+	\item Drei Probleme
+		\begin{itemize}
+			\item Effizienter Zugriff auf gleiche Datei
+			\item Wie sollen Zugriffsrechte bestimmt werden?
+			\item Verwaltung gleichzeitiger Zugriffe
+		\end{itemize}
+\end{itemize}
+
+\subsection{Zugriffsrechte}
+\begin{itemize}
+	\item Keine
+		\begin{itemize}
+			\item Nutzer wissen u.U. nicht von der Existenz einer Datei
+			\item Nutzer hat kein Recht, Ordner einzulesen, welcher die Datei enthaelt
+		\end{itemize}
+	\item Wissen
+		\begin{itemize}
+			\item Benutzer kann nur die Existenz und den Besitzer bestimmen
+		\end{itemize}
+	\item Ausfuehrung
+		\begin{itemize}
+			\item Nutzer kann Programm nur laden und ausfuehren
+		\end{itemize}	
+	\item Lesen
+		\begin{itemize}
+			\item Nutzer kann Datei lesen, kopieren und ausfuehren
+		\end{itemize}
+	\item Anhaengen
+		\begin{itemize}
+			\item Nutzer kann nur Daten zu Datei hinzufuegen, aber keine Daten aendern oder loeschen in der Datei
+		\end{itemize}
+	\item Updaten
+		\begin{itemize}
+			\item Nutzer kann Datei erweitern, aendern und loeschen, sie erstellen, neu schreiben und Daten entfernen
+		\end{itemize}
+	\item Schutz aendern
+		\begin{itemize}
+			\item Nutzer kann Zugriffsrechte der Datei aendern
+		\end{itemize}
+	\item Loeschen
+		\begin{itemize}
+			\item Nutzer kann Datei loeschen
+		\end{itemize}
+	\item Eigentuemer
+		\begin{itemize}
+			\item Hat alle aufgelisteten Rechte
+			\item Kann anderen Nutzer Rechte geben fuer folgende Gruppen von Nutzern:
+				\begin{itemize}
+					\item Bestimmte Nutzer
+					\item Nutzergruppen
+					\item Allen
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+
+\subsection{Klassische Unix Zugriffsrechte}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.25]{unix_access_rights.png}
+\caption{Klassische Unix Zugriffsrechte}
+\end{figure}
+
+\begin{itemize}
+	\item Erster Buchstabe: Dateityp
+		\begin{itemize}
+			\item d fuer Ordner
+			\item - fuer regulaere Datei
+			\item k fuer Blockdatei
+		\end{itemize}
+	\item Drei Benutzerkategorieren
+		\begin{itemize}
+			\item \textbf{u}ser
+			\item \textbf{g}roup
+			\item \textbf{o}ther
+		\end{itemize}
+	\item Drei Zugriffsrechte pro Kategorie
+		\begin{itemize}
+			\item read, write und execute, wobei execute bei Ordner angibt, ob man auf Dateien in dem Ordner zugreifen darf, man muss read Rechte auf Ordner haben, um Inhalte anzeigen zu koennen
+		\end{itemize}
+	\item Maengel
+		\begin{itemize}
+			\item Drei Benutzerkategorien zu wenig
+			\item In Windows gibt es feinere Granularitaet, Angabe von bestimmten Nutzern
+		\end{itemize}
+	\item Unix hat Konzept von ACLs eingefuehrt, das ist eine Liste, welche an eine Datei gebunden wird, welche alle Subjekte und ihre individuellen Rechte enthaelt
+\end{itemize}
+
+\subsection{Unix Zugriffskontrollliste}
+Mit dem Befehl getfacl kann man sich den Inhalt der ACL eines Datei ansehen.
+Ebenso kann man mit diesem Befehl neue Rechte setzen:\\\\
+setfacl -m user:name:permissions file\\\\
+\begin{itemize}
+	\item name ist die loginID der Person, deren Rechte man aendern moechte
+	\item permissions kann r, w oder x sein
+	\item file ist der Name der Datei
+\end{itemize}
+
+\subsection{Gleichzeitiger Zugriff auf Dateien}
+\begin{itemize}
+	\item Manche OSes bieten Mechanismen fuer Benutzer, um gleichzeitigen Zugriff zu verwalten
+	\item Mechanismen basieren auf consistency semantics $\Rightarrow$ Datenbanken
+		\begin{itemize}
+			\item Consistency semantics spezifizieren: Wie mehere Nutzer gleichzeitig auf eine geteilte Datei zugreifen koennen (z.B. mit Locks) und wie die Aenderungen zwischen den Nutzern synchronisiert werden (z.B. strong consistency $\Rightarrow$ jeder Nutzer sieht sofort jede Aenderung
+		\end{itemize}
+	\item Programm koennen locken
+		\begin{itemize}
+			\item ganze Dateien, um diese zu updaten
+			\item bestimmte records zum updaten
+		\end{itemize}
+	\item Exklusiv oder geteilt
+		\begin{itemize}
+			\item Exklusiv: Writer lock
+			\item Shared: Mehrere Leser erlaubt
+		\end{itemize}
+	\item Mandatory oder advisory
+		\begin{itemize}
+			\item Mandatory: Zugriff wird verboten, abhaengig von locks
+			\item Advisory: Prozesse koennen Status von locks finden und entscheiden, was zu tun ist
+		\end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
