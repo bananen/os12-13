@@ -1585,17 +1585,195 @@ C: Nummer der Farbe
 
 \chapter{05cMemoryManagement - Management des Virtuellen Speichers}
 
-\begin{description}
-\item 
-\end{description}
+\section{Hintergrund}
 
-\subsection{Virtueller Speicher} 
-\section{Nachaden von Pages in den Arbeitsspeicher und Pre-paging}
+\begin{description}
+\item [Virtueller Speicher]\ \\ Trennung von logischen Speicher des Nutzers vom physikalischen Speicher.
+\end{description}
+\begin{itemize}
+\item Es müssen nur Teile des Programms im Hauptspeicher für die Ausführung sein.
+\item Daher kann der logische Adressraum deutlich größer sein als der physikalische
+\item Erlaubt es, dass ein Adressraum von mehreren Prozessen geteilt wird.
+\item Erlaubt eine effiziente Prozesserzeugung
+\end{itemize}
+
+Virtueller Speicher kann durch
+\begin{itemize}
+\item Demand paging mit einer fixen Blockgröße. Ist einfacher und kann von der Hardware implementiert/unterstützt werden
+\item Demand segmentation, mit Segmenten beliebiger Größe
+\end{itemize}
+implementiert werden.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/vmgtpm.png}
+\caption{Virtueller Speicher der größer als physikalischer Speicher ist}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/virtuelleradressraum.png}
+\caption{Virtueller Adressraum}
+\end{figure}
+
+\section{Nachladen von Pages in den Arbeitsspeicher (Demand paging)}
+
+\begin{description}
+\item[Demand paging]:\ \\ Überträgt eine Page in den RAM wenn diese Page einen Pagefehler verursacht hat.
+\subitem \textit{Vorteil}: Es wird nur das übertragen was auch benötigt wird 
+\subitem \textit{Nachteil}: "`Einige"' anfängliche Pagefehler wenn die Aufgabe startet
+\end{description}
+\begin{itemize}
+\item Bringt nur dann eine Page in den Speicher wenn sie auch benötigt wird.
+\begin{itemize}
+\item Weniger I/O benötigt
+\item Weniger Speicher benötigt
+\item Schnellere Antworten
+\item Mehr Nutzer
+\end{itemize}
+\item Page wird benötigt? $\Rightarrow$ Referenz drauf
+
+\begin{itemize}
+\item Ungültige Referenz? $\Rightarrow$ uh oh...abort! abort!
+\item Nicht im Speicher? $\Rightarrow$ Ab in den Speicher
+\end{itemize}
+\item \textit{Lazy Swapper} - Tauscht niemals eine page in den Speicher solang sie nicht benötigt wird.
+\subitem \textit{Swapper} welcher mit pages arbeitet wird "`\textit{pager}"' genannt.
+
+\item Jeder pagetable Eintrag wird mit einem valid-invalid bit in Verbindung gebracht und mit i (invalid) initialisiert. Wenn während der Adressübersetzung ein bit = i, entsteht ein \textit{page fault}.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/pagesnotinmemory.png}
+\caption{\textit{Pagetable} bei dem nicht alle \textit{pages} im Hauptspeicher liegen}
+\end{figure}
+
+\subsection{Page Fault Handhabung}
+
+Ein Zugriff auf eine Page, welche zu dem Zeitpunkt nicht im Hauptspeicher ist verursacht einen \textit{page fault}
+
+\begin{enumerate}
+\item OS überprüft die Gültikeit des Zugriffs
+\item Besorge einen leeren \textit{frame}
+\item Lade den Inhalt der angeforderten Page von der Disk in den \textit{frame}
+\item Passe den \textit{page table} an
+\item Setze dasvalid-invalid bit of \textit{v}
+\item Wiederhole die Anweisung, welche den \textit{page fault} verursacht hat
+\end{enumerate}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/pagefaulthandling.png}
+\caption{Page fault Handhabung}
+\end{figure}
+
+\subsubsection{Page Fault Fallgruben (\textit{"`pitfalls")'}}
+
+Einige CISC Anweisungen sind schwierige neuzustarten, da sie eventuell
+\begin{enumerate}
+\item erste Berechnung auf \textit{non-paged} und
+\item anschliessend auf paged data
+\end{enumerate}
+miteinbeziehen.
+
+Beispiel:
+\begin{itemize}
+\item  Bewegung von Datenblöcken überlappender Bereiche
+\item Automatisches erhöhen/verringern von mehreren Ort.
+\end{itemize}
+
+Solution:
+\begin{itemize}
+\item 
+\item Behalte veränderte Daten im Register, sodass \textit{page faults} nicht passieren können
+\end{itemize}
+
+\begin{huge}
+\textbf{Das ist alles BULLSHIT}
+\end{huge}
+
+\subsubsection{Page Fault Latenz}
+\begin{itemize}
+\item Page Fault Rate $0 \leq p \geq 1.0$
+\subitem wenn p = 0, existieren keine page faults
+\subitem wenn p = 1, ist jede Referenz ein Fehler
+\item Effective Acces Time (EAT)
+\end{itemize}
+EAT = (1 - p) * Speicherzugriff + p * (page fault overhead + page fault service time + restart overhead)
+
+\section{Pre-paging}
+\begin{description}
+\item[Pre-paging]:\ \\ Überträgt mehr Pages in die RAM als nur die angeforderte Page
+\subitem \textit{Vorteil}: Verbessert den I/O Durchsatz indem es die chunks liest
+\subitem \textit{Nachteil}: Pre-paging ist höchst spekulativ. Verschwendet I/O Bandbreite wenn die page nie verwendet wird und kann das Arbeitsset eines anderen Auftrag zerstören im Falle von \textit{page stealing}.
+\end{description} 
 
 \section{Shared Memory}
+\textbf{Info vorneweg: kp ob das hier reinkommt, kann auch noch zu pagedemand gehören, Folienorganisation ist wieder ultra beschissen :)}
+\subsection{Prozesserstellung}
+Virtueller Speicher bietet noch einige andere Vorteile während der Prozesserzeugung und der Verwaltung:
+\subsubsection{Shared Libraries/Code/Data}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/sharedlibraries.png}
+\caption{Shared Library/Code welches virtuellen Speicher verwendet}
+\end{figure}
+
+\subsubsection{Memory-Mapped Files}
+\begin{itemize}
+\item \textit{Memory-mapped file} I/O erlaubt es I/O Daten als Routine Speicherzugriff zu behandeln. Dies wird duch das mapping eines Diskblock auf eine page im Speicher realisiert.
+\item Eine Datei wird anfangs via \textit{demand paging} gelesen. "`Ein pagegroßer"' Teil der Datei wird vom FS in die physikalische \textit{page} gelesen. Danachfolgende Lese/Schreibzugriffe auf die Datei werden als normale Speicher Zugriffe behandelt.
+\item Vereinfacht den Dateizugriff indem die I/O Datei durch den Speicher  und nicht durch \textbf{read()} oder \textbf{write()} system calls behandelt wird.
+\item Erlaubt es mehren Prozessen die selbe Datei zu mappen, was wiederum das gemeinsame Nutzen der Seiten im Speicher ermöglicht.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/memorymappedfiles.png}
+\caption{Memory Mapped Files}
+\end{figure}
+
+\newpage
+Geteilte Datensegmente werden oft mit
+\begin{itemize}
+\item temporäre, anonyme memory-mapped files
+\item shared pages
+\end{itemize}
+implementiert.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/shareddatasegment.png}
+\end{figure}
+
+\subsubsection{Copy-On Write (CoW)}
+\begin{itemize}
+\item COW erlaubt es, sowohl Eltern als auch Kindprozessen anfänglich die selben \textit{pages} im Speicher zu teilen. \\
+Nur wenn einer der beiden Prozesse eine geteilte \textit{page} verändern wir die \textit{page} kopiert.
+\item COW ermöglicht viel effizientere und schnellere Prozesserzeugung, da nur modifizierte \textit{pages} kopiert werden.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/cowbefore.png}
+\caption{Bevor Prozess 1 Page C verändert}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/cowafter.png}
+\caption{Nachdem Prozess 1 Page C verändert}
+
+\end{figure}
+
+\ \\
+\subsubsection{Schnellerer Prozessstart im Allgemein}
+Nur die ersten \textit{pages} werden in den Speicher geladen, der Rest wird nachträglich geladen
+
 
 \section{Pageersatz}
-
+Was passiert wenn kein freier \textit{Frame} vorhanden ist? $\rightarrow$ Pageersatz. Suche nach der am passendsten \textit{page} im Speicher
 \section{Frame Allokierung}
 \section{Trashing}
 \section{Kernelspeicher allokieren}
