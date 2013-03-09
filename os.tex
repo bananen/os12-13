@@ -1134,17 +1134,16 @@ Logische und physische Adressen sind im Sinne von Kompilierzeit und "`load-time 
  
  \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.50]{graphics/segmentierung1.png}
+\includegraphics[scale=0.30]{graphics/segmentierung1.png}
 \caption{Segmentierung Beispiel}
 \end{figure}
-
+\ \\
 \begin{figure}[ht]
-\centering
-\includegraphics[scale=0.50]{graphics/segmentierung2.png}
+\includegraphics[scale=0.30]{graphics/segmentierung2.png}
 \caption{Segmentierung Beispiel 2}
 \end{figure}
 \end{itemize}
-
+\ \\
 
 \newpage
 \section{Paging}
@@ -1244,7 +1243,7 @@ $EAT = (\tau + \mu)  \alpha + (\tau + 2\mu) (1-\alpha) = \tau +2\mu - \mu\alpha$
 \end{itemize}
 
 \subsection{Page Table}
-\subsubsection{Hierarchial Paging}
+\subsubsection{Hierachischs Paging}
 
 \begin{itemize}
 \item Aufbrechen des logischen Adressraumes in viele page tables
@@ -1690,12 +1689,12 @@ Lösung:
 \end{itemize}
 
 \begin{huge}
-\textbf{Das ist alles BULLSHIT}
+\textbf{Pitfall ist alles BULLSHIT}
 \end{huge}
 
 \subsubsection{Page Fault Latenz}
 \begin{itemize}
-\item Page Fault Rate $0 \leq p \geq 1.0$
+\item Page Fault Rate $0 \leq p \leq 1.0$
 \subitem wenn p = 0, existieren keine page faults
 \subitem wenn p = 1, ist jede Referenz ein Fehler
 \item Effective Acces Time (EAT)
@@ -1907,7 +1906,7 @@ Stack Implementierung: Halte einen Stapel an pagenummern in einer doppelt gelink
 \item Es müssen 6 Zeiger verändert werden
 \end{itemize}
 \item Keine Suche nach Austausch
-
+\end{itemize}
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.5]{graphics/LRUstack.png}
@@ -1953,11 +1952,214 @@ Stack Implementierung: Halte einen Stapel an pagenummern in einer doppelt gelink
 
 
 \section{Frame Allokierung}
+
+Man sollte alle Frames allokieren, welche für die aktuellen Anweisungen benötigt werden.\ \\
+Es gibt zwei Hauptallokierungs Schemata:
+
+\begin{description}
+
+\item[Fixe Allokierung] \ \\
+
+\begin{itemize}
+\item \textbf{Gleiche Allokierung} (\textit{equal}) - z.B wenn 100 Frames gegeben sind und 5 Prozesse $\rightarrow$ Jeder Prozess bekommt 20 Frames
+\item \textbf{Proportionale Allokierung} - Allokiere in Abhängigkeit zur Größe des Prozesses
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/proportionalallocation.png}
+
+\end{figure}
+
+\end{itemize}
+
+\item[Prioritäts Allokierung]\ \\
+\begin{itemize}
+\item Nutzt ein proportionales Allokierungs System jedoch mit Priorität anstatt Größe.
+item Wenn Prozess P einen Pagefault verursacht:
+\begin{itemize}
+\item Nimm einen eigenenFrame Ersatz
+\item Nimm einen Frame als Ersatz von einem Prozess mit niedrigerer Priorität 
+\end{itemize}
+\end{itemize}
+\end{description}
+
+\subsection{Globale vs Lokal Allokierung:}
+\begin{description}
+\item[Global Replacement] \ \\
+Alles frames werden für einen Austausch in Betracht gezogen, d.h ein Prozess kann einen frame eines anderen Prozesses nehmen.
+\item[Local Replacement]\ \\
+Nur die frames eines fehlerverursachenden Prozesse können als potenzieller Ersatz betrachtet werden.
+\end{description}
+
+\subsection{I/O Interlock}
+:= Seiten müssen manchmal im Speicher verschlossen werden.
+\ \\ \\
+Ziehe I/O-Pages in Betracht, welche Daten von Geräten kopieren . Diese müssen vor eine Verdrängung durch einen Page Replacement Algorithmus verschlossen werden.\ \\
+Lösungsmöglichkeiten:
+\begin{itemize}
+\item Benutze (verschlossenen) Systempuffer, niemals User Space.
+\item Verschließe die Seiten
+\end{itemize}
+
 \section{Trashing}
+:= Ein Prozess ist damit beschäftigt Pages rein und raus zu wechseln (swapping)
+Wenn ein Prozess nicht "`genügend"' Pages hat, ist seine page-fault rate sehr hoch. Dies führt u.a zu:
+\begin{itemize}
+\item geringer CPU Leistung
+\item OS denkt es muss den Grad an Multiprogramming durch das Laden mehrerer Prozesse in den Speicher erhöhen
+\end{itemize} 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/trashing.png}
+\caption{Trashing}
+\end{figure}
+
+\ \newline
+Demand Paging funktioniert aufgrund des Lokalitäts Model
+\begin{itemize}
+\item Prozesse migrieren von einer Lokalität zu einer anderen
+\item Lokalitäten könnten überlappen
+\end{itemize}
+Trashing tritt auf, wenn die Größe der Lokalität aller aktiven Prozesse größer als das totale Speichervolumen ist.
+
+\subsection{Working-Set Model} 
+$\Delta \equiv$ working-set window $\equiv$ eine fixe Anzahl an Pagereferezen.
+
+\begin{itemize}
+\item \textbf{WSS} (Working set des Prozess P) = Insgesamte Anzahl an Pagereferenzen in den jüngsten $\Delta$ (Unterscheiden sich in der Zeit)
+\begin{itemize}
+\item wenn $\Delta$ zu klein ist kann die gesamte Lokalität nicht umfasst werden
+\item wenn $\Delta$ zu groß ist, werden mehrere Lokalitäten umfasst
+\item wenn $\Delta = \infty$ wird das komplette Programm umfasst
+\end{itemize}
+\item D =$\Sigma WSS \equiv$ Alle anfgeforderten Frames
+\item wenn D $> Speicher \rightarrow$ Trashing
+\item Strategie: Wenn D > Speicher, gib einen der Prozesse auf
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/workingset1.png}
+\end{figure}
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/workingset2.png}
+\end{figure}
+
+\subsection{Working Set im Auge behalten}
+Approximiere mit einem Intervall timer und einem Referenzbit
+\begin{itemize}
+\item Beispiel: $\Delta$ = 10.000
+\item Timer unterbricht jede 5000 Zeiteinheit
+\item Führe eine 2 Bit History für jede Page zusätzlich zum Referenzbit
+\item Bei einem Timerinterrupt, für jede Page:
+\begin{itemize}
+\item Schiebe das Referenzbit in die 2-bit History
+\item Setze das Referenzbit zurück
+\subitem Wenn die History nicht leer ist: Page ist im working set
+\end{itemize}
+\item Leider nicht sehr genau, da der Rahmen in sehr großen Schritten läuft
+\subitem Verbesserung: 10bits und alle 1000 Zeiteiheiten einen Interrupt
+\end{itemize}
+
+\subsection{Page Fault Häufigkeits Schema}
+Schaffe eine "`akzeptable"' Page Fault Rate
+\begin{itemize}
+\item Wenn die Rate zu niedrig ist verliert der Prozess Frames.
+\item wenn die Rate zu hoch ist, gewinnt der Prozess an Frames dazu.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/pagefaultfrequency.png}
+\end{figure}
+
+\subsection{Solaris}
+\begin{itemize}
+\item Verwalte eine Liste mit freien Seiten um diese Faultverursachenden Prozessen zuzuweisen
+\item Es muss immer eine mindestanzahl an Seiten für Zuweisungen frei sein
+\item Paging wird durch den \textbf{pageout process} ausgeführt:
+\begin{itemize}
+\item Pageout scannt die Seiten regelmäßig mit Hilfe eines veränderten Clock Algorithmus
+\item Pageout wird öfters aufgerufen in Abhängigkeit wieviel freier Speicher vorhandenist.
+\item \textbf{Scanrate} ist die Geschwindigkeit, in der eine Seite gescanned wird. Dies reicht von \textbf{slowscan} bis \textbf{fastscan}.
+\end{itemize}
+\item Parameter freier Speicherseiten sind:
+\begin{itemize}
+\item \textbf{Lotsfree} - Grenzparameter. Anzahl freier Speicher mit dem man Paging beginnt. Startet den Scanner wenn diese Grenze überschritten wird.
+\item \textbf{Desfree} - Grenzparameter um paging zu erhöhen
+\item \textbf{Minfree} - Grenzparameter für Swapping
+\begin{itemize}
+\item Finde Prozess der schon längere Zeit still steht
+\item Bewege/Befreie alle Pages dieses Prozesses
+\end{itemize}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/solaris.png}
+\end{figure}
+\end{itemize}
+\end{itemize}
+
 \section{Kernelspeicher allokieren}
 
+\begin{itemize}
+\item Wird anders als der Benutzerspeicher behandelt.
+\item Wird oft von einem "`free-memory"' ppol allokiert.
+\subitem Kernel stellt Anfragen nach Speicher für Strukturen unterschiedlicher Größe
+\subitem Einige Kernelspeicher müssen zusammenhängend sein.
+\item Nutzen von separaten Pages für jede angeforderte OS Daten Struktur wäre ineffizient.
+\end{itemize}
+\subsection{Buddy System Allocator}
+\begin{itemize}
+\item Allokiert Speicher von Segmenten fixer Größe, die aus physikalisch zusammenhängenden Seiten bestehen.
+\item Speicher wird mit Hilfe des \textbf{Power-Of-2 allocator} allokiert.
+\begin{itemize}
+\item Befriedigt Anfragen der Größe hoch 2
+\item Anfrage wird aufgerundet zur nächst größeren Zweierpotenz
+\item Wenn nicht genügend kleine Speicherblöcke vorhanden sind:
+\begin{itemize}
+\item Wähle einen Chunk aus und teile ihn in zwei gleich große "`buddies"'
+\item Setze das Verfahren fort bis ein angemessener Chunk vorhanden ist.
 
+\end{itemize}
+\end{itemize}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{graphics/buddyallocator.png}
+\caption{Buddyallocator}
+\end{figure}
+\end{itemize}
 
+\newpage
+\subsection{Slab Allocator}
+\begin{itemize}
+\item Alternative Strategie zum Buddy System
+\item Slab besteht aus einem oder mehrere zusammenhängender Pages
+\item Cache besteht aus einem oder mehrerer Slabs
+\item Ein einziger Cache für eine einzigartige Kernel Datensturktur
+\begin{itemize}
+\item Jeder Cache ist mit Objekten gefüllt - Instanziierung der Datenstruktur
+\end{itemize}
+\item Wenn der Cache erstellt wird, fülle ihn mit Objekten die mit \textit{free} gekennzeichnet sind.
+\item Wenn sie gelagert sind, markiere die Objekte als \textit{used}
+\item Wenn der Slab voller \textit{used} Objects ist wird das nächste Objekt vom nächsten leeren Slab allokiert.
+\begin{itemize}
+\item Wenn kein leerer Slab existiert, allokiere einenneuen
+\end{itemize}
+\item Vorteile sind:
+\begin{itemize}
+\item Keine Fragmentierung
+\item Schnelle Speicheranforderungensbefriedigung
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{graphics/slab.png}
+\caption{Slaballocator}
+\end{figure}
+
+\end{itemize}
 \chapter{06aFileSystems}
 
 \section{Das Konzept von Dateien}
