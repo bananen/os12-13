@@ -452,7 +452,7 @@ Ein laufendes Programm:
 
 \section{Pointer}
 
-Etwas zu Pointern:
+Etwas zu Pointern: Siehe Abbildung: Pointer
 
 \begin{figure}[ht]
 \centering
@@ -460,7 +460,13 @@ Etwas zu Pointern:
 \caption{Pointer}
 \end{figure}
 
-
+\subsection{Beispiele}
+\begin{itemize}
+	\item \textbf{char (*a)[42];} Ein Pointer auf ein Array mit 42 chars
+	\item \textbf{char *b();} Funktion, welche auf einen Pointer auf ein char zurueckgibt
+	\item \textbf{char (*c)();} Funktionspointer, welche ein char zurueckgibt
+	\item \textbf{char *(*(long))(double);} Funktion, welche ein long entgegennimmt und einen Funktionspointer zurueckgibt. Die Funktion, auf welche gezeigt wird, nimmt ein double entgegen und gibt einen Zeiger auf ein char zurueck
+\end{itemize}
 
 
 
@@ -2623,7 +2629,9 @@ memory location ist die data area im AS des aufrufenden Prozesses (z.B. im Heap 
 \caption{Datei Operation 2}
 \end{figure}
 
-\section{Ziele von Ordnern}
+\section{Ordner}
+
+\subsection{Ziele von Ordnern}
 \begin{itemize}
 	\item Benennung: Praktisch fuer Benutzer
 		\begin{itemize}
