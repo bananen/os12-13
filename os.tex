@@ -1689,7 +1689,7 @@ Beispiel:
 \item Automatisches erhöhen/verringern von mehreren Ort.
 \end{itemize}
 
-Solution:
+Lösung:
 \begin{itemize}
 \item 
 \item Behalte veränderte Daten im Register, sodass \textit{page faults} nicht passieren können
@@ -1778,11 +1778,190 @@ Nur wenn einer der beiden Prozesse eine geteilte \textit{page} verändern wir di
 Nur die ersten \textit{pages} werden in den Speicher geladen, der Rest wird nachträglich geladen
 
 
-\section{Pageersatz}
-Was passiert wenn kein freier \textit{Frame} vorhanden ist? $\rightarrow$ Pageersatz. Suche nach der am passendsten \textit{page} im Speicher
+\section{Page Replacemen (Ersatz)}
+Was passiert wenn kein freier \textit{Frame} vorhanden ist? $\rightarrow$ \textit{Page Replacement}. Suche nach der am passendsten \textit{page} im Speicher
+\begin{itemize}
+\item "`Page It Out"'. Kriterien:
+\subitem Algorithmen - geringer administrativer Overhead
+\subitem Leistung - Minimierung der Anzahl an \textit{page faults}
+\subitem \textit{"`User modified (dirty) bit"'}, um den overhead von pageübertragungen zu verringern.
+\item Großer virtueller Speicher kann so auf einem kleineren physikalischen Speicher geboten werden.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{graphics/needreplacement.png}
+\caption{Notwendigkeit von \textit{Page Replacement} }
+\end{figure}
+
+\subsection{Grundlegende Page Replacement}
+\begin{enumerate}
+\item Mache den Aufenthalt der gesuchten \textit{page} auf der Disk ausfindig.
+\item Finde einen freien \textit{Frame}
+\subitem Existiert ein freier Frame, nutze ihn
+\subitem Existiert keiner, verwende einen Page Replacement Algorithmus um ein "`victim"' frame auszuwählen
+\item Setze die Page in den neuen freigewordenen Frame. Bringe die page und die frametables auf den neusten Stand.
+\item Wiederhole die Anweisung, welche den \textit{page fault} ausgelöst hat.
+\end{enumerate}
+
+\begin{table}
+\caption{Page Replacement}
+\centering
+\begin{tabular}{cc}
+\ \\
+\includegraphics[scale=0.3]{graphics/pr1.png} & \includegraphics[scale=0.3]{graphics/pr2.png}\\
+
+\includegraphics[scale=0.3]{graphics/pr3.png} & \includegraphics[scale=0.3]{graphics/pr4.png} \ \\
+
+\end{tabular}
+\end{table}
+
+\subsection{Grundlagen von Replacement}
+\begin{itemize}
+\item Nicht auf allen \textit{frames} kann ein Auswechsel stattfinden. Einige Pages sind an spezifische page frames gepinnt.
+\begin{itemize}
+\item Großer Anteil des Kernels sind angepinnt
+\item DMA Puffer müssen gepinnt sein
+\item Ein Echtzeit Auftrag kann einige/alle seine pages anpinnen (um das Einhalten der Deadline zu garantieren)
+\end{itemize}
+\item OS kann entschließen, dass ein Satz an Pages für den nächsten Austausch  
+\begin{itemize}
+\item \textbf{Limitiert} auf die \textit{Frames} der Anweisung, welche den page fault ausgelösten haben $\rightarrow$ lokales page replacement
+\item \textbf{Unlimitiert}, sprich frames von anderen Anweisungen werden auch in Betracht gezogen $\rightarrow$ globales page replacement
+\end{itemize}
+\end{itemize}
+sein sollen.
+
+\subsection{Reinigungsichtlinien (Cleaning Policy)}
+Wann soll eine "`schmutzige"' (dirty) page zurück auf die Disk geschrieben werden?
+\begin{description}
+\item[Demand Cleaning]\ \\ Page wird nur dann zurück geschrieben, wenn sein veransaltender frame für einen Austausch ausgewählt wurde.
+\begin{itemize}
+\item Page fault Handhabung erfordert zwei Pageübertragungen (raus und rein)
+\end{itemize}
+\item[Pre-Cleaning]\ \\ Schmutzige pages werden auf die Disk zurückgeschrieben, eher ihr pageframe gebraucht wird.
+\begin{itemize}
+\item Das Verlegen von größeren Clustern kann den Diskdurchsatz steigern. Es kann jedoch vorkommen, dass Pages nochmals verändert werden, ehe sie ersetzt werden.
+\end{itemize}
+\end{description}
+\begin{itemize}
+\item Ein guter Kompromiss kann durch Pagepufferung erzielt werden
+\begin{itemize}
+\item Zum Austausch ausgewählt pages werden entweder in einer freien unveränderten Liste oder in einer veränderten Liste gewartet
+\end{itemize}
+\item Pages der veränderten Liste könnten regeläßig zur Disk verlegt werden
+\item Guter Kompromiss da:
+\begin{itemize}
+\item Nicht alle schmutzigen Seiten werden auf die Disk verlegt, nur welche für den nächsten Austausch ausgewählt wurden
+\item Pages werden im Bündel verlegt (somit eine Verbesserung der I/O Disk)
+\end{itemize}
+\end{itemize}
+
+\subsection{Page Replacement Algorithmen}
+\begin{itemize}
+\item Erwünscht ist eine niedrige Page Fault Rate
+\item Evaluiere den Algorithmus indem man ihn auf einem bestimmten String von speicherreferenzen anwendet und berechne die Anzahl an Page Faults auf dem String.
+\end{itemize}
+\newpage
+\subsubsection{FIFO}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/FIFO.png}
+\caption{First-In-First-Out}
+\end{figure}
+\ \\
+
+\subsubsection{Optimaler Algorithmus}
+Ersetze die am längsten unbenutzte Page.
+\ \\
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/optimalpagereplacement.png}
+\caption{Optimale Page Replacement}
+\end{figure}
+\ \\ 
+
+\subsubsection{LRU Algorithmus}
+LRU = Least Recently Used
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/referencestring.png}
+\end{figure}
+\ \\ \ \\
+Zähler Implementierung:
+\begin{itemize}
+\item Jeder Pageeintrag besitzt einen Zähler: Jedes mal wenn eine Seite durch diesen Eintrag referenziert wird, kopiere die Uhr in den Zähler
+\item Schaue auf den Counter wenn eine Page verändert werden soll um zu entscheiden welche auszuwählen ist. Verändere die Page, die am längesten nicht benutzt wurde
+
+\end{itemize}
+
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/LRU.png}
+\end{figure}
+
+\subsubsection{LRU Stack}
+Stack Implementierung: Halte einen Stapel an pagenummern in einer doppelt gelinkte Liste: \ \\
+\begin{itemize}
+
+\item Wenn die Page referenziert wird
+\begin{itemize}
+\item Bewege sie an die oberste Stelle
+\item Es müssen 6 Zeiger verändert werden
+\end{itemize}
+\item Keine Suche nach Austausch
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/LRUstack.png}
+\caption{LRU Stack}
+\end{figure}
+
+\subsubsection{LRU Approximation Algorithmus}
+\begin{description}
+\item[Referenz Bit]
+\begin{itemize}
+\item Verbinde jede Page mit einem Bit. Ist zu Beginn auf 0 gesetzt.
+\item Wenn die Page referenziert wird, setze auf 1
+\item Wenn vorhanden, verwende eine unreferenzierte page (bit = 0) für den Austausch
+\end{itemize}
+\item[Second Chance]
+\begin{itemize}
+\item Referenz Bit muss zu beginn auf 1 gesetzt werden.
+\item Clock replacement
+\item Wenn die zu ersetztende Page (im Uhrzeigersinn) das Referenzbit gesetzt hat, dann:
+\begin{itemize}
+\item Setze es auf 0
+\item Lasse die Seite im Speicher
+\item Gehe zur nächsten page (Im Uhrzeigersinn), verwende die selben Regeln
+\end{itemize}
+\item Wenn das Referenzbit nicht gesetzt ist -> Ersetze die Seite
+\end{itemize}
+\end{description}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/secondchance.png}
+\caption{Second-Chance Page Replacement}
+\end{figure}
+
+
+\subsubsection{Zählende Algorithmen}
+\begin{itemize}
+\item Halte einen Zähler für die Anzahl an Referenzen, welche zu jeder Seite gemacht  wurde
+\item Least Frequently Used (LFU) Algorithmus : Ersetze die Seiten mit dem niedrigsten Counter
+\item Most Frequently Used (MFU) Algorithmus: Basierend auf dem Argument, dass die Seite mit dem kleinsten Zähler wahrscheinlich erst hinzugefügt wurde und noch verwendet werden muss.
+\end{itemize}
+
+
+
 \section{Frame Allokierung}
 \section{Trashing}
 \section{Kernelspeicher allokieren}
+
 
 
 \chapter{06aFileSystems}
