@@ -799,7 +799,252 @@ Beispiele:
 			\item Tru64 UNIX
 			\item Solaris 9 und früher
 		\end{itemize}
+		
+\section{Thread Librarys}
+Thread librarys bieten eine Schnittstelle für die Prozesserstellung und -verwaltung\\
+\begin{itemize}
+	\item komplett im Benutzerraum
+	\item oder unterstützt vom BS im Kernel-Level
+\end{itemize}
+Pthreads: POSIX Standard für Thread-Erstellung und -Synchronisation\\
+\section{User Threads vs. Kernel Threads}
+\subsection{User Threads}
+\begin{itemize}
+\item verwaltet von Benuzter-Level-Bibliotheken
+\item Beispiele:
+\begin{itemize}
+\item Windows XP/Vista/7
+\item Linux
+\item Solaris
+\item Mac OS X
+\end{itemize}
+\end{itemize}
+\subsection{Kernel Threads}
+\begin{itemize}
+\item vom Kernel unterstützt
+\item hauptsächlich 3:
+\begin{itemize}
+\item POSIX Pthreads
+\item Win32 threads
+\item Java threads
+\end{itemize}
+\end{itemize}
+\section{Issues???}
+\begin{itemize}
+\item duplizieren fork() und exec() nur den aufrufenden oder alle Threads?
+\item asynchrones Abbrechen terminiert den Ziel-Thread sofort
+\item verschobenes Abbrechen lässt Ziel-Thread regelmäßig überprüfen, ob er beendet werden soll
+\item Signale werden in UNIX Systemen benutzt um einen Thread über ein Ereignis zu informieren
+\item Ein \underline{Signal Handler} wird benutzt um Signale zu behandeln
+\begin{itemize}
+\item Signal wird durch ein Ereignis erzeugt
+\item Signal wird zum Prozess weitergeleitet
+\item Signal wird verarbeitet
+\end{itemize}
+\item Signal wird an einen oder mehrere bestimmte oder an alle Threads weitergeleitet
+\item \underline{Thread Pools}: Threads werden auf Vorrat erzeugt und bei Bedarf benutzt
+\begin{itemize}
+\item etwas schneller als einen neuen Thread zu erzeugen, wenn er benötigt wird
+\item Somit kann man die Anzahl der Threads auf die Zahl der Threads im Pool beschränken
+\end{itemize}
+\item \underline{Thread Specific Data}: erlaubt es jedem Thread eine eigene Datenkopie zu geben
+\item \underline{Scheduler Activations} geben eine Kommunikationsmöglichkeit vom Kernel zur Thread-Bibliothek und somit eine Möglichkeit jeder Applikation die richtige Anzahl an Kernelthreads zu behalten
+\end{itemize}
+\section{Process Scheduling Queues}
+\begin{itemize}
+\item \underline{Job queue}: Menge aller Prozesse im System
+\item \underline{Ready queue}: Menge aller zur Ausführung bereiten Prozesse im Hauptspeicher
+\item \underline{Device queue}: Menge der Prozesse die auf Ein- oder Ausgaben warten
+\item Prozesse wechseln zwischen diesen Warteschlagen
+\end{itemize}
+\includegraphics[scale = 0.5]{graphics/queues.png}
+\section{Scheduler}
+\subsection{Long-term scheduler (job scheduler)}
+\begin{itemize}
+\item bestimmt welche Prozesse in die Ready-queue kommen
+\item wird nur selten aufgerufen (Sekunden/Minuten) $\rightarrow$ könnte langsam sein
+\item bestimmt den Grad von Multiprogrammbetrieb (multiprogramming)
+\end{itemize}
+\subsection{Short-term scheduler (CPU scheduler)}
+\begin{itemize}
+\item bestimmt welcher Prozess als Nächstes ausgeführt wird
+\item reserviert CPU
+\item wird oft aufgerufen (Millisekunden) $\rightarrow$ muss schnell sein
+\end{itemize}
+\subsection{kinds of processes}
+\begin{itemize}
+\item \underline{I/O-bound process}: Prozess verbringt mehr Zeit mit I/O als mit Rechnen
+\item \underline{CPU-bound process}: Prozess verbringt mehr Zeit mit Rechnen als mit I/O
+\end{itemize}
+\begin{figure}[t]
+\includegraphics[scale = 0.5]{graphics/medium_scheduling.png}
+\caption{Hinzufügen von Medium-Term Scheduling}
+\end{figure}
 \chapter{03bProcess-management-scheduling}
+\section{Dispatcher}
+Übergibt dem Prozess Kontrolle über die für ihn reservierte CPU
+\begin{itemize}
+\item tauscht den Kontext aus
+\item wechselt den Benutzermodus
+\item springt zur richtigen Stelle im Programm um es neu zu starten
+\end{itemize}
+\begin{itemize}
+\item \underline{Dispatch Latency}: Zeit um einen Prozess zu stoppen und den nächsten zu starten
+\item \underline{CPU Utilization}: die CPU so beschäftigt wie möglich halten (am besten max)
+\item \underline{Throughput}: Anzahl der beendeten Prozesse pro Zeiteinheit (am besten max)
+\item \underline{Turnaround Time}: Zeit um einen bestimmten Prozess auszuführen (am besten min)
+\item \underline{Waiting Time}: Zeit die ein Prozess in der ready-queue verbracht hat (am besten min)
+\item \underline{Response Time}: Zeit vom Senden einer Anfrage bis zur Antwort (nicht Ausgabe) (am besten min)
+\end{itemize}
+\subsection{Scheduling Verfahren}
+\begin{itemize}
+\item \underline{nicht-präemtiv/kooperativ}: ein Prozess läuft bis zur Blockade, bis er fertig ist oder den Prozessor abgibt
+\item \underline{präemtiv}: laufende Prozesse können unterbrochen und später fortgesetzt werden
+\end{itemize}
+\subsection{Deterministisch vs. Probabilistisch}
+\underline{Deterministisch}:
+\begin{itemize}
+\item Ausführungszeiten der Prozesse bekannt
+\item Prozesse werden so angeordnet, dass das System wie gewünscht läuft(z.B. minimale Durchlaufzeit)
+\end{itemize}
+\underline{Probabilistisch}:
+\begin{itemize}
+\item Erwartungswerte oder Wahrscheinlichkeitsverteilung der Ankunfts- oder Bedienzeiten sind bekannt
+\item Das Verhalten des Scheduling-Algorithmus wird unter der wahrscheinlichsten Last beschrieben
+\item Analyse und Bewertung mit Hilfe der Wahrscheinlichkeitstheorie
+\end{itemize}
+Unterschiedliche Systeme $\rightarrow$ unterschiedliche Schedulingverfahren
+\begin{itemize}
+\item für alle Systeme gilt
+\begin{itemize}
+\item fairer CPU-Anteil für alle Prozesse
+\item umsetzung der gewünschten Policy
+\item Nutung der vorhandenen Resourcen
+\end{itemize}
+\item Batch-System(nicht-präemtiv oder präemtiv mit langen Laufzeiten ist OK)
+\begin{itemize}
+\item Durchsatz max (Jobs/Zeit)
+\item einzelne Laufzeiten min
+\item CPU Utilisation max (CPU Nutzung)
+\end{itemize}
+\item Interaktive Systeme (Präemtiv ist essentiell)
+\begin{itemize}
+\item Antwortzeit min
+\end{itemize}
+\item Echtzeit-Systeme
+\begin{itemize}
+\item Einhalten von Deadlines
+\item Vermeidung von Datenverlust
+\item Vermeidung von Qualitätsverlust in MM-Systemen (Many to Many)
+\end{itemize}
+\end{itemize}
+\subsection{Verfahren}
+Batch(aber auch absehbar in interaktiven Systemen
+\begin{itemize}
+\item Firs-Come First-Serve (FCFS)
+\item Shortest Job First (SJF)
+\item Shortest Remaining Time Next (SRTN, SRT)
+\end{itemize}
+Interaktiv:
+\begin{itemize}
+\item Round-Robin Scheduling (RR)
+\item Priority Scheduling (PS)
+\item Shortest Process Next (SPN)
+\item Highest Response Rate Next(HRRN)
+\item Feedback (FB)
+\end{itemize}
+Echtzeit:
+\begin{itemize}
+\item Rate Monotonic Scheduling (RMS)
+\end{itemize}
+Kürzeste durchschnittliche Wartezeit $\rightarrow$ SJF $\rightarrow$ Problem : \underline{Starvation}(sehr lange Prozesse können gar nicht drankommen)
+
+\subsection{Priority Scheduling}
+\begin{itemize}
+\item Jedem Prozess wird eine Priorität(Integer) zugeordnet
+\item Priorität $\equiv$ erwartete CPU-Burst-Zeit (SJF)
+\item also niedrige Zahl $\equiv$ hohe Priorität
+\end{itemize}
+Lösung für Starvation: \underline{Aging}(Priorität nimmt mit der Zeit zu)
+\subsection{RR}
+Jedem Prozess in der Schlange wird eine bestimmte Zeit(time quantum) gegeben, und anschließend wird der Prozess falls er noch nicht beendet ist wieder hinten an die Schlange gehängt (higher turnaround better response htan SJF)\\
+Achtung! Bei zu niedrigem time quantum wirkt sich die context-switch Zeit viel zu stark aus
+\subsection{Multilevel Queue}
+Ready Queue wird in foreground(interaktiv)(RR) und background(batch)(FCFS) aufgeteilt. Dann wird zwischen den Warteschlangen neu Aufgeteilt z.B.
+\begin{itemize}
+\item zuerst alle im foreground dann alle im background (wieder Problem mit Starvation)
+\item jede Schlange bekommt abwechselnd einen Zeitabschnitt der CPU (z.B. 80\% foregorund 20\% background)
+\end{itemize}
+\includegraphics[scale = 0.5]{graphics/priority.png}
+\subsection{RR: CPU-Bound vs IO-Bound}
+\includegraphics[scale = 0.6]{graphics/virtual_rr}
+\subsection{Multilevel Feedback (MLFB) Queue}
+Mehrere Warteschlangen mit folgenden Parametern
+\begin{itemize}
+\item Anzahl der Warteschlangen
+\item Scheduling Algorithmus für jede Warteschlange
+\item Methode um festzustellen wann ein Prozess aufgewertet/abgewertet wird
+\item Methode um festzustellen in welche Schlange der Prozess zuerst kommt
+\end{itemize}
+\subsection{Lottery Scheduling}
+\begin{itemize}
+\item Jeder Prozess bekommt ein paar Lotteriescheine (jeder mindestens einen, je kürzer der Prozess je mehr Scheine
+\item In jedem Zeitabschnitt wird eins der Tickets zufällig gezogen und dem zugehörigen Prozess Rechenzeit zugesagt
+\item Vorteil gegenüber strikter Reihenfolge: neue Prozesse wirken sich proportional zu den Tickets auf jeden anderen Prozess aus. Ticket Donation wird möglich (Prozesse können Tickets an andere Prozesse abgeben)
+\end{itemize}
+\includegraphics[width = 1.0\linewidth]{graphics/scheduling_policies.png}
+\section{Multiple Processor Scheduling}
+Mehrere Prozessoren erschweren das Scheduling
+\begin{itemize}
+\item gleichartige Prozessoren (Homogeneous processors)
+\item \underline{Asymmetric Multiprocessing}: Nur ein Prozessor hat Zugriff auf Systemdatenstrukturen $\rightarrow$ weniger Datenteilung notwendig
+\item \underline{Symmetric Multiprocessing}: Jeder Prozessor eigenes Scheduling gemeinsame oder einzelne Ready-Queue
+\item \underline{Processor affinity}: Ein Prozess hat Affinität zu dem Prozessor, auf dem er gerade läuft
+\begin{itemize}
+\item \underline{soft affinity}
+\item \underline{hard affinity}
+\end{itemize}
+\end{itemize}
+\begin{figure}[htb]
+\includegraphics[scale = 0.4]{graphics/numa.png}
+\caption{NUMA and CPU Scheduling}
+\end{figure}
+\subsection{SMT and Multicore Processors}
+\begin{itemize}
+\item Es ist Trend mehr Prozessoren auf einem Kern zu platzieren $\rightarrow$ schneller und energiesparender
+\item Es gibt auch immer mehr Threads pro Kern $\rightarrow$ ergibt einen Vorteil da auf einem anderen Thread gearbeitet werden kann während ein Speicheraufruf stattfindet
+\end{itemize}
+
+
+\section{Algorithm Evaluation}
+\begin{itemize}
+\item \underline{Deterministic modeling}: nimmt einen vorher bestimmtes Arbeitspensum und passt die Performance von jedem Algorithmus für dieses Arbeitspensum an
+\item Queueing models
+\item Implementation
+\end{itemize}
+\section{Queueing Models}
+\begin{itemize}
+\item basierend auf den Grundlagen der Queue-Theory
+\item System wird als ein Netzwerk von Warteschlangen modelliert
+\item Aktivitäten(CPU und I/O) werden mit Ankunfts- und Ausführungszeitverteilung modelliert (oft unrealistisch)
+\item Warteschlangen-Netzwerk-Analysen bestimmen die durchschnittlichen Throughput, utilization, Warteschlangenlänge, Wartezeit
+\item Little's Formula: n = $\lambda$ * W (gültig für alle policies und Verteilungen)
+\begin{itemize}
+\item n := durchschnittliche Warteschlangenlänge
+\item $\lambda$ := durchschnittliche Ankunftsrate
+\item W := durchschnittliche Wartezeit eines Prozesses in der Warteschlange
+\end{itemize}
+\end{itemize}
+\begin{figure}[htb]
+\includegraphics[scale = 0.5]{graphics/evaluation.png}
+\caption{Evaluation of CPU schedulers by Simulation}
+\end{figure}
+\subsection{Implementierung und Messung}
+\begin{itemize}
+\item Implementierung mit ''echten`` Betriebssystem Quellen
+\item Messung mit ''typischem`` Arbeitspensum und ''echter`` Hardware
+\end{itemize}
+$\rightarrow$ kleine Änderungen in der Umgebung können eine dramatische Beeinflussung der Messung ergeben
 \chapter{04Process-coordination}
 
 \section{Interprozess Kommunikation}
