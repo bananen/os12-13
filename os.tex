@@ -3064,6 +3064,118 @@ setfacl -m user:name:permissions file\\\\
 \chapter{07aImplementingFileSystems}
 \chapter{07bImplementingFileSystems}
 \chapter{08SecondaryStorageStructure}
+\section{Verbesserungen für Input/Output}
+\begin{itemize}
+	\item Daten Rate einer Festplatte meist sehr viel kleiner als Datenrate der CPU und des RAM
+	\item Idee zur Verbesserung dieses Problems: Parallelität, multiple Fesplatten gleichzeitig ansteuern
+	\item Bietet eine bessere Festplatten Verfügbarkeit
+	\item Wird anstelle einer einzigen großen (teuren) Festplatte eingesetzt
+\end{itemize}
+\section{RAID)
+\subsection{Einführung}
+\begin{itemize}
+	\item Mehrere Festplatte in einer Anordnung (RAID) verbessern die Performance und Verlässlichkeit eines Systems durch redundante Datenspeicherung
+	\item Mirroring und Shadowing behält Duplikate auf den Festplatten
+	\item Disk Stripping benutzt eine Gruppe von Festplatten als eine Speichereinheit
+	\item RAID ist unterteilt in  6 Level
+\end{itemize}	
+\subsection{RAID (Level) 0}
+\begin{itemize}
+	\item "Striping"
+	\item Festplatten werden im Reißverschlussverfahren zu größerer Speichereinheit eingeteilt, was höhere Datenraten ermöglicht (wenn von mehreren Festplatten gleichzeitig geladen wird)	
+	\item Geringe Zuverlässigkeit des Gesamtsystems ("Schwächstes Kettenglied...", es braucht nur 1 Platte ausfallen)
+
+\end{itemize}	
+\subsection{RAID (Level) 1}
+\begin{itemize}
+	\item "Mirroring"
+	\item Spiegelung aller Daten auf einer weiteren Festplatte 
+	\item Möglicherweise langsamer Schreibzugriff
+	\item Möglicherweise schnellerer Lesezugriff (schnellere Festplatte liefert Daten zuerst)
+	
+\end{itemize}	
+\subsection{RAID (Level) 2}
+\begin{itemize}
+	\item "Nibbles und Hammingcode"
+	\item Nicht mehr relevant, wurde nur bei Großrechnern angewandt
+	\item Aufteilen von bytes in 2 "nibbles" (4bit)
+	\item Nibble und 3bit Hammingcode auf 7 Festplatten schreiben
+	\item Performant und verlässlich, benötigt aber viele Festplatten
+	\item Synchronisation der Rotation und der Armköpfe ermöglicht schnelles Lesen und Schreiben
+	\item Benötigt leistungsfähigen Controller
+\end{itemize}	
+\subsection{RAID (Level) 3}
+\begin{itemize}
+	\item Paritätsfestplatte
+	\item Normale Datenplatten, eine Paritätssplatte, welche die Summe der bits der Datenplatten darstellt
+	\item Parität anschaulich errechnet durch Summe der Bits auf den Datenplatten, wenn gerade Summe, steht am zubehörigen Platz eine 0, wenn ungerade eine 1
+	\item Kann Fehler auf 1 Festplatte aufspüren, wenn jedoch 2 fehlschlagen hilft das Verfahren nichts mehr.
+	\item Paritätsplatte bildet den Flaschenhals des Systems, da bei jedem Schreibzugriff auf diese geschrieben werden muss.
+\end{itemize}		
+
+\subsection{RAID (Level) 4}
+\begin{itemize}
+	\item Ähnlich wie RAID 3, nur wird die Parität nicht bitweise, sondern chunk/strip-weise berechnet
+\end{itemize}
+
+\subsection{RAID (Level) 5}
+\begin{itemize}
+	\item Ähnlich wie RAID 4, aber hier wird die Parität nicht auf einer separaten Festplatte, sonder verteilt über alle Platten gespeichert.
+	\item Dies löst das Problem mit dem Flaschenhals, kann aber Probleme bei der Wiederherstellung nach einem Ausfall geben.
+\end{itemize}
+\section{Tertiäre Speichereinheiten}
+\subsection{Einführung}
+\begin{itemize}
+	\item Niedrige Kosten
+	\item Generell sind diese Speichereinheiten entfernbar (removable)	
+	\item Geschwindigkeit lässt sich aufteilen in 2 Aspekte, Bandbreite und Latenz
+	\item Bandbreite: Kontinuierliche Bandbreite: Datenrate während der Datenstrom läuft
+	\item Effektive Bandbreite: Durchschnitt über die gesamte I/O Zeit, inklusive Suchen und an die richtige Stelle rotieren, oder cartridge wechseln.
+	\item Beispiele sind externe Festplatten, Bänder (tapes), sowie optische Platten (DVDs)
+
+\end{itemize}
+\subsection{Entfernbare Disks}
+\begin{itemize}
+	\item Floppy disks: dünne, flexible disk, eingehüllt in magnetisches Material, eingeschlossen in eine schützenden Plastikummantelung, meist mit einer Kapazität von ca 1MB (es gibt disks mit gleicher Technologie, welche bis zu 200MB speichern können)
+	\item Removable magnetic  können fast gleichschnell wie Hard disks sein, haben aber ein größeres Risiko Schaden durch Belichtung (exposure) zu nehmen.
+	\item Magneto-optic disk hält Daten auf einer starren Platte, eingehüllt in magnetisches Material
+	\item Hier wird Laser-Hitze verwendet um bits zu schreiben und zu lesen
+	\item Der Lese-Schreib-Kopf ist viel weiter entfernt als bei magnetischen Köpfen, und das magnetische Material ist durch Plastik oder Glas geschützt
+\end{itemize}
+\subsection{Magnetische Tapes}
+\begin{itemize}
+	\item Werden an einer Stelle gehalten und vor- oder zurückgespult, um dem Kopf lesen und schreiben zu ermöglichen
+	\item Sobald die richtige Stelle gefunden ist, ist die Datenrate vergleichbar zu einer Festplatte
+	\item 20-800GB typische Speichergröße
+	\item Technologien sind 4mm, 8mm, 19mm, LTO-4 und SDLT
+	\item Im Vergleich zu einer Festplatte ist ein Tape wesentlich billiger und hält mehr Daten, aber ein zufälliger Zugriff braucht aufgrund des Spulens wesentlich länger
+	\item Als Backup-Speichereinheit sehr gut, da sehr günstig
+	\item Große Tape-Installationen benutzen meist Roboter, um die Bänder zu wechseln. Diese bewegen sich dann zwischen dem Laufwerk und einer Bibliothek. (Stacker - kleine Bibliothek, Silo - Bibliothek mit tausenden Bändern)
+	\item Zur günstigen Speicherung kann ein Festplatten natives File auf ein Tape geschrieben werden, der Computer kann zur aktiven Benutzung wieder darauf zugreifen.
+\end{itemize}
+\subsection{Interface}
+\begin{itemize}
+	\item Die meisten Betriebssysteme behandeln entfernbare Speichermedien wie Festplatten, mit Formatierung und file-system
+	\item Ein tape sind roh-storage-Medien, d.h. ein Programm öffnet keine Datei auf dem tape, sondern das gesamte tape als rohes device.
+	\item Meist ist das tape-Laufwerk exklusiv für dieses Programm reserviert.
+	\item Da das Betriebssystem kein file-system anbietet, muss das Programm selber wissen, wie es die Daten zu behandeln hat.
+	\item Da jedes Programm ein eigenes System erstellt, wie es mit den Daten umgeht, kann ein Tape nur mit dem zubehörigen Program gelesen werden.
+\end{itemize}
+\subsection{Tape drives}
+\begin{itemize}
+	\item Grundlegende Funktionen unterscheiden sicher von denen einer Festplatte
+	\item Locate positioniert das Band zum logischen Block (korrespondierend zu seek)
+	\item read position operation liest die logische Block Nummer, an der der Lesekopf ist.
+	\item space Operation ermöglicht relative Bewegung
+	\item Tape drives können nur anhängen, wenn in der Mitte des Bands geschrieben wird, wird effektiv alles was danach auf dem Band kommt, gelöscht.
+	\item EOT Markierung wird nach dem Block angehängt, wenn geschrieben wurde.
+\end{itemize}
+\subsection{Hierarchisches Speicher Management}
+\begin{itemize}
+	\item Ein Hierarchisches Speicher Management System erweitert das Speicher Management um tertiäre Speichereinheiten, meist implementiert als Jukebox an Tapes oder entfernbaren Platten
+	\item Meist werden diese durch Erweiterung des file-system eingebunden, kleine, oftbenutzte Dateien bleiben auf der Festplatte, große, alte, inaktive Dateien werden auf der Jukebox gespeichert
+	\item HSM wird meist in supercomputing Zentren gefunden oder anderen Installationen mit sehr großen Mengen an Daten.
+\end{itemize}
 \chapter{09I/O-Systems}
 
 \section{Ziele des Gerätemanagements}
