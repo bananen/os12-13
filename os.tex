@@ -3136,6 +3136,77 @@ cannot be used elsewhere
 \subsection{Schritte zum Behandeln eines Interrupts}
 \begin{itemize}
 	\item (1) Register des laufenden Prozesses speichern
-	\item (2) 
+	\item (2) Set up context (adress space) for interrupt service procedure
+	\item (3) Set up stack for interrupt service procedure
+	\item (4) Erkenne/Maskiere Interrupt-Controller, sodass andere Interrupts reaktiviert werden
+	\item (5) Ausführen der interrupt service procedure
+	\item (6) In manchen Fällen muss man einer Faden mit höherer Priorität bzgl. Prozess/Kernel -Level aufwecken
+	\item (7) Register des neuen/originalen Prozesses laden.
+	\item (8) Vom Interrupt zurückkehren und den neuen/originalen laufenden Prozess starten
 \end{itemize}
+\section{I/O Systemorganisation im Betriebssystem}
+	\includegraphics[scale=0.24]{graphics/chapter9_7.png}
+\subsection{Anwendung I/O Schnittstelle}
+	\begin{itemize}
+		\item I/O system calls kapseln das Verhalten von Geräten in generischen Klassen
+		\item Gerätetreiberschicht verbirgt Unterschiede zwischen I/O-Controllern vom Kernel
+		\item Geräte unterscheiden sich in vielen Punkten
+			\subitem Character-stream oder Block
+			\subitem sequentiell oder zufälliger Zugriff (random access)
+			\subitem teilbar oder engagiert(dedicated)
+			\subitem Geschwindigkeit der Operation	
+			\subitem read-write, read only, write only
+	\end{itemize}
+\subsection{Kernel I/O Subsysteme: Aufgaben}
+	\begin{itemize}
+		\item Scheduling
+		\item Gerätereservierung
+		\item Pufferung
+		\item Schutz
+		\item Spooling
+		\item Fehlerbehandlung
+	\end{itemize}
+\subsection{Eine geschichtete Kernel I/O Struktur}
+	\includegraphics[scale=0.34]{graphics/chapter9_8.png}
+\subsection{Schichten des I/O Systems und Haupfunktionen der einzelnen Schichten}
+	\includegraphics[scale=0.26]{graphics/chapter9_9.png}
+\subsection{Geräteunabhängige I/O Software}
+	\begin{itemize}
+		\item Es gibt Gemeinsamkeiten zwischen gleich klassifizierten Treibern
+		\item Teile I/O Software in Geräteabhängige und Geräteunabhängige Software ein
+		\item Vereinheitliche Geräteschnittstelle für Kernel Code
+		\item Vereinheitliche Kernelschnittstelle für Geräte Code
+	\end{itemize}
+\subsection{Gerätetreiber}
+	\begin{itemize}
+		\item Treiber sind in ähnlichen Kategorien klassifiziert
+		\subitem Blockgeräte
+		\subitem Character(Datenstrom)-Geräte
+		\item Betriebssystem definiert Standardschnittstellen zu den verschiedenen Klassen von Geräten
+		\item Job des Gerätetreibers 
+			\subitem Übersetzen der Nutzeranfragen
+			\subitem Hardware zur Boot-Zeit initialisieren 
+			\subitem Hardware herunterfahren
+		\item Nach dem Befehl an das Gerät...
+			\subitem vollendet das Gerät sofort und der Treiber geht zurück zum Aufrufer
+			\subitem oder es führt die Anfrage aus und der Treiber blockiert normalerweise das Warten auf ein I/O Interrupt Signal
+
+		\item Drivers are reentrant (können von anderm Prozess aufgerufen werden während ein Prozess bereits im Treiber geblockt wird)
+	\end{itemize}
+\subsection{Lebenszyklus einer I/O Anfrage}
+	\includegraphics[scale=0.35]{graphics/chapter9_10.png}
+\subsection{Datenstrukturen des Kernels}
+	\begin{itemize}
+		\item Kernel behält Info über den Zustand von I/O-Komponenten(beinhaltet offene Datentabellen, Netzwekverbindungen und Character-Gerätezustand)
+		\item Sehr viele komplexe Datenstrukturen um Puffer, Speicherallokierung und "dirty" Blocks zu verfolgen
+		\item Einige verwenden objektorientierte Methoden und Nachrichtenweitergabe um I/O zu implementieren
+	\end{itemize}
+\subsection{UNIX I/O Kernelstruktur}
+	\includegraphics[scale=0.32]{graphics/chapter9_11.png}
+
+		
+	
+
+
+
 \end{document}
