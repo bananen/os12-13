@@ -1034,7 +1034,7 @@ Beispiele:
 
 \item Cache liegt zwischen Hauptspeicher und CPU Registern
 
-\item Sicherheit des Speichers werden zur Sicherstellung korrek ausgeführter Operationen benötigt.
+\item Sicherheit des Speichers werden zur Sicherstellung korrekt ausgeführter Operationen benötigt.
 
 \end{itemize}
 
@@ -1069,9 +1069,10 @@ Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 \begin{itemize}
 \item Ein Prozess kann temporär aus dem Speicher in einen Zusatzspeicher gewechselt werden und dann wieder zurück um die Ausführung fortzusetzen
 \item \textbf{Zusatzspeicher (\textit{Backing store})} \ \\ Schneller Speicher, welcher groß genug ist um alle \textit{memory images} aller Nutzer unterzubringen. Er muss jedoch direkten Zugriff zu jenen bieten.
-\item \textbf{Roll out, roll in} \ \\ Eine Swapping Variation für prioritätsbasierte scheduling Algorithmen: Prozesse niedriger Priorität werden mit Prozessen hoher Priorität ausgewechselt um somit geladen und ausgeführt werden können.
+\item \textbf{Roll out, roll in} \ \\ Eine Swapping Variation für prioritätsbasierte scheduling Algorithmen: Prozesse niedriger Priorität werden mit Prozessen hoher Priorität ausgewechselt um somit geladen und ausgeführt werden zu können.
+
 \item Hauptbestandteil der \textit{swap time} ist die \textit{transfer time}: Die totale Transferzeit ist direkt proportional zur Menge des ausgewechelten Speichers
-\item Modifizierte Versionen von ˆ\textit{swapping} wird auf vielen System gefunden (z.B UNIX, Linux und Windows)
+\item Modifizierte Versionen von \textit{swapping} wird auf vielen System gefunden (z.B UNIX, Linux und Windows)
 \item Das System führt eine \textit{ready queue} mit "`ready to run"'-Prozessen welche ein memory image im Speicher haben.
 
 \end{itemize}
@@ -1130,13 +1131,6 @@ Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 \includegraphics[scale=0.50]{graphics/buddysystem.png}
 \caption{Beispiel Buddysystem}
 \end{figure}
-  \ \\
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.5]{graphics/buddysystemtree.png}
-\caption{Darstellung Buddysystem als Baum}
-\end{figure}
-\newpage
 
 \section{Relocation}
 \subsection{Fragmentierung}
@@ -1269,8 +1263,8 @@ Logische und physische Adressen sind im Sinne von Kompilierzeit und "`load-time 
 \newpage
 \section{Paging}
 \begin{itemize}
-\item Logische Adressräume eines Prozesses könnten nicht zusammenhängend sein: Einem Prozess wird physikalischer Speicher allokiert sobald Letzteres vorhanden ist
-\item Physikalischer Speicher wird in Blöcke fixer größe eingeteilt, sogenannte \textbf{frames} (Größe ist 2er Potenz, zwischen 512 Bytes und 8192 Bytes)
+\item Logische Adressräume eines Prozesses könnten nicht zusammenhängend sein: Einem Prozess wird physikalischer Speicher zugeweisen sobald Letzteres vorhanden ist
+\item Physikalischer Speicher wird in Blöcke fixer Größe eingeteilt, sogenannte \textbf{frames} (Größe ist 2er Potenz, zwischen 512 Bytes und 8192 Bytes)
 \item In Blöcke gleicher Größe aufgeteilter logischer Speicher heißt \textbf{pages}
 \item Überwachung aller freien frames
 \item Um ein Programm der Größe n pages auszuführen, werden n freie Frames benötigt
@@ -1283,14 +1277,15 @@ Von der CPU generierte Adressen werden wie folgt aufgeteilt:
 \begin{itemize}
 \item \textbf{Page number (p)} - Wird als Index in einem Page Table, welche Basisadressen jeder page im physikalischen Speicher hat, benutzt.
 \item \textbf{Page offset (d)} - Zusammen mit der Basisadresse bildet sie physikalische Speicheradresse welche zur Speichereinheit gesendet wird
-\end{itemize}
-
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.40]{graphics/numberoffset.png}
 \includegraphics[scale=0.50]{graphics/paging1.png}
 \caption{Paging}
 \end{figure}
+
+\end{itemize}
+
 
 
 Bei der Auswahl der Pagegröße muss auf folgenes geachtet werden:
