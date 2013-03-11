@@ -11,7 +11,7 @@
 \begin{document}
 
 \title{BS Zusammenfassung}
-\author{Benedict Hauck, Fedor Scholz\\Alex Tu, Florian Pohl}
+\author{Benedict Hauck, Fedor Scholz\\Alex Tu, Florian Pohl, Marc Beuter}
 \maketitle
 
 \tableofcontents
@@ -129,7 +129,7 @@
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{dma.png}
+\includegraphics[scale=0.4]{graphics/dma.png}
 \caption{Direct Memory Access}
 \end{figure}
 
@@ -266,7 +266,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{storage.png}
+\includegraphics[scale=0.4]{graphics/storage.png}
 \caption{Unterschiedliche Speicher und ihre Werte}
 \end{figure}
 
@@ -308,7 +308,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{big_picture.png}
+\includegraphics[scale=0.5]{graphics/big_picture.png}
 \caption{Uebersicht}
 \end{figure}
 
@@ -342,7 +342,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.35]{services.png}
+\includegraphics[scale=0.35]{graphics/services.png}
 \caption{Ort der Services}
 \end{figure}
 
@@ -356,7 +356,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{system_call.png}
+\includegraphics[scale=0.3]{graphics/system_call.png}
 \caption{Aufrufsequenz eines Syscalls}
 \end{figure}
 
@@ -366,7 +366,7 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{api.png}
+\includegraphics[scale=0.4]{graphics/api.png}
 \caption{Head von ReadFile()}
 \end{figure}
 
@@ -387,7 +387,7 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{syscall_os_relationship.png}
+\includegraphics[scale=0.4]{graphics/syscall_os_relationship.png}
 \caption{Beziehung zwischen Syscalls und OS}
 \end{figure}
 
@@ -395,7 +395,7 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{printf.png}
+\includegraphics[scale=0.4]{graphics/printf.png}
 \caption{Aufruf von printf}
 \end{figure}
 
@@ -410,7 +410,7 @@ Generell gibt es drei Methoden, Parameter an das OS zu uebergeben:
 \subsubsection{System Calls von Windows und Unix}
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{syscall_examples.png}
+\includegraphics[scale=0.3]{graphics/syscall_examples.png}
 \caption{Beispiele von Syscalls}
 \end{figure}
 
@@ -446,21 +446,27 @@ Ein laufendes Programm:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.6]{running_program.png}
+\includegraphics[scale=0.6]{graphics/running_program.png}
 \caption{Laufendes C-Programm}
 \end{figure}
 
 \section{Pointer}
 
-Etwas zu Pointern:
+Etwas zu Pointern: Siehe Abbildung: Pointer
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.6]{pointer.png}
+\includegraphics[scale=0.6]{graphics/pointer.png}
 \caption{Pointer}
 \end{figure}
 
-
+\subsection{Beispiele}
+\begin{itemize}
+	\item \textbf{char (*a)[42];} Ein Pointer auf ein Array mit 42 chars
+	\item \textbf{char *b();} Funktion, welche auf einen Pointer auf ein char zurueckgibt
+	\item \textbf{char (*c)();} Funktionspointer, welche ein char zurueckgibt
+	\item \textbf{char *(*(long))(double);} Funktion, welche ein long entgegennimmt und einen Funktionspointer zurueckgibt. Die Funktion, auf welche gezeigt wird, nimmt ein double entgegen und gibt einen Zeiger auf ein char zurueck
+\end{itemize}
 
 
 
@@ -508,7 +514,7 @@ Beispiele:
 	\end{itemize}
 
 \begin{center}
-\includegraphics[scale=0.15] {schichtenmodell.png} 
+\includegraphics[scale=0.15]{graphics/schichtenmodell.png}
 \end{center}
 
 Vorteile:
@@ -529,7 +535,7 @@ Beispiele:
 	
 \section{Monolitische Kernels}
 	\begin{center}
-		\includegraphics[scale=0.3] {monolithickernel.png}
+		\includegraphics[scale=0.3]{graphics/monolithickernel.png}
 	\end{center}
 	Vorteile:
 		\begin{itemize}
@@ -550,7 +556,7 @@ Beispiele:
 
 \section{Microkernel Systeme}
 	\begin{center}
-		\includegraphics[scale=0.3] {microkernel.png}
+		\includegraphics[scale=0.3]{graphics/microkernel.png}
 	\end{center}
 
 	\begin{itemize}
@@ -589,11 +595,11 @@ Beispiele:
 			\item Nützlich für Development und Testen
 		\end{itemize}
 	\begin{center}
-		\includegraphics[scale=0.5] {virtualmachine.png}
+		\includegraphics[scale=0.5]{graphics/virtualmachine.png}
 		\\
-		\includegraphics[scale=0.35] {vmwarearchi.png}
+		\includegraphics[scale=0.35]{graphics/vmwarearchi.png}
 		\\
-		\includegraphics[scale=0.3] {javavm.png}
+		\includegraphics[scale=0.3]{graphics/javavm.png}
 	\end{center}
 
 
@@ -630,13 +636,13 @@ Beispiele:
 		\begin{minipage}[t]{4cm}
 			\vspace{0pt}
 			\centering
-			\includegraphics[scale = 0.3]{memory.png}\\
+			\includegraphics[scale = 0.3]{graphics/memory.png}\\
 		\end{minipage}
 	\end{figure}
 
 \section{Process Status}
 	Ein Prozess wechselt wie folgt zwischen verschiedenen Zuständen:\\ \\
-	\includegraphics[scale = 0.4]{prozess_status.png}
+	\includegraphics[scale = 0.4]{graphics/prozess_status.png}
 \section{Process Control Block(PCB)}
 	Zu jedem Prozess gehört:
 	\begin{itemize}
@@ -650,7 +656,7 @@ Beispiele:
 \section{Context Switch}
 	:= Das Wechseln der Prozessinformationen beim Prozesswechsel in der CPU\\ \\
 	Dieser Kontext wird in PCB's gespeichert. Zeit zum Wechseln geht bei der Rechenzeit verloren.\\ \\
-	\includegraphics[scale = 0.6]{process_switch.png}\\
+	\includegraphics[scale = 0.6]{graphics/process_switch.png}\\
 \section{Process Creation}
 	\begin{itemize}
 		\item Prozesse bilden als Kinder- und Elternprozesse einen Prozessbaum
@@ -677,7 +683,122 @@ Beispiele:
 			\item \underline{exec} SysCall benutzt nach \underline{fork} um neues Programm zu laden
 		\end{itemize}
 	\end{itemize}
-	\includegraphics[scale = 0.6]{process_fork.png}
+	\includegraphics[scale = 0.6]{graphics/process_fork.png}
+
+\section{Process Termination}
+	\begin{itemize}
+		\item Prozess führt letzte Anweisung aus und lässt sich vom System löschen (\underline{Exit})
+		\begin{itemize}
+			\item Rückgabedaten via \underline{wait} an Eltern
+			\item danach wird Speicher des Prozess wieder freigegeben
+		\end{itemize}
+		\item Eltern brechen Kindprozess ab (\underline{abort})
+		\begin{itemize}
+			\item Kind hat die zugesicherten Resourcen überschritten
+			\item Aufgabe des Prozess' wird nicht mehr benötigt
+			\item oder (nur bei manchen Betriebssystemen) wird durch das beenden des Elternprozess' beendet (\underline{cascading termination})
+		\end{itemize}
+	\end{itemize}
+
+\section{Multi-Thread, Multi-Core}
+	\includegraphics[scale = 0.4]{graphics/threads.png}\\
+	Vorteile (Multithreading):
+	\begin{itemize}
+		\item Ansprechbarkeit
+		\item Teilen der Resourcen
+		\item ökonomisch
+		\item Skalierbarkeit
+	\end{itemize}
+	Schwierigkeiten (Multi-Core prgoramming)
+	\begin{itemize}
+		\item Vorgänge zu teilen
+		\item gleichmäßiges Verteilen
+		\item Datenaufteilung
+		\item Datenabhängigkeit
+		\item Testen und Debuggen
+	\end{itemize}
+	\subsection{Many-to-One}
+	\begin{figure}[htbp]
+		\begin{minipage}[t]{5cm}
+			\vspace{0pt}
+			\centering
+			\includegraphics[scale = 0.6]{graphics/many_to_one.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{9cm}
+			\vspace{0pt}
+			Vorteile:
+			\begin{itemize}
+				\item schnelle Thread-Direktion
+				\item flexibles scheduling
+				\item Systemresourcen-Ersparnis
+				\item kann ohne Probleme in 1x1 oder MxN überführt werden
+			\end{itemize}
+			Nachteile:
+			\begin{itemize}
+				\item Falls ein Thread blockiert wird blockiert der ganze Prozess
+				\item Laufzeitanalyse und Debugging nicht möglich
+			\end{itemize}
+			Beispiele:
+			\begin{itemize}
+				\item Solaris Green Threads
+				\item GNU Portable Threads
+			\end{itemize}
+		\end{minipage}
+	\end{figure}
+	
+	\subsection{One-to-One}
+%		\includegraphics[scale = 0.6]{graphics/one_to_one.png}
+		Vorteile:
+		\begin{itemize}
+			\item echte Parallelisierung
+			\item Laufzeitanalyse und Debuggen ist möglich
+		\end{itemize}
+		Nachteile:
+		\begin{itemize}
+			\item ignorieren der Kernelvorgaben
+			\item System-Speicher intensiv
+		\end{itemize}
+		Beispiele:
+		\begin{itemize}
+			\item Windows NT++
+			\item Linux
+			\item Solaris 9 and later
+		\end{itemize}
+		
+	\subsection{Many-to-Many}
+		\includegraphics[scale = 0.6]{graphics/many_to_many.png}
+		Vorteile:
+		\begin{itemize}
+			\item flexibles Scheduling
+			\item effiziente Ausführung
+			\item erholung aus Blockade durch Thread erzeugung des kernels
+		\end{itemize}
+		Nachteile:
+		\begin{itemize}
+			\item scheduling auf 2 leveln
+			\item Laufzeitanalyse und Debuggen nicht möglich
+		\end{itemize}
+		Beispiele:
+		\begin{itemize}
+			\item Windows NT/2000 mit ThreadFiber package
+			\item Solarisversion vor der version 9
+		\end{itemize}
+			
+	\subsection{Two-Level}
+		\includegraphics[scale = 0.6]{graphics/two_level_model.png}
+		Vorteile und Nachteile:
+		\begin{itemize}
+			\item ähnlich wie bei Many to Many
+			\item der Unterschied ist, das hier userThreads an kernelThreads gebunden werden können
+		\end{itemize}
+		Beispiele:
+		\begin{itemize}
+			\item Irix
+			\item HP-UX
+			\item Tru64 UNIX
+			\item Solaris 9 und früher
+		\end{itemize}
 \chapter{03bProcess-management-scheduling}
 \chapter{04Process-coordination}
 
@@ -779,7 +900,7 @@ Beispiele:
 					\item Semaphore emptry = N
 				\end{itemize}
 		\end{itemize}
-	\includegraphics[scale=0.75] {boundedbufferprob.png}
+	\includegraphics[scale=0.75]{graphics/boundedbufferprob.png}
 	
 	\subsection{Readers-Writers Probleme}
 		\begin{itemize}
@@ -795,7 +916,7 @@ Beispiele:
 				\begin{itemize}
 					\item Kein Reader sollte warten wenn ein shared date gelesen werden kann
 				\end{itemize}	
-			\includegraphics[scale=0.6] {readerwriterprob.png}
+			\includegraphics[scale=0.6]{graphics/readerwriterprob.png}
 			
 			\subsubsection{2nd und 3rd Readers-Writers Problem}
 				\begin{itemize}
@@ -808,7 +929,7 @@ Beispiele:
 				\item Zyklischer Ablauf
 				\item => Deadlock
 			\end{itemize}
-			\includegraphics[scale=0.35] {philprob.png}
+			\includegraphics[scale=0.35]{graphics/philprob.png}
 	\section{Deadlocks}
 		\subsection{Das Deadlock Problem}
 			\begin{itemize}
@@ -833,7 +954,7 @@ Beispiele:
 				\item request edge - Kante von P1 nach Rj
 				\item assignment edge - Kante von Rj nach Pi
 			\end{itemize}
-		\includegraphics[scale=0.7]{resallograph.png}
+		\includegraphics[scale=0.7]{graphics/resallograph.png}
 			\begin{itemize}
 				\item Graph beinhaltet kein Zyklus => kein Deadlock
 				\item Graph beinhaltet Zyklus =>
@@ -878,7 +999,7 @@ Beispiele:
 					\item System ist in unsafe state => Deadlocks möglich
 					\item Vermeidung => sicherstellen das ein System nie in einen unsafe state eintreten kann
 				\end{itemize}
-				\includegraphics[scale=0.15] {state.png}
+				\includegraphics[scale=0.15]{graphics/state.png}
 			
 			\subsubsection{Vermeidungsalgorithmen}
 				\begin{itemize}
@@ -899,8 +1020,9 @@ Beispiele:
 							\item Starvation - Gleicher Prozess könnt immer als Opfer ausgewählt werden, Anzahl der Wiederherstellungen im Kostenfaktor berücksichtigen
 						\end{itemize}
 				\end{itemize}
-\chapter{05aMemoryManagement}
-\section{Background}
+
+\chapter{05aMemoryManagement - Speichermanagement Strategy}
+\section{Hintergrund}
 \begin{itemize}
 \item Damit ein Programm laufen kann muss es von der Platte in den Speicher gebracht und innerhalb des Prozesses plaziert werden.
 
@@ -931,7 +1053,7 @@ Register dienten dem Schutz der Benutzerprozesse untereinander und vor Veränder
 \end{itemize}
 
 \begin{center}
-		\includegraphics[scale=0.5] {baseandlimit.png}
+		\includegraphics[scale=0.5]{graphics/baseandlimit.png}
 \end{center}
 
 \subsection{Einfacher Schutz mit \textit{base} und \textit{limit register}}
@@ -939,7 +1061,7 @@ Register dienten dem Schutz der Benutzerprozesse untereinander und vor Veränder
 Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 
 \begin{center}
-\includegraphics[scale=0.5]{baseandlimitprotection.png}
+\includegraphics[scale=0.5]{graphics/baseandlimitprotection.png}
 \end{center}
 
 
@@ -956,7 +1078,7 @@ Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.6]{swapping.png}
+\includegraphics[scale=0.6]{graphics/swapping.png}
 \caption{Schematik von Swapping}
 \end{figure}
 
@@ -975,7 +1097,7 @@ Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.6]{allocation.png}
+\includegraphics[scale=0.6]{graphics/allocation.png}
 \caption{Schematik Speicherallokierung}
 \end{figure}
 
@@ -999,19 +1121,19 @@ Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.55]{allocationexample.png}
+\includegraphics[scale=0.55]{graphics/allocationexample.png}
 \caption{Beispiel vor und nach Allokierung eines 16Mbyte Blocks}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.50]{buddysystem.png}
+\includegraphics[scale=0.50]{graphics/buddysystem.png}
 \caption{Beispiel Buddysystem}
 \end{figure}
   \ \\
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{buddysystemtree.png}
+\includegraphics[scale=0.5]{graphics/buddysystemtree.png}
 \caption{Darstellung Buddysystem als Baum}
 \end{figure}
 \newpage
@@ -1069,7 +1191,7 @@ Logische und physische Adressen sind im Sinne von Kompilierzeit und "`load-time 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.50]{overlays.png}
+\includegraphics[scale=0.50]{graphics/overlays.png}
 \caption{Überlagerung (\textit{overlays})}
 \end{figure}
 
@@ -1133,17 +1255,16 @@ Logische und physische Adressen sind im Sinne von Kompilierzeit und "`load-time 
  
  \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.50]{segmentierung1.png}
+\includegraphics[scale=0.30]{graphics/segmentierung1.png}
 \caption{Segmentierung Beispiel}
 \end{figure}
-
+\ \\
 \begin{figure}[ht]
-\centering
-\includegraphics[scale=0.50]{segmentierung2.png}
+\includegraphics[scale=0.30]{graphics/segmentierung2.png}
 \caption{Segmentierung Beispiel 2}
 \end{figure}
 \end{itemize}
-
+\ \\
 
 \newpage
 \section{Paging}
@@ -1166,8 +1287,8 @@ Von der CPU generierte Adressen werden wie folgt aufgeteilt:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.40]{numberoffset.png}
-\includegraphics[scale=0.50]{paging1.png}
+\includegraphics[scale=0.40]{graphics/numberoffset.png}
+\includegraphics[scale=0.50]{graphics/paging1.png}
 \caption{Paging}
 \end{figure}
 
@@ -1191,7 +1312,7 @@ Bei der Auswahl der Pagegröße muss auf folgenes geachtet werden:
 \end{itemize}
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.40]{tlb.png}
+\includegraphics[scale=0.40]{graphics/tlb.png}
 \end{figure}
 
 
@@ -1243,7 +1364,7 @@ $EAT = (\tau + \mu)  \alpha + (\tau + 2\mu) (1-\alpha) = \tau +2\mu - \mu\alpha$
 \end{itemize}
 
 \subsection{Page Table}
-\subsubsection{Hierarchial Paging}
+\subsubsection{Hierachischs Paging}
 
 \begin{itemize}
 \item Aufbrechen des logischen Adressraumes in viele page tables
@@ -1252,7 +1373,7 @@ $EAT = (\tau + \mu)  \alpha + (\tau + 2\mu) (1-\alpha) = \tau +2\mu - \mu\alpha$
 \item Eine 32-bit große logische Adresse mit 1K page size wird unterteilt in
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{twolevelpage.png}
+\includegraphics[scale=0.3]{graphics/twolevelpage.png}
 \caption{Two Level Paging}
 \end{figure}
 
@@ -1260,13 +1381,13 @@ $EAT = (\tau + \mu)  \alpha + (\tau + 2\mu) (1-\alpha) = \tau +2\mu - \mu\alpha$
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{topdownadress.png}
+\includegraphics[scale=0.4]{graphics/topdownadress.png}
 \caption{Top-Down Address-Translation Scheme}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{topdownthreelevel.png}
+\includegraphics[scale=0.3]{graphics/topdownthreelevel.png}
 \caption{Top-Down three-Level Paging Scheme}
 \end{figure}
 
@@ -1288,21 +1409,878 @@ page < Fuck this shit, not gonna translate it
 \item Reduziert den benötigten Speicher für ein page table, erhöht jedoch die Zeit um den Table zu finden
 
 \end{itemize}
-\chapter{05bMemoryManagement - Cache Management}
-\section{Basisoperationen}
+\chapter{05bMemoryManagement -  Management des Caches}
+\section{Basics}
+\subsection{Operationen}
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{operation.png}
+\includegraphics[scale=0.4]{graphics/operation.png}
+\end{figure}
+
+\begin{itemize}
+\item Pufferspeicher zur Ausnutzung zeitlicher und räumlicher Lokalität
+\item Niedrige Latenz, hohe Bandbreite 
+\item Zugriffe auf den Hauptspeicher verringern
+\item Puffer für asynchrone geprefetchte Operationen
+\end{itemize}
+
+\subsection{Zugriff}
+
+\begin{itemize}
+\item Cache miss
+\begin{itemize}
+\item \textit{Compulsory} (Cold Start, first reference) - Datenblock wurde zuvor nicht gecached
+\item \textit{Capacity} - Die benötigten Daten passen nicht all in den Cache
+\item \textit{Conflict} (collision, interference) - Abhängig von der Organisation könnten Daten miteinander in Konflikt geraten
+\end{itemize}
+\item Cache hit
+\item Hit ratio
+\end{itemize}
+
+\begin{description}
+\item[Neuman Architektur]\ \\ Befehle und Operanden liegen im selben Speicher. CPU braucht daher 2 Lesezyklen.
+\item[Harvard Architektur]\ \\ Befehle und Operanden in jeweils unterschiedlichen Speichern. Ermöglicht gleichzeitiges Lesen von Befehl und Operanden
+\item[Gemischter oder modifizierter Harvard]\ \\Separater Cache für Befehl und Operanden, aber selber Hauptspeicher
+\end{description}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{graphics/modifiedharvard.png}
+\caption{modifizierte Harvard Architektur}
+\end{figure}
+
+\begin{itemize}
+\item Im Cache wird mit Hilfe von Hashing oder dem Vergleichen von Adressen gesucht.
+\item Write Policies:
+\begin{itemize}
+\item Cache Hit
+\begin{itemize}
+\item \textbf{write-through}: Hauptspeicher immer auf dem neusten Stand, Schreiben braucht dafür seine Zeit.
+\item \textbf{write-back}: Daten werden nur in den Cache geschrieben, der Hauptspeicher ist daher in einem temporär inkonsistenten Zustand.
+\end{itemize}
+\item Cache Miss
+\begin{itemize}
+\item \textbf{write-allocate}: Zu schreibende Daten werden vom Hauptspeicher in den Cache eingelesen. Geschrieben wird danach nach der vorliegenden "`write policy"'
+\item \textbf{write-to-memory}: Es werden nur im Hauptspeicher Veränderungen vorgenommen.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsection{Cacheorganisation}
+\begin{itemize}
+\item \textbf{Voll Assoziativ}
+\begin{itemize}
+\item Jeder Speicherzeile kann mit jeder Cachezeile in Verbindung gebracht werden
+\item Adressen im Cache werden via Hashing gefunden
+\end{itemize}
+\item \textbf{Direktes Mapping}
+\begin{itemize}
+\item Eine page befindet sich im Cache mit allen ihren Zeilen
+\item Adressen im Cache werden via Vergleich gefunden
+\end{itemize}
+\item \textbf{N-way set Assoziativ}
+\begin{itemize}
+\item n pages befindet sich im Cache
+\item Um eine Adresse im Cache zu finden werden n Vergleiche benötigt
+\end{itemize}
+\item Cache Zeilen mit fixer Länge (z.B 32/64 Bytes)
+\item Adressen werden auf die Cachezeilen abgebildet
+\item Daten werden durch ihr \textit{tag-field} identifiziert. Tags repräsentieren die Adresse des Datums im Speicher
+\end{itemize}
+
+\subsection{Hash Algorithmen}
+\begin{itemize}
+\item Modulo Hashing z.B  0. bis 5. bits als byte offset innerhalb der Cachezeile. 6. bis 18. bits um die Cachezeile auszuwählen und 19. bis 31. Bit als tag
+\item Nehme zufällig gewählte Abschnitte der Adresse um die Cachezeile zu bestimmen. Wird nicht benutzt, da suboptimales Abbilduen von Adressen auf Cachezeilen.
+\end{itemize}
+
+\subsection{Synchronisation von Cache und Speicher}
+\begin{description}
+\item[Leeren des Caches] \ \\ Stellt Konsitenz sicher. Validiert Speicher indem es modifizierte Cachezeilen zurückschreibt und leert Cache
+\item[Ungepufferte Operationen] \ \\ Benötigt z.B für Speichergemappte Register von I/O Geräten. 
+\end{description}
+\subsection{Cache Leistung}
+\begin{itemize}
+\item Bei Temporärer Lokalität wird eine \textit{write-back} Strategie bevorzugt.
+\item Bei kleinen Caches  wird eien set-assoziative Implementierung mit großen Sets genommen.
+\item Räumliche Lokalität bevorzugt lange Zeilen
+\item Leistungssteigerung hängt vom Betriebssystem ab
+\end{itemize}
+
+\subsection{Cache Design Parameter}
+\begin{itemize}
+\item Größe
+\item Zeilenlänge
+\item Setgröße
+\item Verwendung von virtuellen oder physikalische Adressen für Tagging/Indizierung
+\item Austauschstrategie
+\item Nutzung von \textit{write-allocate}
+\item \textit{Write-through} oder \textit{write-back}
+
+\end{itemize}
+\subsection{Cache Anordnung}
+\begin{itemize}
+\item Länge der Cachezeilen hat Einfluss auf die Datenstruktur
+\item \textit{Problem}: Mehrfache Misses werden durch "`nicht-angeordnete"' Datenstrukturen die mehrere Cachezeilen umfassen verursacht.
+\item \textit{Lösung}:  Struktur wird zu einem mehrfachen der Zeilenlänge aufgefüllt
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{graphics/cachealignment.png}
+\end{figure}
+
+\item In der Praxis treten Cacheanordnungs Probleme kaum auf
+\item Einträge sind Blöcke. Speicher wird Blockweise vom Speicher in den Cache kopiert
+\item Daraus folgt: Wenn Block = Zeile, sind die Zeilen voll
+\end{itemize}
+
+\subsection{Index und Tags}
+\begin{itemize}
+\item Adressen im Cache werden mit Hilfe eines Index gefunden, welcher der Zeilennummer entspricht
+\item  Tag bestimmt ob ein Speicherblock von der CPU benötigt wird.
+\item  CPUs benutzen oft virtuelle Adressen
+\end{itemize}
+
+\section{Virtuell indizierter, virtuell getaggter Cache (VIVT)}
+\begin{itemize}
+\item Kein MMU Zugriff benötigt für Cachezugriff
+\item Alte ARM Architektur
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{graphics/VIVT.png}
+\end{figure}
+
+MMU sitzt hinter dem Cache, jedoch nur virtuell/virtuell Möglich.
+
+\begin{itemize}
+\item \textbf{Ambiguity Problem}: Zwei identische virtuelle Adressen zeigen auf unterschiedliche physikalische Adressen zu zwei verschiedenen Zeitpunkten
+\item \textbf{Alias Problem}: Unterschiedliche virtuelle Adressen zeigen auf die selbe physikalische Speicherstelle
+\end{itemize}
+
+\begin{description}
+\item \textbf{Context Switch} \ \\ Cache muss geleert werden, da identische virtuelle Adresse von unterschiedlichen Adressräumen auf unterschiedliche physikalische Adressen weisen können (und mit hoher wahrscheinlichkeit auch tun werden)
+
+\item \textbf{fork()} \ \\Das Kind benötigt eine komplette Kopie des Elterns Adressraum.
+\item \textbf{exec()} \ \\ leert Cache um amibguities zu verhindern. Wird nicht beim Zurückschreiben benötigt, da der Speicher eh überschrieben wird.
+
+\item \textbf{exit()} \ \\ leert den Cache
+\item \textbf{brk() and sbrk()} \ \\ "`Growing"' benötigt keine Aktion, "`shrinking"' benötigt selektive Cache leerung.
+\end{description}
+
+\subsection{Shared Memory und Memory mapped files}
+\begin{itemize}
+\item Das Problem mit  Aliases ist, dass mehr virtuelle Adressen benutzt werden um auf die selben pysikalischen Speicherstellen zu verweisen
+\item Also: Nicht erlauben und nicht cachen.
+\item Erlaube nur adressen die auf die selbe Cachezeile mappen (wenn der Cache direkt gemapped und write-allocate verwendet)
+\item Jeder Frame ist von exakt einer virtuellen Adresse zu jedem Zeitpunkt erreichtbar
+\end{itemize}
+
+ Gepufferte I/O machen keine Probleme, Ungepufferte hingegen schon, da:
+ \begin{itemize}
+ 
+\item Schreiben: Information könnten immer noch im Cache sein
+\item Lesen: Cache muss geleert werden
+ \end{itemize}
+
+\subsection{User-Kernel Data Ambiguities (Doppeldeutigkeit,Missverständnis)}
+\begin{itemize}
+\item Schreibe Systemdateien zurück bevor man in den usermode zurück kehrt.
+\item Cache leeren before man in den user mode zurück kehrt
+\end{itemize}
+
+\subsection{Echzeit Charakteristik}
+
+\begin{itemize}
+\item Schnell da die MMU nur bei Cache Misses benötigt wird
+\item Konstante  Ausführungszeit eines Prozesses mit festem Speichermapping
+\item Variable Ausführungszeit im Falle von dynamischer Speicherallokierung (werden durch conflict misses ausgelöst, wenn ein voller Assoziativcache verwendet wird)
+\item Teure Kontextwechsel und I/O da der Cache geleert werden muss
+\end{itemize}
+
+\section{Virtuell indizierter, physikalisch getaggter Cache(VIPT)}
+\begin{itemize}
+\item MMU Zugriff benötigt
+\item Intel Core++ Prozessor
+\item Instruktions Cache ARM Cortex
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/VIPT.png}
+\end{figure}
+
+\item Wird oft als first-level Cache verwendet (z.B UltraSPARC II)
+\item \textbf{Cache Management}
+\begin{itemize}
+\item Keine Mehrdeutigkeiten
+\item Keine Cacheleerung bei Kontextwechsel
+\item Virtuelle Startadressen müssen auf die selbe Cachezeile gemapped sein
+\end{itemize}
+
+\item Es könnten Konflike entstehen wenn Datenstrukturen, der Abstand der Adressen ein Vielfaches der Cachegröße beträgt auf die selbe Cachezeile gemapped sind. Dies kann durch n-way caching behoben werden.
+\end{itemize}
+\subsection{Laufzeit Eigenschaften}
+\begin{itemize}
+\item Schnelle Kontextwechsel, Interrupt-handlig und System Calls, da Cache flushes die meiste Zeit verhindert werden
+\item Verzögerte Write-Back nach einem Kontextwechsel. 
+\item Unterschiedliche Ausführungszeit im Falle von dynamischem Speichermanagement, welche durch Conflict misses verursacht werden
+\item  Variable Suchdauer, welche durch die Adressübersetzung der MMU verursacht wird.
+\item Problematik bei multiprozessor Systemen mit shared memory: Welche Zeile leeren?
+\end{itemize}
+
+
+\section{Physikalisch indizierter, physikalisch getaggter Cache (PIPT)}
+
+\begin{itemize}
+\item Daten Cache ARM Cortex
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/PIPT.png}
+\end{figure}
+
+\textbf{Vorteile}
+\begin{itemize}
+\item Komplett transparent für den Prozessor
+\item Keine Unterstützung für Performanz-kritische Systeme benötigt.
+\item SMP mit shared memory kann ein in der Hardware implementiertes Kohärenzprotokoll benutzen
+\end{itemize}
+\section{Physikalisch indizierter, virtuell getaggter Cache (PIVT)}
+\begin{huge}
+\textbf{>>>>>>SINNLOS!<<<<<<} 
+\end{huge}
+\begin{small}
+Daher nicht praktiziert...
+\end{small}
+
+\section{Page Conflicts}
+
+Werden durch zufällige Allokierungen von physikalischem Speicher verursacht
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/pageconflict.png}
+\end{figure}
+ \ \\
+Angrenzend virtueller Speicher wird normallerweise auf beliebig freie physikalische pages abgebildet.
+
+\subsection{Page Colouring}
+Problem von zufälliger Page Färbung : Benachbarte Codes/Daten könnten nicht auf den selben Cache abgebildet werden, wenn sie auf die selbe Zeile hashen.
+
+Lösung1: 
+
+\begin{itemize}
+\item Folgen von zufälligem page coloring:
+\begin{itemize}
+\item Cache Conflicts
+\item Cache nur teilweise benutzt
+\item Signifikante unterschiede in der Laufzeit \\
+$X(p \in bin) = {P \choose p} (\frac{1}{C})^p(1-\frac{1}{C})^{P-p} $
+P: Anzahl von allokierten Pages
+p: p pages die der selben Cachezeile entsprechen
+C: Nummer der Farbe
+\end{itemize}
+\end{itemize}
+
+
+\subsection{Cache Konflikte vermeiden}
+\subsubsection{Cachepartitionierung}
+\begin{itemize}
+\item Unterteile den physikalischen Speicher in disjunkte  Teilmengen. Alle Pages einer Teilmenge werden auf die selbe Cachepartition abgebildet.\\
+\textit{Beispiel:} \\
+\item Alle roten und blauen Pages fürs Betriebssystem
+\item Alle gelben Pages für die echtzeit Anwendung
+\item Alle grünen Pages für die Hintergrundprozesse.
+\end{itemize}
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/pagecoloring.png}
+\caption{Analyse von Zugriffsmustern und Page coloring}
 \end{figure}
 
 
+\chapter{05cMemoryManagement - Management des Virtuellen Speichers}
 
-\section{Virtuell indizierter, virtuell getaggter Cache}
-\section{Virtuell inizierter, physikalisch gtaggter Caseh}
-\section{Physikalisch indizierter Cache}
-\section{•}
+\section{Hintergrund}
 
-\chapter{05cMemoryManagement}
+\begin{description}
+\item [Virtueller Speicher]\ \\ Trennung von logischen Speicher des Nutzers vom physikalischen Speicher.
+\end{description}
+\begin{itemize}
+\item Es müssen nur Teile des Programms im Hauptspeicher für die Ausführung sein.
+\item Daher kann der logische Adressraum deutlich größer sein als der physikalische
+\item Erlaubt es, dass ein Adressraum von mehreren Prozessen geteilt wird.
+\item Erlaubt eine effiziente Prozesserzeugung
+\end{itemize}
+
+Virtueller Speicher kann durch
+\begin{itemize}
+\item Demand paging mit einer fixen Blockgröße. Ist einfacher und kann von der Hardware implementiert/unterstützt werden
+\item Demand segmentation, mit Segmenten beliebiger Größe
+\end{itemize}
+implementiert werden.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/vmgtpm.png}
+\caption{Virtueller Speicher der größer als physikalischer Speicher ist}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/virtuelleradressraum.png}
+\caption{Virtueller Adressraum}
+\end{figure}
+
+\section{Nachladen von Pages in den Arbeitsspeicher (Demand paging)}
+
+\begin{description}
+\item[Demand paging]:\ \\ Überträgt eine Page in den RAM wenn diese Page einen Pagefehler verursacht hat.
+\subitem \textit{Vorteil}: Es wird nur das übertragen was auch benötigt wird 
+\subitem \textit{Nachteil}: "`Einige"' anfängliche Pagefehler wenn die Aufgabe startet
+\end{description}
+\begin{itemize}
+\item Bringt nur dann eine Page in den Speicher wenn sie auch benötigt wird.
+\begin{itemize}
+\item Weniger I/O benötigt
+\item Weniger Speicher benötigt
+\item Schnellere Antworten
+\item Mehr Nutzer
+\end{itemize}
+\item Page wird benötigt? $\Rightarrow$ Referenz drauf
+
+\begin{itemize}
+\item Ungültige Referenz? $\Rightarrow$ uh oh...abort! abort!
+\item Nicht im Speicher? $\Rightarrow$ Ab in den Speicher
+\end{itemize}
+\item \textit{Lazy Swapper} - Tauscht niemals eine page in den Speicher solang sie nicht benötigt wird.
+\subitem \textit{Swapper} welcher mit pages arbeitet wird "`\textit{pager}"' genannt.
+
+\item Jeder pagetable Eintrag wird mit einem valid-invalid bit in Verbindung gebracht und mit i (invalid) initialisiert. Wenn während der Adressübersetzung ein bit = i, entsteht ein \textit{page fault}.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/pagesnotinmemory.png}
+\caption{\textit{Pagetable} bei dem nicht alle \textit{pages} im Hauptspeicher liegen}
+\end{figure}
+
+\subsection{Page Fault Handhabung}
+
+Ein Zugriff auf eine Page, welche zu dem Zeitpunkt nicht im Hauptspeicher ist verursacht einen \textit{page fault}
+
+\begin{enumerate}
+\item OS überprüft die Gültikeit des Zugriffs
+\item Besorge einen leeren \textit{frame}
+\item Lade den Inhalt der angeforderten Page von der Disk in den \textit{frame}
+\item Passe den \textit{page table} an
+\item Setze dasvalid-invalid bit of \textit{v}
+\item Wiederhole die Anweisung, welche den \textit{page fault} verursacht hat
+\end{enumerate}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/pagefaulthandling.png}
+\caption{Page fault Handhabung}
+\end{figure}
+
+\subsubsection{Page Fault Fallgruben (\textit{"`pitfalls")'}}
+
+Einige CISC Anweisungen sind schwierige neuzustarten, da sie eventuell
+\begin{enumerate}
+\item erste Berechnung auf \textit{non-paged} und
+\item anschliessend auf paged data
+\end{enumerate}
+miteinbeziehen.
+
+Beispiel:
+\begin{itemize}
+\item  Bewegung von Datenblöcken überlappender Bereiche
+\item Automatisches erhöhen/verringern von mehreren Ort.
+\end{itemize}
+
+Lösung:
+\begin{itemize}
+\item 
+\item Behalte veränderte Daten im Register, sodass \textit{page faults} nicht passieren können
+\end{itemize}
+
+\begin{huge}
+\textbf{Pitfall ist alles BULLSHIT}
+\end{huge}
+
+\subsubsection{Page Fault Latenz}
+\begin{itemize}
+\item Page Fault Rate $0 \leq p \leq 1.0$
+\subitem wenn p = 0, existieren keine page faults
+\subitem wenn p = 1, ist jede Referenz ein Fehler
+\item Effective Acces Time (EAT)
+\end{itemize}
+EAT = (1 - p) * Speicherzugriff + p * (page fault overhead + page fault service time + restart overhead)
+
+\section{Pre-paging}
+\begin{description}
+\item[Pre-paging]:\ \\ Überträgt mehr Pages in die RAM als nur die angeforderte Page
+\subitem \textit{Vorteil}: Verbessert den I/O Durchsatz indem es die chunks liest
+\subitem \textit{Nachteil}: Pre-paging ist höchst spekulativ. Verschwendet I/O Bandbreite wenn die page nie verwendet wird und kann das Arbeitsset eines anderen Auftrag zerstören im Falle von \textit{page stealing}.
+\end{description} 
+
+\section{Shared Memory}
+\textbf{Info vorneweg: kp ob das hier reinkommt, kann auch noch zu pagedemand gehören, Folienorganisation ist wieder ultra beschissen :)}
+\subsection{Prozesserstellung}
+Virtueller Speicher bietet noch einige andere Vorteile während der Prozesserzeugung und der Verwaltung:
+\subsubsection{Shared Libraries/Code/Data}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/sharedlibraries.png}
+\caption{Shared Library/Code welches virtuellen Speicher verwendet}
+\end{figure}
+
+\subsubsection{Memory-Mapped Files}
+\begin{itemize}
+\item \textit{Memory-mapped file} I/O erlaubt es I/O Daten als Routine Speicherzugriff zu behandeln. Dies wird duch das mapping eines Diskblock auf eine page im Speicher realisiert.
+\item Eine Datei wird anfangs via \textit{demand paging} gelesen. "`Ein pagegroßer"' Teil der Datei wird vom FS in die physikalische \textit{page} gelesen. Danachfolgende Lese/Schreibzugriffe auf die Datei werden als normale Speicher Zugriffe behandelt.
+\item Vereinfacht den Dateizugriff indem die I/O Datei durch den Speicher  und nicht durch \textbf{read()} oder \textbf{write()} system calls behandelt wird.
+\item Erlaubt es mehren Prozessen die selbe Datei zu mappen, was wiederum das gemeinsame Nutzen der Seiten im Speicher ermöglicht.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/memorymappedfiles.png}
+\caption{Memory Mapped Files}
+\end{figure}
+
+\newpage
+Geteilte Datensegmente werden oft mit
+\begin{itemize}
+\item temporäre, anonyme memory-mapped files
+\item shared pages
+\end{itemize}
+implementiert.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/shareddatasegment.png}
+\end{figure}
+
+\subsubsection{Copy-On Write (CoW)}
+\begin{itemize}
+\item COW erlaubt es, sowohl Eltern als auch Kindprozessen anfänglich die selben \textit{pages} im Speicher zu teilen. \\
+Nur wenn einer der beiden Prozesse eine geteilte \textit{page} verändern wir die \textit{page} kopiert.
+\item COW ermöglicht viel effizientere und schnellere Prozesserzeugung, da nur modifizierte \textit{pages} kopiert werden.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/cowbefore.png}
+\caption{Bevor Prozess 1 Page C verändert}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/cowafter.png}
+\caption{Nachdem Prozess 1 Page C verändert}
+
+\end{figure}
+
+\ \\
+\subsubsection{Schnellerer Prozessstart im Allgemein}
+Nur die ersten \textit{pages} werden in den Speicher geladen, der Rest wird nachträglich geladen
+
+
+\section{Page Replacemen (Ersatz)}
+Was passiert wenn kein freier \textit{Frame} vorhanden ist? $\rightarrow$ \textit{Page Replacement}. Suche nach der am passendsten \textit{page} im Speicher
+\begin{itemize}
+\item "`Page It Out"'. Kriterien:
+\subitem Algorithmen - geringer administrativer Overhead
+\subitem Leistung - Minimierung der Anzahl an \textit{page faults}
+\subitem \textit{"`User modified (dirty) bit"'}, um den overhead von pageübertragungen zu verringern.
+\item Großer virtueller Speicher kann so auf einem kleineren physikalischen Speicher geboten werden.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{graphics/needreplacement.png}
+\caption{Notwendigkeit von \textit{Page Replacement} }
+\end{figure}
+
+\subsection{Grundlegende Page Replacement}
+\begin{enumerate}
+\item Mache den Aufenthalt der gesuchten \textit{page} auf der Disk ausfindig.
+\item Finde einen freien \textit{Frame}
+\subitem Existiert ein freier Frame, nutze ihn
+\subitem Existiert keiner, verwende einen Page Replacement Algorithmus um ein "`victim"' frame auszuwählen
+\item Setze die Page in den neuen freigewordenen Frame. Bringe die page und die frametables auf den neusten Stand.
+\item Wiederhole die Anweisung, welche den \textit{page fault} ausgelöst hat.
+\end{enumerate}
+
+\begin{table}
+\caption{Page Replacement}
+\centering
+\begin{tabular}{cc}
+\ \\
+\includegraphics[scale=0.3]{graphics/pr1.png} & \includegraphics[scale=0.3]{graphics/pr2.png}\\
+
+\includegraphics[scale=0.3]{graphics/pr3.png} & \includegraphics[scale=0.3]{graphics/pr4.png} \ \\
+
+\end{tabular}
+\end{table}
+
+\subsection{Grundlagen von Replacement}
+\begin{itemize}
+\item Nicht auf allen \textit{frames} kann ein Auswechsel stattfinden. Einige Pages sind an spezifische page frames gepinnt.
+\begin{itemize}
+\item Großer Anteil des Kernels sind angepinnt
+\item DMA Puffer müssen gepinnt sein
+\item Ein Echtzeit Auftrag kann einige/alle seine pages anpinnen (um das Einhalten der Deadline zu garantieren)
+\end{itemize}
+\item OS kann entschließen, dass ein Satz an Pages für den nächsten Austausch  
+\begin{itemize}
+\item \textbf{Limitiert} auf die \textit{Frames} der Anweisung, welche den page fault ausgelösten haben $\rightarrow$ lokales page replacement
+\item \textbf{Unlimitiert}, sprich frames von anderen Anweisungen werden auch in Betracht gezogen $\rightarrow$ globales page replacement
+\end{itemize}
+\end{itemize}
+sein sollen.
+
+\subsection{Reinigungsichtlinien (Cleaning Policy)}
+Wann soll eine "`schmutzige"' (dirty) page zurück auf die Disk geschrieben werden?
+\begin{description}
+\item[Demand Cleaning]\ \\ Page wird nur dann zurück geschrieben, wenn sein veransaltender frame für einen Austausch ausgewählt wurde.
+\begin{itemize}
+\item Page fault Handhabung erfordert zwei Pageübertragungen (raus und rein)
+\end{itemize}
+\item[Pre-Cleaning]\ \\ Schmutzige pages werden auf die Disk zurückgeschrieben, eher ihr pageframe gebraucht wird.
+\begin{itemize}
+\item Das Verlegen von größeren Clustern kann den Diskdurchsatz steigern. Es kann jedoch vorkommen, dass Pages nochmals verändert werden, ehe sie ersetzt werden.
+\end{itemize}
+\end{description}
+\begin{itemize}
+\item Ein guter Kompromiss kann durch Pagepufferung erzielt werden
+\begin{itemize}
+\item Zum Austausch ausgewählt pages werden entweder in einer freien unveränderten Liste oder in einer veränderten Liste gewartet
+\end{itemize}
+\item Pages der veränderten Liste könnten regeläßig zur Disk verlegt werden
+\item Guter Kompromiss da:
+\begin{itemize}
+\item Nicht alle schmutzigen Seiten werden auf die Disk verlegt, nur welche für den nächsten Austausch ausgewählt wurden
+\item Pages werden im Bündel verlegt (somit eine Verbesserung der I/O Disk)
+\end{itemize}
+\end{itemize}
+
+\subsection{Page Replacement Algorithmen}
+\begin{itemize}
+\item Erwünscht ist eine niedrige Page Fault Rate
+\item Evaluiere den Algorithmus indem man ihn auf einem bestimmten String von speicherreferenzen anwendet und berechne die Anzahl an Page Faults auf dem String.
+\end{itemize}
+\newpage
+\subsubsection{FIFO}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/FIFO.png}
+\caption{First-In-First-Out}
+\end{figure}
+\ \\
+
+\subsubsection{Optimaler Algorithmus}
+Ersetze die am längsten unbenutzte Page.
+\ \\
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/optimalpagereplacement.png}
+\caption{Optimale Page Replacement}
+\end{figure}
+\ \\ 
+
+\subsubsection{LRU Algorithmus}
+LRU = Least Recently Used
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/referencestring.png}
+\end{figure}
+\ \\ \ \\
+Zähler Implementierung:
+\begin{itemize}
+\item Jeder Pageeintrag besitzt einen Zähler: Jedes mal wenn eine Seite durch diesen Eintrag referenziert wird, kopiere die Uhr in den Zähler
+\item Schaue auf den Counter wenn eine Page verändert werden soll um zu entscheiden welche auszuwählen ist. Verändere die Page, die am längesten nicht benutzt wurde
+
+\end{itemize}
+
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/LRU.png}
+\end{figure}
+
+\subsubsection{LRU Stack}
+Stack Implementierung: Halte einen Stapel an pagenummern in einer doppelt gelinkte Liste: \ \\
+\begin{itemize}
+
+\item Wenn die Page referenziert wird
+\begin{itemize}
+\item Bewege sie an die oberste Stelle
+\item Es müssen 6 Zeiger verändert werden
+\end{itemize}
+\item Keine Suche nach Austausch
+\end{itemize}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/LRUstack.png}
+\caption{LRU Stack}
+\end{figure}
+
+\subsubsection{LRU Approximation Algorithmus}
+\begin{description}
+\item[Referenz Bit]
+\begin{itemize}
+\item Verbinde jede Page mit einem Bit. Ist zu Beginn auf 0 gesetzt.
+\item Wenn die Page referenziert wird, setze auf 1
+\item Wenn vorhanden, verwende eine unreferenzierte page (bit = 0) für den Austausch
+\end{itemize}
+\item[Second Chance]
+\begin{itemize}
+\item Referenz Bit muss zu beginn auf 1 gesetzt werden.
+\item Clock replacement
+\item Wenn die zu ersetztende Page (im Uhrzeigersinn) das Referenzbit gesetzt hat, dann:
+\begin{itemize}
+\item Setze es auf 0
+\item Lasse die Seite im Speicher
+\item Gehe zur nächsten page (Im Uhrzeigersinn), verwende die selben Regeln
+\end{itemize}
+\item Wenn das Referenzbit nicht gesetzt ist -> Ersetze die Seite
+\end{itemize}
+\end{description}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/secondchance.png}
+\caption{Second-Chance Page Replacement}
+\end{figure}
+
+
+\subsubsection{Zählende Algorithmen}
+\begin{itemize}
+\item Halte einen Zähler für die Anzahl an Referenzen, welche zu jeder Seite gemacht  wurde
+\item Least Frequently Used (LFU) Algorithmus : Ersetze die Seiten mit dem niedrigsten Counter
+\item Most Frequently Used (MFU) Algorithmus: Basierend auf dem Argument, dass die Seite mit dem kleinsten Zähler wahrscheinlich erst hinzugefügt wurde und noch verwendet werden muss.
+\end{itemize}
+
+
+
+\section{Frame Allokierung}
+
+Man sollte alle Frames allokieren, welche für die aktuellen Anweisungen benötigt werden.\ \\
+Es gibt zwei Hauptallokierungs Schemata:
+
+\begin{description}
+
+\item[Fixe Allokierung] \ \\
+
+\begin{itemize}
+\item \textbf{Gleiche Allokierung} (\textit{equal}) - z.B wenn 100 Frames gegeben sind und 5 Prozesse $\rightarrow$ Jeder Prozess bekommt 20 Frames
+\item \textbf{Proportionale Allokierung} - Allokiere in Abhängigkeit zur Größe des Prozesses
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/proportionalallocation.png}
+
+\end{figure}
+
+\end{itemize}
+
+\item[Prioritäts Allokierung]\ \\
+\begin{itemize}
+\item Nutzt ein proportionales Allokierungs System jedoch mit Priorität anstatt Größe.
+item Wenn Prozess P einen Pagefault verursacht:
+\begin{itemize}
+\item Nimm einen eigenenFrame Ersatz
+\item Nimm einen Frame als Ersatz von einem Prozess mit niedrigerer Priorität 
+\end{itemize}
+\end{itemize}
+\end{description}
+
+\subsection{Globale vs Lokal Allokierung:}
+\begin{description}
+\item[Global Replacement] \ \\
+Alles frames werden für einen Austausch in Betracht gezogen, d.h ein Prozess kann einen frame eines anderen Prozesses nehmen.
+\item[Local Replacement]\ \\
+Nur die frames eines fehlerverursachenden Prozesse können als potenzieller Ersatz betrachtet werden.
+\end{description}
+
+\subsection{I/O Interlock}
+:= Seiten müssen manchmal im Speicher verschlossen werden.
+\ \\ \\
+Ziehe I/O-Pages in Betracht, welche Daten von Geräten kopieren . Diese müssen vor eine Verdrängung durch einen Page Replacement Algorithmus verschlossen werden.\ \\
+Lösungsmöglichkeiten:
+\begin{itemize}
+\item Benutze (verschlossenen) Systempuffer, niemals User Space.
+\item Verschließe die Seiten
+\end{itemize}
+
+\section{Trashing}
+:= Ein Prozess ist damit beschäftigt Pages rein und raus zu wechseln (swapping)
+Wenn ein Prozess nicht "`genügend"' Pages hat, ist seine page-fault rate sehr hoch. Dies führt u.a zu:
+\begin{itemize}
+\item geringer CPU Leistung
+\item OS denkt es muss den Grad an Multiprogramming durch das Laden mehrerer Prozesse in den Speicher erhöhen
+\end{itemize} 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/trashing.png}
+\caption{Trashing}
+\end{figure}
+
+\ \newline
+Demand Paging funktioniert aufgrund des Lokalitäts Model
+\begin{itemize}
+\item Prozesse migrieren von einer Lokalität zu einer anderen
+\item Lokalitäten könnten überlappen
+\end{itemize}
+Trashing tritt auf, wenn die Größe der Lokalität aller aktiven Prozesse größer als das totale Speichervolumen ist.
+
+\subsection{Working-Set Model} 
+$\Delta \equiv$ working-set window $\equiv$ eine fixe Anzahl an Pagereferezen.
+
+\begin{itemize}
+\item \textbf{WSS} (Working set des Prozess P) = Insgesamte Anzahl an Pagereferenzen in den jüngsten $\Delta$ (Unterscheiden sich in der Zeit)
+\begin{itemize}
+\item wenn $\Delta$ zu klein ist kann die gesamte Lokalität nicht umfasst werden
+\item wenn $\Delta$ zu groß ist, werden mehrere Lokalitäten umfasst
+\item wenn $\Delta = \infty$ wird das komplette Programm umfasst
+\end{itemize}
+\item D =$\Sigma WSS \equiv$ Alle anfgeforderten Frames
+\item wenn D $> Speicher \rightarrow$ Trashing
+\item Strategie: Wenn D > Speicher, gib einen der Prozesse auf
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/workingset1.png}
+\end{figure}
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/workingset2.png}
+\end{figure}
+
+\subsection{Working Set im Auge behalten}
+Approximiere mit einem Intervall timer und einem Referenzbit
+\begin{itemize}
+\item Beispiel: $\Delta$ = 10.000
+\item Timer unterbricht jede 5000 Zeiteinheit
+\item Führe eine 2 Bit History für jede Page zusätzlich zum Referenzbit
+\item Bei einem Timerinterrupt, für jede Page:
+\begin{itemize}
+\item Schiebe das Referenzbit in die 2-bit History
+\item Setze das Referenzbit zurück
+\subitem Wenn die History nicht leer ist: Page ist im working set
+\end{itemize}
+\item Leider nicht sehr genau, da der Rahmen in sehr großen Schritten läuft
+\subitem Verbesserung: 10bits und alle 1000 Zeiteiheiten einen Interrupt
+\end{itemize}
+
+\subsection{Page Fault Häufigkeits Schema}
+Schaffe eine "`akzeptable"' Page Fault Rate
+\begin{itemize}
+\item Wenn die Rate zu niedrig ist verliert der Prozess Frames.
+\item wenn die Rate zu hoch ist, gewinnt der Prozess an Frames dazu.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/pagefaultfrequency.png}
+\end{figure}
+
+\subsection{Solaris}
+\begin{itemize}
+\item Verwalte eine Liste mit freien Seiten um diese Faultverursachenden Prozessen zuzuweisen
+\item Es muss immer eine mindestanzahl an Seiten für Zuweisungen frei sein
+\item Paging wird durch den \textbf{pageout process} ausgeführt:
+\begin{itemize}
+\item Pageout scannt die Seiten regelmäßig mit Hilfe eines veränderten Clock Algorithmus
+\item Pageout wird öfters aufgerufen in Abhängigkeit wieviel freier Speicher vorhandenist.
+\item \textbf{Scanrate} ist die Geschwindigkeit, in der eine Seite gescanned wird. Dies reicht von \textbf{slowscan} bis \textbf{fastscan}.
+\end{itemize}
+\item Parameter freier Speicherseiten sind:
+\begin{itemize}
+\item \textbf{Lotsfree} - Grenzparameter. Anzahl freier Speicher mit dem man Paging beginnt. Startet den Scanner wenn diese Grenze überschritten wird.
+\item \textbf{Desfree} - Grenzparameter um paging zu erhöhen
+\item \textbf{Minfree} - Grenzparameter für Swapping
+\begin{itemize}
+\item Finde Prozess der schon längere Zeit still steht
+\item Bewege/Befreie alle Pages dieses Prozesses
+\end{itemize}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{graphics/solaris.png}
+\end{figure}
+\end{itemize}
+\end{itemize}
+
+\section{Kernelspeicher allokieren}
+
+\begin{itemize}
+\item Wird anders als der Benutzerspeicher behandelt.
+\item Wird oft von einem "`free-memory"' ppol allokiert.
+\subitem Kernel stellt Anfragen nach Speicher für Strukturen unterschiedlicher Größe
+\subitem Einige Kernelspeicher müssen zusammenhängend sein.
+\item Nutzen von separaten Pages für jede angeforderte OS Daten Struktur wäre ineffizient.
+\end{itemize}
+\subsection{Buddy System Allocator}
+\begin{itemize}
+\item Allokiert Speicher von Segmenten fixer Größe, die aus physikalisch zusammenhängenden Seiten bestehen.
+\item Speicher wird mit Hilfe des \textbf{Power-Of-2 allocator} allokiert.
+\begin{itemize}
+\item Befriedigt Anfragen der Größe hoch 2
+\item Anfrage wird aufgerundet zur nächst größeren Zweierpotenz
+\item Wenn nicht genügend kleine Speicherblöcke vorhanden sind:
+\begin{itemize}
+\item Wähle einen Chunk aus und teile ihn in zwei gleich große "`buddies"'
+\item Setze das Verfahren fort bis ein angemessener Chunk vorhanden ist.
+
+\end{itemize}
+\end{itemize}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{graphics/buddyallocator.png}
+\caption{Buddyallocator}
+\end{figure}
+\end{itemize}
+
+\newpage
+\subsection{Slab Allocator}
+\begin{itemize}
+\item Alternative Strategie zum Buddy System
+\item Slab besteht aus einem oder mehrere zusammenhängender Pages
+\item Cache besteht aus einem oder mehrerer Slabs
+\item Ein einziger Cache für eine einzigartige Kernel Datensturktur
+\begin{itemize}
+\item Jeder Cache ist mit Objekten gefüllt - Instanziierung der Datenstruktur
+\end{itemize}
+\item Wenn der Cache erstellt wird, fülle ihn mit Objekten die mit \textit{free} gekennzeichnet sind.
+\item Wenn sie gelagert sind, markiere die Objekte als \textit{used}
+\item Wenn der Slab voller \textit{used} Objects ist wird das nächste Objekt vom nächsten leeren Slab allokiert.
+\begin{itemize}
+\item Wenn kein leerer Slab existiert, allokiere einenneuen
+\end{itemize}
+\item Vorteile sind:
+\begin{itemize}
+\item Keine Fragmentierung
+\item Schnelle Speicheranforderungensbefriedigung
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{graphics/slab.png}
+\caption{Slaballocator}
+\end{figure}
+
+\end{itemize}
 \chapter{06aFileSystems}
 
 \section{Das Konzept von Dateien}
@@ -1354,7 +2332,7 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{harddisk.png}
+\includegraphics[scale=0.3]{graphics/harddisk.png}
 \caption{Zylinder, Tracks und Sektoren}
 \end{figure}
 \subsection{Das Positionierungssystem}
@@ -1424,7 +2402,7 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{san.png}
+\includegraphics[scale=0.4]{graphics/san.png}
 \caption{SAN}
 \end{figure}
 
@@ -1495,7 +2473,7 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{ssd.png}
+\includegraphics[scale=0.3]{graphics/ssd.png}
 \caption{SSD Logik}
 \end{figure}
 
@@ -1539,7 +2517,7 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.25]{file_attributes.png}
+\includegraphics[scale=0.25]{graphics/file_attributes.png}
 \caption{Typische Dateiattribute}
 \end{figure}
 
@@ -1563,7 +2541,7 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{file_structure.png}
+\includegraphics[scale=0.3]{graphics/file_structure.png}
 \caption{Datei Struktur}
 \end{figure}
 
@@ -1590,13 +2568,13 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.3]{regular_filetypes.png}
+\includegraphics[scale=0.3]{graphics/regular_filetypes.png}
 \caption{Regulaere Dateitypen 1}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{regular_filetypes2.png}
+\includegraphics[scale=0.4]{graphics/regular_filetypes2.png}
 \caption{Regulaere Dateitypen 2}
 \end{figure}
 
@@ -1614,11 +2592,11 @@ page < Fuck this shit, not gonna translate it
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.4]{filesystem_interaction.png}
+\includegraphics[scale=0.35]{graphics/filesystem_interaction.png}
 \caption{Interaktionen zwischen einem Programm und dem Dateisystem}
 \end{figure}
 
-\section{Ziele der Dateiverwaltung}
+\subsection{Ziele der Dateiverwaltung}
 \begin{itemize}
 	\item Liefer ueberzeugendes Namenschema fuer Dateien
 	\item Liefer einheitlichen I/O Support fuer unterschiedliche Speichergeraetetypen
@@ -1629,124 +2607,611 @@ page < Fuck this shit, not gonna translate it
 	\item Liefer akzeptierbare Performance
 \end{itemize}
 
+\subsection{Dateinamen}
+\begin{itemize}
+	\item Textuelle Namen
+	\item Eingeschraenktes Alphabet
+		\begin{itemize}
+			\item Nur bestimmte characters
+			\item Eingeschraenkte Laenge
+			\item Case (in)sensitive
+		\end{itemize}
+	\item Nur bestimmte Formate, z.B.
+		\begin{itemize}
+			\item DOS: 8 character string.xyz character suffix
+			\item XP: 255 character string.xyz character suffix
+		\end{itemize}
+	\item Namen mussen bestimmte weitere Eigenschaften einhalten, z.B. Erweiterungen xyz.c, wenn der C-Compiler laufen soll
+\end{itemize}
+
+\subsection{Oeffnen von Dateien}
+Unterschiedliche Metadaten werden gebraucht, um das Oeffnen von Dateien zu verwalten
+\begin{itemize}
+	\item file pointer: Zeiger auf die letzte Lese-/Schreibaktion, pro Prozess, der die Datei offen hat
+	\item access rights: Pro Prozess/Task gibt es Zugriffsinformationen
+	\item file-open count: Zaehler, welcher angibt, wie oft die Datei offen ist, um Entfernen von Daten aus der Datei zu ermoeglichen, wenn der letzte Prozess beendet ist
+	\item disk location: Cache mit Datenzugriffsinformationen
+\end{itemize}
+
+\subsection{Dateizugriff}
+\begin{itemize}
+	\item Strikt sequentieller Zugriff (fruehere Systeme)
+		\begin{itemize}
+			\item Lies alle Bytes von Anfang an
+			\item Keine Spruenge moeglich, nur zurueck
+			\item Ausreichend, solange Tapes benutzt wurden
+		\end{itemize}
+	\item Zufaelliger Zugriff (aktuelle System)
+		\begin{itemize}
+			\item Lies Bytes in beliebiger Reihenfolge
+			\item Essenziell fuer Datenbankensysteme
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Dateiorganisation und Zugriff}
+Moegliche Zugriffsmuster:
+\begin{itemize}
+	\item Lies komplette Datei
+	\item Lies individuelle Block einer Datei
+	\item Lies Bloecke mit den folgenden oder vorangehenden
+	\item Finde eine Untermenge an records wieder auf
+	\item Schreibe/update eine komplette Datei sequenziell
+	\item Einfuegen/Loeschen/Updaten eines records in einer Datei
+	\item Update Bloecke in eine Datei
+\end{itemize}
+
+\subsubsection{Dateizugriffsmethoden}
+\begin{itemize}
+	\item Sequenzieller Zugriff
+		\begin{itemize}
+			\item read next
+			\item write next
+			\item rewind
+			\item no read after last write
+			\item append
+		\end{itemize}
+	\item Direkter Zugriff
+		\begin{itemize}
+			\item read n
+			\item write n
+			\item position to n
+			\item read next
+			\item write next
+		\end{itemize}
+	\item n = relative Position
+	\item Einfache (unstrukturierte) Datei
+		\begin{itemize}
+			\item Einheit: Byte (manchmal Block)
+			\item Will eine Applikation einen Datencontainer strukturieren moechte, so hat es die interne Struktur zu implementieren
+		\end{itemize}
+	\item Strukturierte Datei
+		\begin{itemize}
+			\item Einheit: record (oder user type object, ...)
+		\end{itemize}
+	\item Seit Unix bieten OSes nur noch plain file, Programme und Bibliotheken koennen darauf spezielle Strukturen implementieren
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.15]{graphics/sequential_access.png}
+\caption{Ein sequenzieller Zugriff auf eine Datei}
+\end{figure}
+
+\subsubsection{Operationen auf unstrukturierten Dateien}
+\begin{itemize}
+	\item CreateFile(pathname)
+	\item DestroyFile(pathname)
+	\item OpenFile(pathname, read/write)
+	\item ReadFile(FID, byte-range, memory location)
+	\item WriteFile(FID, byte-range, memory location)
+	\item CloseFile(FID)
+	\item PositionPointer(FID, position for pointer)
+\end{itemize}
+
+memory location ist die data area im AS des aufrufenden Prozesses (z.B. im Heap oder Stack)
+
+\subsection{Plain File}
+\begin{itemize}
+	\item Definition: Plain File ist eine Sequenz von Bytes, meisten auf der Disk
+	\item Characteristic: Man kann auf jedes Byte in einer unstrukturierten Datei zugreifen, wenn der Zeiger richtig gesetzt ist
+	\item Problem: Disks koennen nicht auf Bytes sondern nur auf Bloecke zugreifen
+	\item Solution: Buffer file blocks (klassische Methode) oder ganze Dateien (auf den Speicher abgebildete Dateien) im Hauptspeicher
+\end{itemize}
+
+\subsection{Strukturierte Datei}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.2]{graphics/structured_file.png}
+\caption{Strukturierte Datei}
+\end{figure}
+
+\begin{itemize}
+	\item Records = logische Einheiten streng an eine Applikation gebunden
+	\item Records mit gleicher Groeße oder nicht
+	\item Records mit einem speziellen Schluesselfeld ($\Rightarrow$ etwas Ordnung in der Datei)
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{graphics/file_operation.png}
+\caption{Datei Operation 1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{graphics/file_operation2.png}
+\caption{Datei Operation 2}
+\end{figure}
+
+\section{Ordner}
+
+\subsection{Ziele von Ordnern}
+\begin{itemize}
+	\item Benennung: Praktisch fuer Benutzer
+		\begin{itemize}
+			\item Zwei Benutzer koennen den gleichen Namen fuer unterschiedliche Dateien benutzen
+			\item Diesselbe Datei kann mehrere unterschiedliche Namen haben
+		\end{itemize}
+	\item Gruppierung: Logische Gruppen von Dateien
+	\item Effizienz: Schnelle Operationen
+\end{itemize}
+
+\subsection{Operationen von Ordnern}
+\begin{itemize}
+	\item Datei erstellen
+	\item Datei loeschen
+	\item Datei umbenennen
+	\item Dateisystem traversieren
+	\item Ordnerinhalt auflisten
+	\item Datei suchen
+\end{itemize}
+
+\subsection{Ordner}
+\begin{itemize}
+	\item Ordner ist ein node in einem FS, welcher zu einem authorisierten Subjekt gehoert und Informationen ueber die Datein im FS enthaelt
+	\item Sowohl Order als auch Dateien sind auf Disk
+	\item Backups von Ordnern und Dateien werden auf tapes gemacht
+	\item Die Sammlung von Ordnern und Dateien bringen eine hierarchische FS-Struktur
+	\item In Linux gibt es ein paar spezielle Order, z.B.
+		\begin{itemize}
+			\item root
+			\item home
+			\item working
+		\end{itemize}
+	\item Prinzipielle Stuktur eines modernen FS ist ein gewurzelter Baum
+		\begin{itemize}
+			\item Pfadnamen helfen, Dateien zu identifizieren
+			\item Ermoeglicht das Abbilden von Dateiennamen auf Dateien
+		\end{itemize}
+	\item Prozess der Dateiabfrag = Navigation
+\end{itemize}
+
+\subsubsection{Single-Level Ordner}
+\begin{itemize}
+	\item Einzelner Ordner fuer alle Benutzer
+	\item Namensproblem
+	\item Gruppierungsproblem
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.2]{graphics/single_level_directory.png}
+\caption{Single-Level Ordner}
+\end{figure}
+
+\subsubsection{Two-Level Ordner}
+\begin{itemize}
+	\item Separate Ordner fuer jeden Benutzer
+	\item Pfadname
+	\item Koennen gleichen Dateinamen bei unterschiedlichen Nutzern haben
+	\item Effizientes Suchen
+	\item Keine Moeglichkeit zur Gruppierung
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.2]{graphics/two_level_directory.png}
+\caption{Two-Level Ordner}
+\end{figure}
+
+\subsubsection{Baumstrukturierte Ordner}
+Prizipielle Struktur eines modernen Dateisystems
+\begin{itemize}
+	\item Effizientes Suchen
+	\item Gesamte Unterbaeume koennen einfach bewegt oder geloescht werden
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{graphics/tree_structured_directories.png}
+\caption{Baumstrukturierte Ordner}
+\end{figure}
+
+\subsubsection{Rolle vom Working Directory}
+\begin{itemize}
+	\item Absolute Pfadnamen koennen ermuedend werden
+	\item Idee eines aktuellen working directory cwd
+		\begin{itemize}
+			\item Datei wird ueber hoffentlich langsameren relativen Pfadnamen referenziert
+			\item cwb gehoert zu der Ausfuehrungsumgebung einen Prozesses
+			\item Anfaengliches cwd wird oft home genannt
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Relative vs. absolute Pfadnamen}
+\begin{itemize}
+	\item Absolute Pfadnamen: Pfad von der Wurzel bis zur Datei
+	\item Relative Pfadnamen: Pfad von cwd zur Datei
+	\item . zeigt auf aktuelles Verzeichnis
+	\item .. zeigt auf darueberliegendes Verzeichnis
+\end{itemize}
+
+\subsubsection{Vorteile relativer Pfadnamen}
+\begin{itemize}
+	\item Bessere Portabilitaet
+	\item Beispiel: Programmsystem
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.2]{graphics/program_system.png}
+\caption{Ein Programmsystem}
+\end{figure}
+	\item Wenn man ein Programmsystem bewegt, muss man alle absoluten Pfade aendern, die relativen koennen aber erhalten bleiben
+\end{itemize}
+
+\subsubsection{Hierarchisches FS}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.25]{graphics/hierarchical_fs.png}
+\caption{Hierarchisches Dateisystem}
+\end{figure}
+Eindeutige Dateinamen ueber Pfadnamen, z.B. /bin/passwd $\neq$ /etc/passwd
+
+\subsection{Operationen auf Ordnern in Unix}
+\begin{itemize}
+	\item opendir
+	\item closedir
+	\item readdir
+	\item mkdir
+	\item rmdir
+\end{itemize}
+
+\subsection{Unix Link}
+\begin{itemize}
+	\item Direkter Zugriff auf Datei ohne Navigation
+	\item Unix hard link: ln filename linkname (Anderer Name zu gleicher Datei, also gleiche Inode, die Datei wird nur geloescht, wenn der letzte hardlink geloescht wird, ungueltige links sind nicht moeglich
+	\item Symbolischer Link: ln -s filename linkname (Neues Linkname mit einem Link zu eine Datei mit Dateinamen, dessen Datei u.U. nicht gemountet ist oder nicht existiert)
+\end{itemize}
+
+\subsubsection{Azyklischen Graphen Ordner}
+Komplexere Stuktur als Baum, hat geteilte Unterordner und Dateien
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.25]{graphics/acyclic_graph_directories.png}
+\caption{Azyklischen Graphen Ordner}
+\end{figure}
+
+\begin{itemize}
+	\item Fuehrt zu aliasing (unterschiedliche Namen) von Dateien und Ordnern
+	\item Gefahr von dangling pointers (baumelnde Zeiger), welche auf unkontrollierte Orte im FS zeigen
+	\item Loesungen:
+		\begin{itemize}
+			\item Backpointers, so we can delete all pointers Variable size recors a problem
+			\item New Ordnereintragtyp
+				\begin{itemize}
+					\item Link - ein anderer name (Zeiger) auf existente Datei
+					\item Resolve the link - folge dem Zeiger um die Datei zu lokalisieren
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+
+\section{Datentausch}
+\begin{itemize}
+	\item In Mehrbenutzersystemen koennen Dateien mit mehreren Nutzern geteilt werden
+	\item Drei Probleme
+		\begin{itemize}
+			\item Effizienter Zugriff auf gleiche Datei
+			\item Wie sollen Zugriffsrechte bestimmt werden?
+			\item Verwaltung gleichzeitiger Zugriffe
+		\end{itemize}
+\end{itemize}
+
+\subsection{Zugriffsrechte}
+\begin{itemize}
+	\item Keine
+		\begin{itemize}
+			\item Nutzer wissen u.U. nicht von der Existenz einer Datei
+			\item Nutzer hat kein Recht, Ordner einzulesen, welcher die Datei enthaelt
+		\end{itemize}
+	\item Wissen
+		\begin{itemize}
+			\item Benutzer kann nur die Existenz und den Besitzer bestimmen
+		\end{itemize}
+	\item Ausfuehrung
+		\begin{itemize}
+			\item Nutzer kann Programm nur laden und ausfuehren
+		\end{itemize}	
+	\item Lesen
+		\begin{itemize}
+			\item Nutzer kann Datei lesen, kopieren und ausfuehren
+		\end{itemize}
+	\item Anhaengen
+		\begin{itemize}
+			\item Nutzer kann nur Daten zu Datei hinzufuegen, aber keine Daten aendern oder loeschen in der Datei
+		\end{itemize}
+	\item Updaten
+		\begin{itemize}
+			\item Nutzer kann Datei erweitern, aendern und loeschen, sie erstellen, neu schreiben und Daten entfernen
+		\end{itemize}
+	\item Schutz aendern
+		\begin{itemize}
+			\item Nutzer kann Zugriffsrechte der Datei aendern
+		\end{itemize}
+	\item Loeschen
+		\begin{itemize}
+			\item Nutzer kann Datei loeschen
+		\end{itemize}
+	\item Eigentuemer
+		\begin{itemize}
+			\item Hat alle aufgelisteten Rechte
+			\item Kann anderen Nutzer Rechte geben fuer folgende Gruppen von Nutzern:
+				\begin{itemize}
+					\item Bestimmte Nutzer
+					\item Nutzergruppen
+					\item Allen
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+
+\subsection{Klassische Unix Zugriffsrechte}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.25]{graphics/unix_access_rights.png}
+\caption{Klassische Unix Zugriffsrechte}
+\end{figure}
+
+\begin{itemize}
+	\item Erster Buchstabe: Dateityp
+		\begin{itemize}
+			\item d fuer Ordner
+			\item - fuer regulaere Datei
+			\item k fuer Blockdatei
+		\end{itemize}
+	\item Drei Benutzerkategorieren
+		\begin{itemize}
+			\item \textbf{u}ser
+			\item \textbf{g}roup
+			\item \textbf{o}ther
+		\end{itemize}
+	\item Drei Zugriffsrechte pro Kategorie
+		\begin{itemize}
+			\item read, write und execute, wobei execute bei Ordner angibt, ob man auf Dateien in dem Ordner zugreifen darf, man muss read Rechte auf Ordner haben, um Inhalte anzeigen zu koennen
+		\end{itemize}
+	\item Maengel
+		\begin{itemize}
+			\item Drei Benutzerkategorien zu wenig
+			\item In Windows gibt es feinere Granularitaet, Angabe von bestimmten Nutzern
+		\end{itemize}
+	\item Unix hat Konzept von ACLs eingefuehrt, das ist eine Liste, welche an eine Datei gebunden wird, welche alle Subjekte und ihre individuellen Rechte enthaelt
+\end{itemize}
+
+\subsection{Unix Zugriffskontrollliste}
+Mit dem Befehl getfacl kann man sich den Inhalt der ACL eines Datei ansehen.
+Ebenso kann man mit diesem Befehl neue Rechte setzen:\\\\
+setfacl -m user:name:permissions file\\\\
+\begin{itemize}
+	\item name ist die loginID der Person, deren Rechte man aendern moechte
+	\item permissions kann r, w oder x sein
+	\item file ist der Name der Datei
+\end{itemize}
+
+\subsection{Gleichzeitiger Zugriff auf Dateien}
+\begin{itemize}
+	\item Manche OSes bieten Mechanismen fuer Benutzer, um gleichzeitigen Zugriff zu verwalten
+	\item Mechanismen basieren auf consistency semantics $\Rightarrow$ Datenbanken
+		\begin{itemize}
+			\item Consistency semantics spezifizieren: Wie mehere Nutzer gleichzeitig auf eine geteilte Datei zugreifen koennen (z.B. mit Locks) und wie die Aenderungen zwischen den Nutzern synchronisiert werden (z.B. strong consistency $\Rightarrow$ jeder Nutzer sieht sofort jede Aenderung
+		\end{itemize}
+	\item Programm koennen locken
+		\begin{itemize}
+			\item ganze Dateien, um diese zu updaten
+			\item bestimmte records zum updaten
+		\end{itemize}
+	\item Exklusiv oder geteilt
+		\begin{itemize}
+			\item Exklusiv: Writer lock
+			\item Shared: Mehrere Leser erlaubt
+		\end{itemize}
+	\item Mandatory oder advisory
+		\begin{itemize}
+			\item Mandatory: Zugriff wird verboten, abhaengig von locks
+			\item Advisory: Prozesse koennen Status von locks finden und entscheiden, was zu tun ist
+		\end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 \chapter{07aImplementingFileSystems}
 \chapter{07bImplementingFileSystems}
 \chapter{08SecondaryStorageStructure}
-\section{Verbesserungen für Input/Output}
-\begin{itemize}
-	\item Daten Rate einer Festplatte meist sehr viel kleiner als Datenrate der CPU und des RAM
-	\item Idee zur Verbesserung dieses Problems: Parallelität, multiple Fesplatten gleichzeitig ansteuern
-	\item Bietet eine bessere Festplatten Verfügbarkeit
-	\item Wird anstelle einer einzigen großen (teuren) Festplatte eingesetzt
-\end{itemize}
-\section{RAID)
-\subsection{Einführung}
-\begin{itemize}
-	\item Mehrere Festplatte in einer Anordnung (RAID) verbessern die Performance und Verlässlichkeit eines Systems durch redundante Datenspeicherung
-	\item Mirroring und Shadowing behält Duplikate auf den Festplatten
-	\item Disk Stripping benutzt eine Gruppe von Festplatten als eine Speichereinheit
-	\item RAID ist unterteilt in  6 Level
-\end{itemize}	
-\subsection{RAID (Level) 0}
-\begin{itemize}
-	\item "Striping"
-	\item Festplatten werden im Reißverschlussverfahren zu größerer Speichereinheit eingeteilt, was höhere Datenraten ermöglicht (wenn von mehreren Festplatten gleichzeitig geladen wird)	
-	\item Geringe Zuverlässigkeit des Gesamtsystems ("Schwächstes Kettenglied...", es braucht nur 1 Platte ausfallen)
+\chapter{09I/O-Systems}
 
-\end{itemize}	
-\subsection{RAID (Level) 1}
+\section{Ziele des Gerätemanagements}
 \begin{itemize}
-	\item "Mirroring"
-	\item Spiegelung aller Daten auf einer weiteren Festplatte 
-	\item Möglicherweise langsamer Schreibzugriff
-	\item Möglicherweise schnellerer Lesezugriff (schnellere Festplatte liefert Daten zuerst)
+	\item \textbf{Abstraktion} von Details der physischen Gerätemanagements
+	\item \textbf{Uniform Naming} das nicht von Hardware-Details abhängt
+	\item \textbf{Serialisierung} von I/O-Operationen durch gleichzeitige Anwendungen
+	\item \textbf{Schutz} von Standard-Geräten vor unberechtigten Zugriffen 
+	\item \textbf{Puffern}, wenn Daten von/zu einem Gerät nicht im Zielverzeichnis gespeichert werden können 
+	\item \textbf{Fehlerbehandlung} von unregelmäßigen Gerätefehlern
+	\item \textbf{Virtualisierung} physischer Geräte mit Hilfe von Speicher- und Zeitmultiplexen (z.B. pty, RAM Disk)
+\end{itemize}
+
+\section{Charakteristiken von I/O-Geräten}
+\begin{itemize}
+	\item \textbf{Block-Geräte} enthalten Plattenlaufwerke
+	\subitem Befehle enthalten read, write, seek
+	\subitem "Roher" I/O- or FS-Zugriff
+	\subitem Speicherabgebildeter(Memory-mapped) Datenzugriff möglich
+	\item \textbf{Charakter-Geräte} enthalten Tastaturen, Mäuse und serieller Ports
+	\subitem Befehle enthalten get, put
+	\item \textbf{Netzwerkgeräte} unterscheiden sich stark genug von Block und Charakter-Geräten um ihre eigene Schnittstelle  zu haben.
+	\subitem Windows und UNIX enthalten Socket-Interface("Sockelschnittstelle")
+\end{itemize}
+\includegraphics[scale=0.6]{graphics/chapter9_1.png}
+\section{I/O Hardware}
+\begin{itemize}
+	\item Übliche Komponenten
+		\subitem Controller
+		\subitem Port (externer Verbindgungspunkt)
+		\subitem Bus (verkette Hardwarekomponenten oder geteilter direkter Zugriff)
+	\item Geräte haben Adressen, die von folgenden Komponenten verwendet werden:
+		\subitem Direkte I/O Anweisungen 
+		\subitem Memory-mapped I/O
+	\item Geräteadressen zeigen normalerweise aufgefüllt	
+		\subitem Status Register
+		\subitem Control Register
+		\subitem Data-in Register
+		\subitem Data-out Register
+\end{itemize}
+\section{Memory-mapped I/O}
+\includegraphics[scale=0.5]{graphics/chapter9_2.png}
+\begin{itemize}
+	\item Trenne I/O-Adressraum und Speicher-Adressraum
+		\subitem Trennt Folgen von I/O-Anweisungen für jeden einzelnen Raum
+		\subitem oder eine Folge von Anweisungen mit "space-flags"
+	\item Memory-mapped I/O
+	\item Hybrid(Pentium)
+\end{itemize}
+\includegraphics[scale=0.25]{graphics/chapter9_3.png}
+\begin{itemize}
+\item (a) Single-bus architecture (Einzel-Bus-Architektur)
+\item (b) Dual-bus memory architecture (Doppel-Bus Speicherarchitektur)
+\end{itemize}
+\section{I/O-Management Techniken}
+\begin{itemize}
+	\item Programmierter I/O (synchron)
+		\subitem Thread is busy-waiting for the I/O-operation to complete, processor
+cannot be used elsewhere
+		\subitem Kernel-Faden frägt den Zustand eines I/O Gerätes ab (command-ready, busy, error)
+	\item Interrupt-driven I/O (synchron)
+		\subitem I/O-Befehl wird ausgegeben
+		\subitem Prozessor führt Anweisungen weiter auseinander
+		\subitem I/O-Gerät sendet einen Interrupt(Unterbrechung) sobald I/O-Befehl fertig ist
+	\item Direkter Speicherzugriff(DMA)(asynchron)
+		\subitem DMA Modul kontrolliert Datenaustausch zwischen Hauptspeicher und I/O-Geräte	\subitem Prozessor wird unterbrochen nachdem gesamter Block übertragen wurden	
+		\subitem Umgeht CPU, um Daten direkt zwischen I/O-Gerät und Speicher zu übertragen
+\end{itemize}
+\section{Interrupts}
+\includegraphics[scale=0.7]{graphics/chapter9_4.png}
+\subsection{Interrupts im Detail}
+\includegraphics[scale=0.9]{graphics/chapter9_5.png}
+\subsection{Asynchroner Interrupt-Driven I/O Zyklus}
+\includegraphics[scale=0.3]{graphics/chapter9_6.png}
+\subsection{Schritte zum Behandeln eines Interrupts}
+\begin{itemize}
+	\item (1) Register des laufenden Prozesses speichern
+	\item (2) Set up context (adress space) for interrupt service procedure
+	\item (3) Set up stack for interrupt service procedure
+	\item (4) Erkenne/Maskiere Interrupt-Controller, sodass andere Interrupts reaktiviert werden
+	\item (5) Ausführen der interrupt service procedure
+	\item (6) In manchen Fällen muss man einer Faden mit höherer Priorität bzgl. Prozess/Kernel -Level aufwecken
+	\item (7) Register des neuen/originalen Prozesses laden.
+	\item (8) Vom Interrupt zurückkehren und den neuen/originalen laufenden Prozess starten
+\end{itemize}
+\section{I/O Systemorganisation im Betriebssystem}
+	\includegraphics[scale=0.24]{graphics/chapter9_7.png}
+\subsection{Anwendung I/O Schnittstelle}
+	\begin{itemize}
+		\item I/O system calls kapseln das Verhalten von Geräten in generischen Klassen
+		\item Gerätetreiberschicht verbirgt Unterschiede zwischen I/O-Controllern vom Kernel
+		\item Geräte unterscheiden sich in vielen Punkten
+			\subitem Character-stream oder Block
+			\subitem sequentiell oder zufälliger Zugriff (random access)
+			\subitem teilbar oder engagiert(dedicated)
+			\subitem Geschwindigkeit der Operation	
+			\subitem read-write, read only, write only
+	\end{itemize}
+\subsection{Kernel I/O Subsysteme: Aufgaben}
+	\begin{itemize}
+		\item Scheduling
+		\item Gerätereservierung
+		\item Pufferung
+		\item Schutz
+		\item Spooling
+		\item Fehlerbehandlung
+	\end{itemize}
+\subsection{Eine geschichtete Kernel I/O Struktur}
+	\includegraphics[scale=0.34]{graphics/chapter9_8.png}
+\subsection{Schichten des I/O Systems und Haupfunktionen der einzelnen Schichten}
+	\includegraphics[scale=0.26]{graphics/chapter9_9.png}
+\subsection{Geräteunabhängige I/O Software}
+	\begin{itemize}
+		\item Es gibt Gemeinsamkeiten zwischen gleich klassifizierten Treibern
+		\item Teile I/O Software in Geräteabhängige und Geräteunabhängige Software ein
+		\item Vereinheitliche Geräteschnittstelle für Kernel Code
+		\item Vereinheitliche Kernelschnittstelle für Geräte Code
+	\end{itemize}
+\subsection{Gerätetreiber}
+	\begin{itemize}
+		\item Treiber sind in ähnlichen Kategorien klassifiziert
+		\subitem Blockgeräte
+		\subitem Character(Datenstrom)-Geräte
+		\item Betriebssystem definiert Standardschnittstellen zu den verschiedenen Klassen von Geräten
+		\item Job des Gerätetreibers 
+			\subitem Übersetzen der Nutzeranfragen
+			\subitem Hardware zur Boot-Zeit initialisieren 
+			\subitem Hardware herunterfahren
+		\item Nach dem Befehl an das Gerät...
+			\subitem vollendet das Gerät sofort und der Treiber geht zurück zum Aufrufer
+			\subitem oder es führt die Anfrage aus und der Treiber blockiert normalerweise das Warten auf ein I/O Interrupt Signal
+
+		\item Drivers are reentrant (können von anderm Prozess aufgerufen werden während ein Prozess bereits im Treiber geblockt wird)
+	\end{itemize}
+\subsection{Lebenszyklus einer I/O Anfrage}
+	\includegraphics[scale=0.35]{graphics/chapter9_10.png}
+\subsection{Datenstrukturen des Kernels}
+	\begin{itemize}
+		\item Kernel behält Info über den Zustand von I/O-Komponenten(beinhaltet offene Datentabellen, Netzwekverbindungen und Character-Gerätezustand)
+		\item Sehr viele komplexe Datenstrukturen um Puffer, Speicherallokierung und "dirty" Blocks zu verfolgen
+		\item Einige verwenden objektorientierte Methoden und Nachrichtenweitergabe um I/O zu implementieren
+	\end{itemize}
+\subsection{UNIX I/O Kernelstruktur}
+	\includegraphics[scale=0.32]{graphics/chapter9_11.png}
+
+		
 	
-\end{itemize}	
-\subsection{RAID (Level) 2}
-\begin{itemize}
-	\item "Nibbles und Hammingcode"
-	\item Nicht mehr relevant, wurde nur bei Großrechnern angewandt
-	\item Aufteilen von bytes in 2 "nibbles" (4bit)
-	\item Nibble und 3bit Hammingcode auf 7 Festplatten schreiben
-	\item Performant und verlässlich, benötigt aber viele Festplatten
-	\item Synchronisation der Rotation und der Armköpfe ermöglicht schnelles Lesen und Schreiben
-	\item Benötigt leistungsfähigen Controller
-\end{itemize}	
-\subsection{RAID (Level) 3}
-\begin{itemize}
-	\item Paritätsfestplatte
-	\item Normale Datenplatten, eine Paritätssplatte, welche die Summe der bits der Datenplatten darstellt
-	\item Parität anschaulich errechnet durch Summe der Bits auf den Datenplatten, wenn gerade Summe, steht am zubehörigen Platz eine 0, wenn ungerade eine 1
-	\item Kann Fehler auf 1 Festplatte aufspüren, wenn jedoch 2 fehlschlagen hilft das Verfahren nichts mehr.
-	\item Paritätsplatte bildet den Flaschenhals des Systems, da bei jedem Schreibzugriff auf diese geschrieben werden muss.
-\end{itemize}		
 
-\subsection{RAID (Level) 4}
-\begin{itemize}
-	\item Ähnlich wie RAID 3, nur wird die Parität nicht bitweise, sondern chunk/strip-weise berechnet
-\end{itemize}
 
-\subsection{RAID (Level) 5}
-\begin{itemize}
-	\item Ähnlich wie RAID 4, aber hier wird die Parität nicht auf einer separaten Festplatte, sonder verteilt über alle Platten gespeichert.
-	\item Dies löst das Problem mit dem Flaschenhals, kann aber Probleme bei der Wiederherstellung nach einem Ausfall geben.
-\end{itemize}
-\section{Tertiäre Speichereinheiten}
-\subsection{Einführung}
-\begin{itemize}
-	\item Niedrige Kosten
-	\item Generell sind diese Speichereinheiten entfernbar (removable)	
-	\item Geschwindigkeit lässt sich aufteilen in 2 Aspekte, Bandbreite und Latenz
-	\item Bandbreite: Kontinuierliche Bandbreite: Datenrate während der Datenstrom läuft
-	\item Effektive Bandbreite: Durchschnitt über die gesamte I/O Zeit, inklusive Suchen und an die richtige Stelle rotieren, oder cartridge wechseln.
-	\item Beispiele sind externe Festplatten, Bänder (tapes), sowie optische Platten (DVDs)
-
-\end{itemize}
-\subsection{Entfernbare Disks}
-\begin{itemize}
-	\item Floppy disks: dünne, flexible disk, eingehüllt in magnetisches Material, eingeschlossen in eine schützenden Plastikummantelung, meist mit einer Kapazität von ca 1MB (es gibt disks mit gleicher Technologie, welche bis zu 200MB speichern können)
-	\item Removable magnetic  können fast gleichschnell wie Hard disks sein, haben aber ein größeres Risiko Schaden durch Belichtung (exposure) zu nehmen.
-	\item Magneto-optic disk hält Daten auf einer starren Platte, eingehüllt in magnetisches Material
-	\item Hier wird Laser-Hitze verwendet um bits zu schreiben und zu lesen
-	\item Der Lese-Schreib-Kopf ist viel weiter entfernt als bei magnetischen Köpfen, und das magnetische Material ist durch Plastik oder Glas geschützt
-\end{itemize}
-\subsection{Magnetische Tapes}
-\begin{itemize}
-	\item Werden an einer Stelle gehalten und vor- oder zurückgespult, um dem Kopf lesen und schreiben zu ermöglichen
-	\item Sobald die richtige Stelle gefunden ist, ist die Datenrate vergleichbar zu einer Festplatte
-	\item 20-800GB typische Speichergröße
-	\item Technologien sind 4mm, 8mm, 19mm, LTO-4 und SDLT
-	\item Im Vergleich zu einer Festplatte ist ein Tape wesentlich billiger und hält mehr Daten, aber ein zufälliger Zugriff braucht aufgrund des Spulens wesentlich länger
-	\item Als Backup-Speichereinheit sehr gut, da sehr günstig
-	\item Große Tape-Installationen benutzen meist Roboter, um die Bänder zu wechseln. Diese bewegen sich dann zwischen dem Laufwerk und einer Bibliothek. (Stacker - kleine Bibliothek, Silo - Bibliothek mit tausenden Bändern)
-	\item Zur günstigen Speicherung kann ein Festplatten natives File auf ein Tape geschrieben werden, der Computer kann zur aktiven Benutzung wieder darauf zugreifen.
-\end{itemize}
-\subsection{Interface}
-\begin{itemize}
-	\item Die meisten Betriebssysteme behandeln entfernbare Speichermedien wie Festplatten, mit Formatierung und file-system
-	\item Ein tape sind roh-storage-Medien, d.h. ein Programm öffnet keine Datei auf dem tape, sondern das gesamte tape als rohes device.
-	\item Meist ist das tape-Laufwerk exklusiv für dieses Programm reserviert.
-	\item Da das Betriebssystem kein file-system anbietet, muss das Programm selber wissen, wie es die Daten zu behandeln hat.
-	\item Da jedes Programm ein eigenes System erstellt, wie es mit den Daten umgeht, kann ein Tape nur mit dem zubehörigen Program gelesen werden.
-\end{itemize}
-\subsection{Tape drives}
-\begin{itemize}
-	\item Grundlegende Funktionen unterscheiden sicher von denen einer Festplatte
-	\item Locate positioniert das Band zum logischen Block (korrespondierend zu seek)
-	\item read position operation liest die logische Block Nummer, an der der Lesekopf ist.
-	\item space Operation ermöglicht relative Bewegung
-	\item Tape drives können nur anhängen, wenn in der Mitte des Bands geschrieben wird, wird effektiv alles was danach auf dem Band kommt, gelöscht.
-	\item EOT Markierung wird nach dem Block angehängt, wenn geschrieben wurde.
-\end{itemize}
-\subsection{Hierarchisches Speicher Management}
-\begin{itemize}
-	\item Ein Hierarchisches Speicher Management System erweitert das Speicher Management um tertiäre Speichereinheiten, meist implementiert als Jukebox an Tapes oder entfernbaren Platten
-	\item Meist werden diese durch Erweiterung des file-system eingebunden, kleine, oftbenutzte Dateien bleiben auf der Festplatte, große, alte, inaktive Dateien werden auf der Jukebox gespeichert
-	\item HSM wird meist in supercomputing Zentren gefunden oder anderen Installationen mit sehr großen Mengen an Daten.
-\end{itemize}
-\chapter{09IoSystems}	
 
 \end{document}
