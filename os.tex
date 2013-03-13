@@ -1,4 +1,5 @@
 \documentclass[a4paper]{scrreprt}
+\usepackage[a4paper, left=2cm, right=2cm, top=3cm]{geometry}
 
 \usepackage[german]{babel}
 \usepackage[utf8]{inputenc}
@@ -24,7 +25,7 @@
 	\item Vermittler zwischen Benutzer und Computer
 	\item Ziele
 		\begin{itemize}
-			\item Benutzerprogramme ausfuehren und dem Benutzer das Loesen von Problemen erleichtern
+			\item Benutzerprogramme ausführen und dem Benutzer das Lösen von Problemen erleichtern
 			\item Computer benutzbarer machen
 			\item Hardware des Computer effizient nutzen
 			\item Benutzerziele
@@ -38,8 +39,8 @@
 			\item Systemziele
 				\begin{itemize}
 					\item Leicht zu designen, implementieren und unterhalten
-					\item Flexibilitaet
-					\item Zuverlaessigkeit
+					\item Flexibilität
+					\item Zuverlässigkeit
 					\item Fehlerfreiheit
 					\item Effizienz
 				\end{itemize}
@@ -54,38 +55,38 @@
 	\item Betriebssysteme verteilen Ressourcen
 		\begin{itemize}
 			\item Verwaltung aller Ressourcen
-			\item Entscheidung bei konfligierenden Anfragen fuer effizientes und faires Benutzen der Ressourcen
+			\item Entscheidung bei konfligierenden Anfragen für effizientes und faires Benutzen der Ressourcen
 		\end{itemize}
 	\item Betriebssysteme kontrollieren
 		\begin{itemize}
-			\item Kontrolle der Ausfuehrung von Programmen, um Fehler und Missbrauch des Computers zu verhindern
+			\item Kontrolle der Ausführung von Programmen, um Fehler und Missbrauch des Computers zu verhindern
 		\end{itemize}
 	\item Immer laufendes Programm ist Kernel, Rest ist System- oder Anwendungsprogramm
 	\item Bootstrap program wird beim Starten/Neustarten geladen
 		\begin{itemize}
 			\item In ROM, EPROM oder FLASH als firmware gespeichert
 			\item Initialisiert alle Aspekte des Systems, insbesondere die HW-Komponenten
-			\item Laedt den Kernel und startet die Ausfuehrung
+			\item Lädt den Kernel und startet die Ausführung
 		\end{itemize}
 \end{itemize}
 
 \section{Organisation}
 \begin{itemize}
-	\item CPUs und device controllers sind fuer Zugriff auf shared memory ueber Bus verbunden
-	\item I/O-Geraete und CPU koennen gleichzeitig ausfuehren
-	\item Jeder device controller ist zustaendig fuer einen Geraetetypen
+	\item CPUs und device controllers sind für Zugriff auf shared memory über Bus verbunden
+	\item I/O-Geräte und CPU können gleichzeitig ausführen
+	\item Jeder device controller ist zuständig für einen Gerätetypen
 	\item Jeder device controller hat einen lokalen Puffer
 	\item CPU bewegt Daten vom/zum Hauptspeicher zu/von lokalen Puffern
-	\item I/O ist vom Geraet zum lokalen Puffer des controllers
+	\item I/O ist vom Gerät zum lokalen Puffer des controllers
 	\item device controller informiert CPU per interrupts, wenn er fertig ist
 \end{itemize}
 
 
 \section{Interrupts}
-\subsection{Haeufige Funktionen von Interrupts}
+\subsection{Häufige Funktionen von Interrupts}
 \begin{itemize}
-	\item interrupt gibt Kontrolle an interrupt service routine ueber einen interrupt vector, welcher die Adressen von allen service routines beinhaltet
-	\item interrupt architecture muss Adresse der unterbrochenen Intruktion speichern
+	\item interrupt gibt Kontrolle an interrupt service routine über einen interrupt vector, welcher die Adressen von allen service routines beinhaltet
+	\item interrupt architecture muss Adresse der unterbrochenen Instruktion speichern
 	\item Einkommende interrupts sind aus, wenn gerade ein anderer bearbeitet wird, um lost interrupts zu verhindern
 	\item trap ist ein interrupt, welcher von Software verursacht wurde (wegen eines Fehler oder durch eine Nutzer)
 	\item Betriebssysteme sind interrupt driven
@@ -94,14 +95,14 @@
 \subsection{Time interrupts}
 \begin{itemize}
 	\item Time interrupts um endlose Schleifen und Prozesse zu verhindern
-	\item Wird nach bestimmter Zeitspanne ausgefuehrt
+	\item Wird nach bestimmter Zeitspanne ausgeführt
 	\item Wird vor dem schedulen des Programm aufgesetzt
-	\item Eingebettete Systeme haben Watchdog, welcher bis 0 zaehlt und dann resettet
+	\item Eingebettete Systeme haben Watchdog, welcher bis 0 zählt und dann resettet
 \end{itemize}
 
 \subsection{Interrupt Handling}
 \begin{itemize}
-	\item Betriebssystem merkt sich Status der CPU, indem es Register und Programmzaehler speichert
+	\item Betriebssystem merkt sich Status der CPU, indem es Register und Programmzähler speichert
 	\item Legt Typ des interrupts fest
 		\begin{itemize}
 			\item polling
@@ -113,8 +114,8 @@
 \subsection{Synchrone oder blockende I/O}
 \begin{itemize}
 	\item Nachdem I/O beginnt, geht die Kontrolle erst nach Fertigstellung der I/O wieder zum Benutzerprogramm
-	\item Wait instruction laesst die CPU idlen
-	\item Meistens nur ein I/O Request gleichzeitig
+	\item Wait instruction lässt die CPU idlen
+	\item Meistens nur eine I/O Request gleichzeitig
 	\item Polling
 	\item Signal
 	\item Callback function
@@ -122,8 +123,8 @@
 
 \subsection{Direct Memory Access Structure}
 \begin{itemize}
-	\item Fuer high-speed I/O, damit diese mit fast der Geschwindigkeit des Hauptspeichers Informationen uebertragen koennen
-	\item Device Controller uebertraegt Daten in Bloecken vom Puffer direkt in den Hauptspeicher ohne CPU Eingriff
+	\item Für high-speed I/O, damit diese mit fast der Geschwindigkeit des Hauptspeichers Informationen übertragen können
+	\item Device Controller überträgt Daten in Blöcken vom Puffer direkt in den Hauptspeicher ohne CPU Eingriff
 	\item Nur ein interrupt pro Block
 \end{itemize}
 
@@ -139,9 +140,9 @@
 	\item Auch parallel systems, tightly-coupled systems
 	\item Vorteile
 		\begin{itemize}
-			\item Erhoehter Durchsatz
+			\item Erhöhter Durchsatz
 			\item Wirtschaftlichkeit durch große Serie
-			\item Erhoehte Zuverlaessigkeit - Fehlertoleranz
+			\item Erhöhte Zuverlässigkeit - Fehlertoleranz
 		\end{itemize}
 	\item Zwei Typen
 		\begin{itemize}
@@ -161,60 +162,60 @@
 Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 
 \begin{itemize}
-	\item Teilen sich meistens Speicher ueber storage-area network (SAN)
-	\item Ermoeglicht hochverfuegbare Services, welche Fehler ueberleben
+	\item Teilen sich meistens Speicher über storage-area network (SAN)
+	\item Ermöglicht hochverfügbare Services, welche Fehler überleben
 		\begin{itemize}
 			\item Asymmetrisches Clustern hat eine Maschine im hot-standby mode
 			\item Symmetrisches Clustern hat viele Maschinen mit laufenden Programmen, welche sich gegenseitig beobachten
-			\item Manche sind fuer hochperfomantes computing (HPC)
+			\item Manche sind für hochperfomantes computing (HPC)
 		\end{itemize}
 \end{itemize}
 
 \section{Betriebssystem Struktur}
 \begin{itemize}
-	\item Multiprogramming ist noetig fuer Effizienz
+	\item Multiprogramming ist nötig fuer Effizienz
 		\begin{itemize}
 			\item Einzelner Benutzer kann nicht CPU und I/O die ganze Zeit auslasten
 			\item Multiprogramming organisiert jobs, sodass CPU immer beschaeftigt ist
 			\item Untermenge aller Jobs ist im Hauptspeicher
-			\item Einer wird ausgewaehlt per job scheduling
+			\item Einer wird ausgewählt per job scheduling
 			\item Wenn dieser warten muss, wechselt OS den job
 		\end{itemize}
-	\item Timesharing (multitasking) laesst CPU so schnell jobs wechseln, sodass interaktives computing moeglich ist
+	\item Timesharing (multitasking) lässt CPU so schnell jobs wechseln, sodass interaktives computing möglich ist
 		\begin{itemize}
 			\item Response time < 1 Sekunde
-			\item Jeder Benutzer hat mindestens 1 Programm im Speicher, welches ausgefuehrt wird $\Rightarrow$ process
+			\item Jeder Benutzer hat mindestens 1 Programm im Speicher, welches ausgeführt wird $\Rightarrow$ process
 			\item Wenn mehrere jobs bereit sind $\Rightarrow$ CPU scheduling
 			\item Wenn Prozess nicht in Speicher passt $\Rightarrow$ swapping
-			\item Virtueller Speicher erlaubt Ausfuehrung von Prozessen nicht komplett im Speicher
+			\item Virtueller Speicher erlaubt Ausführung von Prozessen nicht komplett im Speicher
 		\end{itemize}
 \end{itemize}
 
-\section{Uebergang vom User zum Kernel Mode}
+\section{Übergang vom User zum Kernel Mode}
 \begin{itemize}
 	\item Interrupt gesteuert durch Hardware
 	\item Softwarefehler oder Anfrage erzeugt exception oder trap
-	\item Dual-mode erlaubt es OS, sich und andere Komponenten zu schuetzen
+	\item Dual-mode erlaubt es OS, sich und andere Komponenten zu schützen
 	\item Mode bit bereitgestellt durch HW
 		\begin{itemize}
 			\item Zeigt an, ob System im User oder Kernel Mode ist
-			\item Manche previligierten Instruktionen sind nur im Kernel Mode moeglich
-			\item System call aendert Modus zu Kernel, Wiederkehr vom call aendert Modus zu User
+			\item Manche priviligierten Instruktionen sind nur im Kernel Mode möglich
+			\item System call ändert Modus zu Kernel, Wiederkehr vom call ändert Modus zu User
 		\end{itemize}
 \end{itemize}
 
 \section{Prozessverwaltung}
 \begin{itemize}
-	\item Prozess ist ein Programm waehrend der Ausfuehrung: Programm ist eine passive, Prozess eine aktive Einheit
+	\item Prozess ist ein Programm während der Ausführung: Programm ist eine passive, Prozess eine aktive Einheit
 	\item Prozessbeedigung erfordert das Freigeben von genutzten Ressourcen
-	\item Single-threaded process hat einen program counter und wird sequentiell ausgefuehrt
+	\item Single-threaded process hat einen program counter und wird sequentiell ausgeführt
 	\item Multi-threaded process hat einen program counter pro thread
-	\item Das Betriebssystem ist dabei fuer folgendes zustaendig:
+	\item Das Betriebssystem ist dabei für folgendes zuständig:
 		\begin{itemize}
-			\item Erschaffen und loeschen von Benutzer- und Systemprozessen
+			\item Erschaffen und löschen von Benutzer- und Systemprozessen
 			\item Suspenden und resumen von Prozessen
-			\item Bereitstellung von Mechanismen fuer Prozessynchronisation
-			\item Bereitstellung von Mechanismen fuer Prozesskommunikation
+			\item Bereitstellung von Mechanismen für Prozessynchronisation
+			\item Bereitstellung von Mechanismen für Prozesskommunikation
 			\item Bereitstellung von Mechanismen fuer das Behandeln von deadlocks
 		\end{itemize}
 \end{itemize}
@@ -223,20 +224,20 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 \subsection{Storage Structure}
 \begin{itemize}
 	\item Hauptspeicher - großer Speicher, auf welchen CPU direkt zugreifen kann
-	\item Zweitspeicher - Erweiterung des Hauptspeichers, welcher groß und nicht fluechtig ist
-	\item Magnetische Disks - Oberflaeche in tracks geteilt, welche wiederum aus Sektoren bestehen
+	\item Zweitspeicher - Erweiterung des Hauptspeichers, welcher groß und nicht flüchtig ist
+	\item Magnetische Disks - Oberfläche in tracks geteilt, welche wiederum aus Sektoren bestehen
 \end{itemize}
 
 \subsection{Speicherverwaltung}
 \begin{itemize}
-	\item Alle Daten muessen vor und nach Verarbeitung im Speicher sein
+	\item Alle Daten müssen vor und nach Verarbeitung im Speicher sein
 	\item Alle Instruktionen muessen in der Reihenfolge ihrer Ausfuehrung im Speicher sein
-	\item Aktivitaeten des OS
+	\item Aktivitäten des OS
 		\begin{itemize}
 			\item Darauf achten, wer was im Speicher benutzt
 			\item Bestimmen, welche Prozesse und Daten in und aus dem Speicher gehen
 			\item Zuteilen und freigeben von Speicherplatz
-			\item Einheitlichen, logischen Ueberblick bieten
+			\item Einheitlichen, logischen Überblick bieten
 				\begin{itemize}
 					\item Abstrahiert physikalischen Eigenschaften zu logischen Einheiten: Dateien
 					\item Jedes Medium wird von einem device kontrolliert
@@ -244,24 +245,24 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 		\end{itemize}
 	\item Dateisystemverwaltung
 		\begin{itemize}
-			\item Dateien haeufig in Ordner organisiert
-			\item Kontrolle ueber Zugriff
-			\item Aktivitaeten des OS
+			\item Dateien häufig in Ordner organisiert
+			\item Kontrolle über Zugriff
+			\item Aktivitäten des OS
 				\begin{itemize}
-					\item Erstellen und Loeschen von Dateien und Ordnern
-					\item Grundsaetzliche Moeglichkeiten zum manipulieren von Dateien und Ordnern
-					\item Abbilden von Dateien in sekundaere Speicher
-					\item Sichern von Dateien auf nichtfluechtige Speicher
+					\item Erstellen und Löschen von Dateien und Ordnern
+					\item Grundsätzliche Möglichkeiten zum manipulieren von Dateien und Ordnern
+					\item Abbilden von Dateien in sekundäre Speicher
+					\item Sichern von Dateien auf nichtflüchtige Speicher
 				\end{itemize}
 		\end{itemize}
 \end{itemize}
 
 \subsection{Speicherhierarchie}
-Die Speicherhierarchie haengt von folgenden Punkten ab:
+Die Speicherhierarchie hängt von folgenden Punkten ab:
 \begin{itemize}
 	\item Geschwindigkeit
 	\item Kosten
-	\item Fluechtigkeit
+	\item Flüchtigkeit
 \end{itemize}
 
 \begin{figure}[ht]
@@ -273,7 +274,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 \subsection{Caching}
 \begin{itemize}
 	\item Wichtiges Prinzip, taucht immer wieder auf (HW, OS, SW)
-	\item Benutzte Information wird temporaer von langsameren zu schnelleren Speichern bewegt
+	\item Benutzte Information wird temporär von langsameren zu schnelleren Speichern bewegt
 	\item Zuerst wird im schnellen Speicher nach Information gesucht
 		\begin{itemize}
 			\item Wird sie gefunden, wird sie direkt benutzt
@@ -285,23 +286,23 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 \section{I/O Subsystem}
 \begin{itemize}
 	\item Betriebssysteme verstecken Eigenheiten der HW vor dem Nutzer
-	\item I/O Subsystem ist verantwortlich fuer
+	\item I/O Subsystem ist verantwortlich für
 		\begin{itemize}
 			\item Speicherverwaltung der I/O inklusive Puffern, Cachen, Spoolen
-			\item generelle Geraetetreiber-Schnittstelle
-			\item Treiber fuer bestimmte Hardwaregeraete
+			\item generelle Gerätetreiber-Schnittstelle
+			\item Treiber für bestimmte Hardwaregeräte
 		\end{itemize}
 \end{itemize}
 
 \section{Schutz und Sicherheit}
 \begin{itemize}
 	\item Schutz - Jeder Mechanismus, welcher den Zugriff von Prozessen und Nutzern auf Ressourcen kontrolliert
-	\item Sicherheit - Verteildigung des System gegen interne und externe Attacken
-	\item Systeme unterscheiden meistens zunaechst nach Nutzer
+	\item Sicherheit - Verteidigung des System gegen interne und externe Attacken
+	\item Systeme unterscheiden meistens zunächst nach Nutzer
 		\begin{itemize}
-			\item Nutzeridentitaeten (user IDs) behinhalten Namen und Nummer
-			\item User ID ist mit allen Dateien und Prozessen verknuepft, auf die der Nutzer zugreifen darf
-			\item Gruppenidentitaeten (group IDs) erlauben den Zugriff einer Menge von Benutzern
+			\item Nutzeridentitäten (user IDs) behinhalten Namen und Nummer
+			\item User ID ist mit allen Dateien und Prozessen verknüpft, auf die der Nutzer zugreifen darf
+			\item Gruppenidentitäten (group IDs) erlauben den Zugriff einer Menge von Benutzern
 			\item Privilege escalation erlaubt es Nutzern, die ID zu wechseln
 		\end{itemize}
 \end{itemize}
@@ -309,7 +310,7 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.5]{graphics/big_picture.png}
-\caption{Uebersicht}
+\caption{Übersicht}
 \end{figure}
 
 \section{Design und Implementierung von OS}
@@ -321,19 +322,19 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 \section{OS Service}
 \begin{itemize}
 	\item Benutzerschnittstelle (CLI, GUI, Batch)
-	\item Programmausfuehrung
+	\item Programmausführung
 	\item I/O Operationen
 	\item Dateisystemmanipulationen
 	\item Kommunikation: Prozesse tauschen Informationen aus (shared memory oder message passing)
 	\item Fehlererkennung
 		\begin{itemize}
-			\item Findet in CPU, Speicher, I/O Geraeten und Benutzerprogrammen statt
-			\item Fuer jeden Typ von Fehler, hat das OS definierte Aktionen
-			\item Debugmoeglichkeiten erhoehen Effizienz des Nutzen
+			\item Findet in CPU, Speicher, I/O Geräten und Benutzerprogrammen statt
+			\item Für jeden Typ von Fehler, hat das OS definierte Aktionen
+			\item Debugmöglichkeiten erhöhen Effizienz des Nutzen
 		\end{itemize}
 	\item Ressourcenallokation: s.o.
 	\item Accouting: Welcher Nutzer nutzt wieviel?
-	\item Schutz und Sicherheit: Besitzer von Informationen wollen Kontrolle ueber ihre Benutzung, Prozesse sollen nicht interferieren
+	\item Schutz und Sicherheit: Besitzer von Informationen wollen Kontrolle über ihre Benutzung, Prozesse sollen nicht interferieren
 		\begin{itemize}
 			\item Schutz: Jeder Zugriff auf das System wird kontrolliert
 			\item Sicherheit: Authentifikation
@@ -349,8 +350,8 @@ Die Speicherhierarchie haengt von folgenden Punkten ab:
 \subsection{System Calls}
 \begin{itemize}
 	\item Schnittstelle zu den Services vom OS
-	\item Meistens in hoeherer Sprache geschrieben
-	\item Meistens ueber ein Application Program Interface (API) genutzt
+	\item Meistens in höherer Sprache geschrieben
+	\item Meistens über ein Application Program Interface (API) genutzt
 	\item Win32 API, POSIX API, Java API
 \end{itemize}
 
@@ -375,14 +376,14 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 	\item LPVOID: Puffer, in den die Datei gelesen wird
 	\item DWORD: Anzahl der zu lesenden Bytes
 	\item LPDWORD: Anzahl der bereits gelesen Bytes
-	\item LPOVERLAPPED: Gibt an, ob ueberlappende I/O genutzt wird
+	\item LPOVERLAPPED: Gibt an, ob überlappende I/O genutzt wird
 \end{itemize}
 
 \subsubsection{Implementierung der System Calls}
 \begin{itemize}
-	\item Fuer jeden System Call gibt es eine Nummer
-	\item System Call Schnittstelle veranlasst einen System Call im OS Kernel und gibt den Status sowie die Rueckgabewerte zurueck
-	\item Aufrufer braucht nichts ueber die Implementierung zu wissen
+	\item Für jeden System Call gibt es eine Nummer
+	\item System Call Schnittstelle veranlasst einen System Call im OS Kernel und gibt den Status sowie die Rückgabewerte zurück
+	\item Aufrufer braucht nichts über die Implementierung zu wissen
 \end{itemize}
 
 \begin{figure}[ht]
@@ -391,7 +392,7 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 \caption{Beziehung zwischen Syscalls und OS}
 \end{figure}
 
-\subsubsection{Beispiel fuer C Bibliothek}
+\subsubsection{Beispiel für C Bibliothek}
 
 \begin{figure}[ht]
 \centering
@@ -400,7 +401,7 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 \end{figure}
 
 \subsubsection{Parameter}
-Generell gibt es drei Methoden, Parameter an das OS zu uebergeben:
+Generell gibt es drei Methoden, Parameter an das OS zu übergeben:
 \begin{itemize}
 	\item Durch Register, manchmal gibt es aber mehr Parameter als Register
 	\item Durch einen Block, wobei seine Adresse ueber Register uebergeben wird
@@ -415,17 +416,17 @@ Generell gibt es drei Methoden, Parameter an das OS zu uebergeben:
 \end{figure}
 
 \subsection{System Programs}
-Systemprogramme ermoeglichen angenehme Umgebung fuer Programmentwicklung und -ausfuehrung:
+Systemprogramme ermöglichen angenehme Umgebung für Programmentwicklung und -ausführung:
 \begin{itemize}
 	\item Dateimanipulation
 	\item Statusinformationen
 	\item Dateimodifikation
-	\item Support fuer Programmiersprachen
-	\item Laden und Ausfuehren von Programmen
+	\item Support für Programmiersprachen
+	\item Laden und Ausführen von Programmen
 	\item Kommunikation
 	\item Applikationen
 \end{itemize}
-Meisten geht die Sicht des Benutzer ueber Systemprogramme anstatt ueber Systemcalls.
+Meisten geht die Sicht des Benutzer über Systemprogramme anstatt über Systemcalls.
 
 
 
@@ -463,9 +464,9 @@ Etwas zu Pointern: Siehe Abbildung: Pointer
 \subsection{Beispiele}
 \begin{itemize}
 	\item \textbf{char (*a)[42];} Ein Pointer auf ein Array mit 42 chars
-	\item \textbf{char *b();} Funktion, welche auf einen Pointer auf ein char zurueckgibt
-	\item \textbf{char (*c)();} Funktionspointer, welche ein char zurueckgibt
-	\item \textbf{char *(*(long))(double);} Funktion, welche ein long entgegennimmt und einen Funktionspointer zurueckgibt. Die Funktion, auf welche gezeigt wird, nimmt ein double entgegen und gibt einen Zeiger auf ein char zurueck
+	\item \textbf{char *b();} Funktion, welche auf einen Pointer auf ein char zurückgibt
+	\item \textbf{char (*c)();} Funktionspointer, welche ein char zurückgibt
+	\item \textbf{char *(d*(long))(double);} Funktion, welche ein long entgegennimmt und einen Funktionspointer zurückgibt. Die Funktion, auf welche gezeigt wird, nimmt ein double entgegen und gibt einen Zeiger auf ein char zurück
 \end{itemize}
 
 
@@ -539,7 +540,7 @@ Beispiele:
 	\end{center}
 	Vorteile:
 		\begin{itemize}
-			\item "Gute" Performance
+			\item "`Gute"' Performance
 			\item Ausreichender Schutz zwischen Anwendungen
 			\item Erweiterbar über Schnittstellen und statische/ladbare Module
 		\end{itemize}
@@ -560,7 +561,7 @@ Beispiele:
 	\end{center}
 
 	\begin{itemize}
-		\item Möglichst viel des Kernels in den "Benutzer" space packen
+		\item Möglichst viel des Kernels in den "`Benutzer"' space packen
 		\item Kommunikation erfolgt zwischen Benutzermodulen mit Nachrichtenweitergabe
 	\end{itemize}
 	
@@ -568,7 +569,7 @@ Beispiele:
 		\begin{itemize}
 			\item Einfacher einen Microkernel zu erweitern
 			\item Einfacher das Betriebssystem auf neue Architekturen zu portieren
-			\item Zuverlässiger (es läuft weniger Code im Kernel-Modul
+			\item Zuverlässiger (es läuft weniger Code im Kernel-Modul)
 			\item Mehrere APIs vorhanden
 			\item Verbesserte Robustheit und Sicherheit
 			\item Einfacher zum Testen und Beweisen
@@ -585,7 +586,7 @@ Beispiele:
 	\begin{itemize}
 		\item Eine virtuelle Maschine nimmt den mehrschichtigen Ansatz und behandelt Hardware sowie den Kernel des Betriebssystems so als wären sie Hardware
 		\item Eine virtuelle Maschine stellt ein identisches Interface zu der blanken, darunterliegenden Hardware
-		\item Der Betriebssystem-Host kreiert die Illusion das ein Prozess sein eigenen Prozessor und (virtuellen Speicher) hat.
+		\item Der Betriebssystem-Host kreiert die Illusion, dass ein Prozess sein eigenen Prozessor und (virtuellen Speicher) hat.
 		\item Jeder Gast bekommt eine Kopie des darunterliegenden Computers zur Verfügung gestellt.
 	\end{itemize}
 	Vorteile:
@@ -609,7 +610,7 @@ Beispiele:
 	Ein Betriebssystem führt
 	\begin{itemize}
 		\item Batch System - Jobs
-		\item und Zeitteilende Systeme - Benutzerprogramme oder -aufgaben
+		\item und zeitteilende Systeme - Benutzerprogramme oder -aufgaben
 	\end{itemize} 
 	aus.\\
 	Job oder Prozess := ein Programm in Ausführung
@@ -667,7 +668,7 @@ Beispiele:
 			\item Eltern teilen einen Teil ihrer Resourcen mit ihren Kindern
 			\item Kinder und Eltern teilen \textbf{keine} Resourcen
 		\end{itemize}
-		\item Synchornisation
+		\item Synchronisation
 		\begin{itemize}
 			\item Eltern und Kinder werden zeitgleich ausgeführt
 			\item Eltern warten auf die Terminierung der Kinder
@@ -696,7 +697,7 @@ Beispiele:
 		\begin{itemize}
 			\item Kind hat die zugesicherten Resourcen überschritten
 			\item Aufgabe des Prozess' wird nicht mehr benötigt
-			\item oder (nur bei manchen Betriebssystemen) wird durch das beenden des Elternprozess' beendet (\underline{cascading termination})
+			\item oder (nur bei manchen Betriebssystemen) wird durch das Beenden des Elternprozess' beendet (\underline{cascading termination})
 		\end{itemize}
 	\end{itemize}
 
@@ -709,7 +710,7 @@ Beispiele:
 		\item ökonomisch
 		\item Skalierbarkeit
 	\end{itemize}
-	Schwierigkeiten (Multi-Core prgoramming)
+	Schwierigkeiten (Multi-Core programming)
 	\begin{itemize}
 		\item Vorgänge zu teilen
 		\item gleichmäßiges Verteilen
@@ -772,11 +773,11 @@ Beispiele:
 		\begin{itemize}
 			\item flexibles Scheduling
 			\item effiziente Ausführung
-			\item erholung aus Blockade durch Thread erzeugung des kernels
+			\item erholung aus Blockade durch Threaderzeugung des Kernels
 		\end{itemize}
 		Nachteile:
 		\begin{itemize}
-			\item scheduling auf 2 leveln
+			\item Scheduling auf 2 leveln
 			\item Laufzeitanalyse und Debuggen nicht möglich
 		\end{itemize}
 		Beispiele:
@@ -919,7 +920,7 @@ Unterschiedliche Systeme $\rightarrow$ unterschiedliche Schedulingverfahren
 \begin{itemize}
 \item fairer CPU-Anteil für alle Prozesse
 \item umsetzung der gewünschten Policy
-\item Nutung der vorhandenen Resourcen
+\item Nutzung der vorhandenen Resourcen
 \end{itemize}
 \item Batch-System(nicht-präemtiv oder präemtiv mit langen Laufzeiten ist OK)
 \begin{itemize}
@@ -967,7 +968,7 @@ Kürzeste durchschnittliche Wartezeit $\rightarrow$ SJF $\rightarrow$ Problem : 
 \end{itemize}
 Lösung für Starvation: \underline{Aging}(Priorität nimmt mit der Zeit zu)
 \subsection{RR}
-Jedem Prozess in der Schlange wird eine bestimmte Zeit(time quantum) gegeben, und anschließend wird der Prozess falls er noch nicht beendet ist wieder hinten an die Schlange gehängt (higher turnaround better response htan SJF)\\
+Jedem Prozess in der Schlange wird eine bestimmte Zeit(time quantum) gegeben, und anschließend wird der Prozess falls er noch nicht beendet ist wieder hinten an die Schlange gehängt (higher turnaround better response than SJF)\\
 Achtung! Bei zu niedrigem time quantum wirkt sich die context-switch Zeit viel zu stark aus
 \subsection{Multilevel Queue}
 Ready Queue wird in foreground(interaktiv)(RR) und background(batch)(FCFS) aufgeteilt. Dann wird zwischen den Warteschlangen neu Aufgeteilt z.B.
@@ -1018,7 +1019,7 @@ Mehrere Prozessoren erschweren das Scheduling
 
 \section{Algorithm Evaluation}
 \begin{itemize}
-\item \underline{Deterministic modeling}: nimmt einen vorher bestimmtes Arbeitspensum und passt die Performance von jedem Algorithmus für dieses Arbeitspensum an
+\item \underline{Deterministic modeling}: nimmt ein vorher bestimmtes Arbeitspensum und passt die Performance von jedem Algorithmus für dieses Arbeitspensum an
 \item Queueing models
 \item Implementation
 \end{itemize}
@@ -1087,9 +1088,9 @@ $\rightarrow$ kleine Änderungen in der Umgebung können eine dramatische Beeinf
 	\end{itemize}
 	Eigenschaften:
 	\begin{itemize}
-		\item Ein Link wird nur eingerichtet falls Prozssse eine Mailbox teilen
+		\item Ein Link wird nur eingerichtet falls Prozesse eine Mailbox teilen
 		\item Ein Link kann mit vielen Prozessen assoziiert werden
-		\item Jedes Paar von Prozessen kann mehere Kommunikationslinks teilen
+		\item Jedes Paar von Prozessen kann mehrere Kommunikationslinks teilen
 		\item Links können unidirektional oder bi-direktional sein
 	\end{itemize}
 	Operationen:
@@ -1185,12 +1186,12 @@ $\rightarrow$ kleine Änderungen in der Umgebung können eine dramatische Beeinf
 			\begin{itemize}
 				\item Ressourcentypen: R1, R2, ..., Rm (CPU Zyklen, Speicherplatz, I/O Geräte)
 				\item Jeder Ressourcen Typ Ri hat Wi Instanzen
-				\item Jeder Prozess verwendet eine Ressource mit: "request", "use" und "release"
+				\item Jeder Prozess verwendet eine Ressource mit: "`request"', "`use"' und "`release"'
 			\end{itemize}
 		\subsection{Deadlock Charakterisierung}
 			\begin{itemize}
 				\item Mutual exclusion: Zu einer Zeit kann nur ein Prozess eine Ressource benutzen
-				\item Hold and wait: Ein Prozess hält mindestiens eine Ressource und wartet auf zusätzliche Ressource die von anderen Prozesse gehalten werden
+				\item Hold and wait: Ein Prozess hält mindestens eine Ressource und wartet auf zusätzliche Ressource die von anderen Prozesse gehalten werden
 				\item No preemption: Eine Ressource kann nur freiwillig von einem Prozess der sie hält, nachdem der Prozess seine Aufgabe beendet hat, freigegeben werden
 				\item Circular wait: Set von wartenden Prozesse (P0, P1, ..., P1) und P0 wartet auf eine Ressource die P1 hält, P1 auf eine Ressource die P2 hält, ..., Pn wartet auf eine Ressource die P0 hält
 			\end{itemize}
@@ -1220,7 +1221,7 @@ $\rightarrow$ kleine Änderungen in der Umgebung können eine dramatische Beeinf
 				\item Hold and Wait: musst garantieren das jederzeit wenn ein Prozess eine Ressource anfrägt, der Prozess selbst keine anderen Ressourcen hält
 				\item No Preemption: 
 					\begin{itemize}
-						\item Wenn ein Prozess einige Ressource hält und eine andere anfrägt und diese nicht gleich bekommt, dann werden alle Ressource die gerade gehalten werden freigegeben
+						\item Wenn ein Prozess einige Ressource hält und eine andere anfrägt und diese nicht gleich bekommt, dann werden alle Ressourcen die gerade gehalten werden freigegeben
 						\item Preempted Ressourcen werden zu einer Liste von Ressourcen hinzugefügt für welche der Prozess wartet
 						\item Prozess restartet nur wenn er seine alten Ressourcen sowie die neue bekommt
 					\end{itemize}
@@ -1236,8 +1237,8 @@ $\rightarrow$ kleine Änderungen in der Umgebung können eine dramatische Beeinf
 			
 			\subsubsection{Safe State}
 				\begin{itemize}
-					\item Wenn ein Prozess eine verfügbare Ressource anfrägt, muss das System sicherstellen das die unmittelbare Allokation das System in einem safe state lääst
-					\item Ein System ist in einem safe state, wenn eine Sequenz <P1, P2, ..., Pn> von allen Prozessen existiert und das System für jeden Prozess Pi die Ressourcen die Pi anfragen kann gerade verfügbar sind. (and resources held by all the Pj with j < l)
+					\item Wenn ein Prozess eine verfügbare Ressource anfrägt, muss das System sicherstellen das die unmittelbare Allokation das System in einem safe state lässt
+					\item Ein System ist in einem safe state, wenn eine Sequenz $<P_1, P_2, ...,P_n>$ von allen Prozessen existiert und das System für jeden Prozess $P_i$ die Ressourcen die $P_i$ anfragen kann gerade verfügbar sind. (and resources held by all the $P_j$ with j < l)
 				\end{itemize}
 				\begin{itemize}
 					\item System ist in safe state => keine Deadlocks
@@ -1260,7 +1261,7 @@ $\rightarrow$ kleine Änderungen in der Umgebung können eine dramatische Beeinf
 						\end{itemize}
 					\item Resource Preemption
 						\begin{itemize}
-							\item Wähle ein "Opfer" - minimieren kosten
+							\item Wähle ein "`Opfer"' - minimieren kosten
 							\item Wiederherstellung - zu einem safe state zurückkehren, die Prozesse für den Zustand neustarten
 							\item Starvation - Gleicher Prozess könnt immer als Opfer ausgewählt werden, Anzahl der Wiederherstellungen im Kostenfaktor berücksichtigen
 						\end{itemize}
@@ -1291,7 +1292,7 @@ Hauptspeicher wird normalerweise in zwei Partitionen unterteilt :
 \item[User processes]\ \\werden im "`high memory"' gespeichert
 \end{description}
 
-Register dienten dem Schutz der Benutzerprozesse untereinander und vor Veränderungen von Betriebssystemcode und Daten.
+Register dienten dem Schutz der Benutzerprozesse untereinander und vor Veränderungen des Betriebssystemcode und der Daten.
 \begin{itemize}
 \item "`Base register"' beinhalten den Wert der kleinsten physichen Adresse.
 \item "`Limit register"' beinhalten den Umfang der logischen Adressen.
@@ -1303,7 +1304,7 @@ Register dienten dem Schutz der Benutzerprozesse untereinander und vor Veränder
 
 \subsection{Einfacher Schutz mit \textit{base} und \textit{limit register}}
 
-Ein Paar aus base und limit Registern definieren einen logischen Adressraum
+Ein Paar aus \textit{base} und \textit{limit} Registern definieren einen logischen Adressraum
 
 \begin{center}
 \includegraphics[scale=0.5]{graphics/baseandlimitprotection.png}
@@ -1346,48 +1347,52 @@ Ein Paar aus base und limit Registern definieren einen logischen Adressraum
 \includegraphics[scale=0.6]{graphics/allocation.png}
 \caption{Schematik Speicherallokierung}
 \end{figure}
-
+\newpage
 \subsection{Dynamisches Speicher-Allokations Problem}
-\textbf{Problem:} Wie befreidigt man Anfragen der Größe n von einer Liste mit freien Löchern?
+\textbf{Problem:} Wie befriedigt man Anfragen der Größe n von einer Liste mit freien Löchern?
 \begin{itemize}
 \item \textit{First-fit}: Allokiert das erste Loch, welches groß genug ist: schnellste Allokierungsstrategie, hinterlässt jedoch Löcher unterschiedlicher Größe
 \item \textit{Best-fit}: Allokiert das kleinste passende Loch. Es muss jedoch die komplette Liste durchsucht werden, außer sie ist nach Größe sortiert. Hinterlässt die kleinsten Löcher.
-\item \textit{Worst-fit}: Allokiert das größte Loch. Es muss die gesammte Liste durchsucht werden, hinterlässt die größten Löcher
+\item \textit{Worst-fit}: Allokiert das größte Loch. Es muss die gesamte Liste durchsucht werden, hinterlässt die größten Löcher
 \item \textit{Next-fit}: Nächst passendes Loch nach der letzten Allokierung
 \item \textit{Buddy System}:
 \begin{itemize}
-\item Die Löcher werden in k Listen so einsortiert, dass die i-te Liste jeweils Löcher der Länge gleich $2^i/$ für i = 1,...,k enthält
+\item Die Löcher werden in k Listen so einsortiert, dass die i-te Liste jeweils Löcher der Länge gleich $2^i$ für i = 1,...,k enthält
 \item Dabei können zwei benachbarte Löcher der i-ten Liste effizient zu einem  Loch der i+1-ten Liste zusammengefügt werden
-\item Umgekehrt kann ein Loch der i-ten Liste einfach in zwei Löcher der i-1-ten Listen aufgeteilt werden
+\item Umgekehrt kann ein Loch der i-ten Liste einfach in zwei Löcher der $(i-1)$-ten Listen aufgeteilt werden
 \item Löcher im Buddy-System können effizient mittels eines Binärbaumes dargestellt werden
-\item Laufzeitverhalten: Zuweisen und Freigabe Block schneller als first/best-fit. Fragmentierungsbehandlung ist aufwändiger. Deshalb Lazy-\textbf{Buddy:Zusammenfügen "`selten"'}
+\item Laufzeitverhalten: Zuweisen und Freigabe Block schneller als first/best-fit. Fragmentierungsbehandlung ist aufwändiger. Deshalb Lazy-Buddy: Zusammenfügen passiert "`selten"'
 \item Standard für Unix/Linux
-\end{itemize}
-\end{itemize}
-
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.55]{graphics/allocationexample.png}
-\caption{Beispiel vor und nach Allokierung eines 16Mbyte Blocks}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.50]{graphics/buddysystem.png}
+\includegraphics[scale=0.30]{graphics/buddysystem.png}
 \caption{Beispiel Buddysystem}
 \end{figure}
+\end{itemize}
+\end{itemize}
 
+
+
+
+
+
+\newpage
 \section{Relocation}
 \subsection{Fragmentierung}
 \begin{itemize}
 \item \textbf{Externe Fragmentierung} - Es ist genügend Speicher vorhanden um eine Anfrage zu befriedigen, jedoch nicht zusammenhängend.
-\item \textbf{Interne Fragmentierung} - Allokierter Speicher kann ein wenige größer als der angeforderte Speicher sein: Der Größenunterschied ist Speicherintern innerhalb einer Partition, wird jedoch nicht verwendet
-\item Reduzierung externer Fragmentierung durch Verdichtung (\textit{compatction}):
+\item \textbf{Interne Fragmentierung} - Allokierter Speicher kann ein wenige größer als der angeforderte Speicher sein: Der Größenunterschied ist speicherintern innerhalb einer Partition, wird jedoch nicht verwendet
+\item Reduzierung externer Fragmentierung durch Verdichtung (\textit{compaction}):
 \begin{itemize}
 \item Vermische den Speicherinhalt um alle freien Speicher in einem großen Block zu sammeln
 \item \textit{Compaction} ist nur dann möglich wenn die \textit{relocation} dynamisch und während der Durchführungszeit statt findet
 
 \end{itemize}
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.4]{graphics/allocationexample.png}
+\caption{Beispiel vor und nach Allokierung eines 16Mbyte Blocks}
+\end{figure}
 \end{itemize}
 \subsection{Adressabbildung und "`Data to Memory"'}
 
@@ -1543,7 +1548,7 @@ Bei der Auswahl der Pagegröße muss auf folgenes geachtet werden:
 
 \subsection{Assoziativspeicher}
 \begin{itemize}
-\item TLB = Assoziativer Cache für Adressübersetzungen.
+\item TLB = translation look-aside buffers = Assoziativer Cache für Adressübersetzungen.
 \item Assoziativspeicher findet mit Hilfe paralleler Suche die translation(p,d)
 \begin{itemize}
 \item Wenn p im Assoziativregister: Besorge die Framenumber
@@ -1568,7 +1573,7 @@ $EAT = (\tau + \mu)  \alpha + (\tau + 2\mu) (1-\alpha) = \tau +2\mu - \mu\alpha$
 \subsubsection{TLB Coverage}
 \begin{itemize}
 \item TLB Reach - Menge an Speicher, die für den TLB zugänglich sind
-\item TLB Rech = (TLB Size) x (Page Size)
+\item TLB Reach = (TLB Size) x (Page Size)
 
 \item Erhöht die Page Size -> kann zu erhöhter Fragmentierung führen
 \item Bietet multiple Page Sizes -> Programm können größere Page Sizes verwenden ohne erhöhte Fragmentierung zu riskieren
