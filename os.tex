@@ -85,18 +85,18 @@
 \section{Interrupts}
 \subsection{Häufige Funktionen von Interrupts}
 \begin{itemize}
-	\item interrupt gibt Kontrolle an interrupt service routine über einen interrupt vector, welcher die Adressen von allen service routines beinhaltet
+	\item Interrupt gibt Kontrolle an interrupt service routine über einen interrupt vector, welcher die Adressen von allen service routines beinhaltet
 	\item interrupt architecture muss Adresse der unterbrochenen Instruktion speichern
 	\item Einkommende interrupts sind aus, wenn gerade ein anderer bearbeitet wird, um lost interrupts zu verhindern
-	\item trap ist ein interrupt, welcher von Software verursacht wurde (wegen eines Fehler oder durch eine Nutzer)
+	\item trap ist ein interrupt, welcher von Software verursacht wurde (wegen eines Fehler oder durch einen Nutzer)
 	\item Betriebssysteme sind interrupt driven
 \end{itemize}
 
 \subsection{Time interrupts}
 \begin{itemize}
-	\item Time interrupts um endlose Schleifen und Prozesse zu verhindern
+	\item Time interrupts, um endlose Schleifen und Prozesse zu verhindern
 	\item Wird nach bestimmter Zeitspanne ausgeführt
-	\item Wird vor dem schedulen des Programm aufgesetzt
+	\item Wird vor dem Schedulen des Programms aufgesetzt
 	\item Eingebettete Systeme haben Watchdog, welcher bis 0 zählt und dann resettet
 \end{itemize}
 
@@ -114,8 +114,8 @@
 \subsection{Synchrone oder blockende I/O}
 \begin{itemize}
 	\item Nachdem I/O beginnt, geht die Kontrolle erst nach Fertigstellung der I/O wieder zum Benutzerprogramm
-	\item Wait instruction lässt die CPU idlen
-	\item Meistens nur eine I/O Request gleichzeitig
+	\item wait instruction lässt die CPU idlen
+	\item Meistens nur ein I/O Request gleichzeitig
 	\item Polling
 	\item Signal
 	\item Callback function
@@ -159,7 +159,7 @@
 \end{itemize}
 
 \subsection{Geclusterte Systeme}
-Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
+Wie Multiprozessorsysteme, nur dass mehrere Systeme zusammen arbeiten
 
 \begin{itemize}
 	\item Teilen sich meistens Speicher über storage-area network (SAN)
@@ -167,7 +167,7 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 		\begin{itemize}
 			\item Asymmetrisches Clustern hat eine Maschine im hot-standby mode
 			\item Symmetrisches Clustern hat viele Maschinen mit laufenden Programmen, welche sich gegenseitig beobachten
-			\item Manche sind für hochperfomantes computing (HPC)
+			\item Manche sind für hochperformantes computing (HPC)
 		\end{itemize}
 \end{itemize}
 
@@ -175,13 +175,13 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 \begin{itemize}
 	\item Multiprogramming ist nötig fuer Effizienz
 		\begin{itemize}
-			\item Einzelner Benutzer kann nicht CPU und I/O die ganze Zeit auslasten
+			\item Einzelner Benutzer kann CPU und I/O nicht die ganze Zeit auslasten
 			\item Multiprogramming organisiert jobs, sodass CPU immer beschaeftigt ist
 			\item Untermenge aller Jobs ist im Hauptspeicher
-			\item Einer wird ausgewählt per job scheduling
-			\item Wenn dieser warten muss, wechselt OS den job
+			\item Einer wird per job scheduling ausgewählt
+			\item Wenn dieser wartet, wechselt OS den job
 		\end{itemize}
-	\item Timesharing (multitasking) lässt CPU so schnell jobs wechseln, sodass interaktives computing möglich ist
+	\item Timesharing (multitasking) lässt CPU sehr schnell jobs wechseln, sodass interaktives computing möglich ist
 		\begin{itemize}
 			\item Response time < 1 Sekunde
 			\item Jeder Benutzer hat mindestens 1 Programm im Speicher, welches ausgeführt wird $\Rightarrow$ process
@@ -199,7 +199,7 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 	\item Mode bit bereitgestellt durch HW
 		\begin{itemize}
 			\item Zeigt an, ob System im User oder Kernel Mode ist
-			\item Manche priviligierten Instruktionen sind nur im Kernel Mode möglich
+			\item Manche privilegierten Instruktionen sind nur im Kernel Mode möglich
 			\item System call ändert Modus zu Kernel, Wiederkehr vom call ändert Modus zu User
 		\end{itemize}
 \end{itemize}
@@ -208,15 +208,15 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 \begin{itemize}
 	\item Prozess ist ein Programm während der Ausführung: Programm ist eine passive, Prozess eine aktive Einheit
 	\item Prozessbeedigung erfordert das Freigeben von genutzten Ressourcen
-	\item Single-threaded process hat einen program counter und wird sequentiell ausgeführt
-	\item Multi-threaded process hat einen program counter pro thread
+	\item Single-threaded process hat einen program counter und wird sequenziell ausgeführt
+	\item Multi-threaded process hat einen program counter pro Thread
 	\item Das Betriebssystem ist dabei für folgendes zuständig:
 		\begin{itemize}
 			\item Erschaffen und löschen von Benutzer- und Systemprozessen
 			\item Suspenden und resumen von Prozessen
 			\item Bereitstellung von Mechanismen für Prozessynchronisation
 			\item Bereitstellung von Mechanismen für Prozesskommunikation
-			\item Bereitstellung von Mechanismen fuer das Behandeln von deadlocks
+			\item Bereitstellung von Mechanismen fuer die Behandlung von deadlocks
 		\end{itemize}
 \end{itemize}
 
@@ -239,7 +239,7 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 			\item Zuteilen und freigeben von Speicherplatz
 			\item Einheitlichen, logischen Überblick bieten
 				\begin{itemize}
-					\item Abstrahiert physikalischen Eigenschaften zu logischen Einheiten: Dateien
+					\item Abstrahiert physikalische Eigenschaften zu logischen Einheiten: Dateien
 					\item Jedes Medium wird von einem device kontrolliert
 				\end{itemize}
 		\end{itemize}
@@ -250,7 +250,7 @@ Wie Multiprozessorsystem, nur dass mehrere Systeme zusammen arbeiten
 			\item Aktivitäten des OS
 				\begin{itemize}
 					\item Erstellen und Löschen von Dateien und Ordnern
-					\item Grundsätzliche Möglichkeiten zum manipulieren von Dateien und Ordnern
+					\item Grundsätzliche Möglichkeiten zum Manipulieren von Dateien und Ordnern
 					\item Abbilden von Dateien in sekundäre Speicher
 					\item Sichern von Dateien auf nichtflüchtige Speicher
 				\end{itemize}
@@ -288,8 +288,8 @@ Die Speicherhierarchie hängt von folgenden Punkten ab:
 	\item Betriebssysteme verstecken Eigenheiten der HW vor dem Nutzer
 	\item I/O Subsystem ist verantwortlich für
 		\begin{itemize}
-			\item Speicherverwaltung der I/O inklusive Puffern, Cachen, Spoolen
-			\item generelle Gerätetreiber-Schnittstelle
+			\item Speicherverwaltung der I/O inklusive puffern, cachen, spoolen
+			\item Generelle Gerätetreiber-Schnittstelle
 			\item Treiber für bestimmte Hardwaregeräte
 		\end{itemize}
 \end{itemize}
@@ -329,7 +329,7 @@ Die Speicherhierarchie hängt von folgenden Punkten ab:
 	\item Fehlererkennung
 		\begin{itemize}
 			\item Findet in CPU, Speicher, I/O Geräten und Benutzerprogrammen statt
-			\item Für jeden Typ von Fehler, hat das OS definierte Aktionen
+			\item Für jeden Typ von Fehler hat das OS definierte Aktionen
 			\item Debugmöglichkeiten erhöhen Effizienz des Nutzen
 		\end{itemize}
 	\item Ressourcenallokation: s.o.
@@ -392,7 +392,7 @@ ReadFile() Funktion in der Win32 API zum Lesen einer Datei:\\
 \caption{Beziehung zwischen Syscalls und OS}
 \end{figure}
 
-\subsubsection{Beispiel für C Bibliothek}
+\subsubsection{Beispiel für C Bibliothek (s. Abb. Aufruf von printf)}
 
 \begin{figure}[ht]
 \centering
@@ -408,11 +408,11 @@ Generell gibt es drei Methoden, Parameter an das OS zu übergeben:
 	\item Durch Pushen auf den Stack
 \end{itemize}
 
-\subsubsection{System Calls von Windows und Unix}
+\subsubsection{System Calls von Windows und Unix (s. Abb. Beispiele von syscalls}
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.3]{graphics/syscall_examples.png}
-\caption{Beispiele von Syscalls}
+\caption{Beispiele von syscalls}
 \end{figure}
 
 \subsection{System Programs}
@@ -426,7 +426,7 @@ Systemprogramme ermöglichen angenehme Umgebung für Programmentwicklung und -au
 	\item Kommunikation
 	\item Applikationen
 \end{itemize}
-Meisten geht die Sicht des Benutzer über Systemprogramme anstatt über Systemcalls.
+Meistens geht die Sicht des Benutzers über Systemprogramme anstatt über syscalls.
 
 
 
