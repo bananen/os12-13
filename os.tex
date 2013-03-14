@@ -464,8 +464,8 @@ Etwas zu Pointern: Siehe Abbildung: Pointer
 \subsection{Beispiele}
 \begin{itemize}
 	\item \textbf{char (*a)[42];} Ein Pointer auf ein Array mit 42 chars
-	\item \textbf{char *b();} Funktion, welche auf einen Pointer auf ein char zurückgibt
-	\item \textbf{char (*c)();} Funktionspointer, welche ein char zurückgibt
+	\item \textbf{char *b();} Funktion, welche einen Pointer auf ein char zurückgibt
+	\item \textbf{char (*c)();} Funktionspointer auf eine Funktion, welche ein char zurückgibt
 	\item \textbf{char *(d*(long))(double);} Funktion, welche ein long entgegennimmt und einen Funktionspointer zurückgibt. Die Funktion, auf welche gezeigt wird, nimmt ein double entgegen und gibt einen Zeiger auf ein char zurück
 \end{itemize}
 
@@ -515,7 +515,7 @@ Beispiele:
 	\end{itemize}
 
 \begin{center}
-\includegraphics[scale=0.15]{graphics/schichtenmodell.png}
+\includegraphics[scale=0.25]{graphics/schichtenmodell.png}
 \end{center}
 
 Vorteile:
@@ -527,14 +527,14 @@ Vorteile:
 Nachteile:
 	\begin{itemize}
 		\item Nur unidirektionaler Schutz
-		\item Beiseitige Abhängigkeit von Schichten verhindert strikte Schichtenbildung
+		\item Beidseitige Abhängigkeit von Schichten verhindert strikte Schichtenbildung
 	\end{itemize}
 Beispiele:
 	\begin{itemize}
-		\item THE (Dijkstra), Multics(GE), VOCOS(EWSD)
+		\item THE (Dijkstra), Multics (GE), VOCOS (EWSD)
 	\end{itemize}
 	
-\section{Monolitische Kernels}
+\section{Monolitische Kernel}
 	\begin{center}
 		\includegraphics[scale=0.3]{graphics/monolithickernel.png}
 	\end{center}
@@ -567,8 +567,8 @@ Beispiele:
 	
 	Vorteile:
 		\begin{itemize}
-			\item Einfacher einen Microkernel zu erweitern
-			\item Einfacher das Betriebssystem auf neue Architekturen zu portieren
+			\item Einfacher, einen Microkernel zu erweitern
+			\item Einfacher, das Betriebssystem auf neue Architekturen zu portieren
 			\item Zuverlässiger (es läuft weniger Code im Kernel-Modul)
 			\item Mehrere APIs vorhanden
 			\item Verbesserte Robustheit und Sicherheit
@@ -584,10 +584,10 @@ Beispiele:
 
 \section{Virtuelle Maschinen}
 	\begin{itemize}
-		\item Eine virtuelle Maschine nimmt den mehrschichtigen Ansatz und behandelt Hardware sowie den Kernel des Betriebssystems so als wären sie Hardware
-		\item Eine virtuelle Maschine stellt ein identisches Interface zu der blanken, darunterliegenden Hardware
-		\item Der Betriebssystem-Host kreiert die Illusion, dass ein Prozess sein eigenen Prozessor und (virtuellen Speicher) hat.
-		\item Jeder Gast bekommt eine Kopie des darunterliegenden Computers zur Verfügung gestellt.
+		\item Eine virtuelle Maschine nimmt den mehrschichtigen Ansatz und behandelt Hardware sowie den Kernel des Betriebssystems so, als wären sie Hardware
+		\item Eine virtuelle Maschine bietet ein identisches Interface zu der blanken, darunterliegenden Hardware
+		\item Der Betriebssystem-Host kreiert die Illusion, dass ein Prozess seinen eigenen Prozessor und (virtuellen Speicher) hat
+		\item Jeder Gast bekommt eine Kopie des darunterliegenden Computers zur Verfügung gestellt
 	\end{itemize}
 	Vorteile:
 		\begin{itemize}
@@ -612,7 +612,7 @@ Beispiele:
 		\item Batch System - Jobs
 		\item und zeitteilende Systeme - Benutzerprogramme oder -aufgaben
 	\end{itemize} 
-	aus.\\
+	aus.\\\\
 	Job oder Prozess := ein Programm in Ausführung
 \section{Process Structure (in memory)}
 	\begin{figure}[htbp]
@@ -630,22 +630,22 @@ Beispiele:
 					\item Data: lesen und schreiben
 					\item BSS: globale, statische Variablen auf 0 gesetzt
 				\end{itemize}
-				\item eine Heap
+				\item einen Heap
 			\end{itemize}
 		\end{minipage}
 		\hfill
 		\begin{minipage}[t]{4cm}
 			\vspace{0pt}
 			\centering
-			\includegraphics[scale = 0.3]{graphics/memory.png}\\
+			\includegraphics[scale = 0.6]{graphics/memory.png}\\
 		\end{minipage}
 	\end{figure}
 
 \section{Process Status}
 	Ein Prozess wechselt wie folgt zwischen verschiedenen Zuständen:\\ \\
-	\includegraphics[scale = 0.4]{graphics/prozess_status.png}
-\section{Process Control Block(PCB)}
-	Zu jedem Prozess gehört:
+	\includegraphics[scale = 0.6]{graphics/prozess_status.png}
+\section{Process Control Block (PCB)}
+	Zu jedem Prozesskontrollblock gehört:
 	\begin{itemize}
 		\item ein Prozessstatus und eine ID
 		\item ein Programmzähler
@@ -656,13 +656,13 @@ Beispiele:
 	\end{itemize}
 \section{Context Switch}
 	:= Das Wechseln der Prozessinformationen beim Prozesswechsel in der CPU\\ \\
-	Dieser Kontext wird in PCB's gespeichert. Zeit zum Wechseln geht bei der Rechenzeit verloren.\\ \\
+	Dieser Kontext wird in PCBs gespeichert. Zeit zum Wechseln geht bei der Rechenzeit verloren.\\ \\
 	\includegraphics[scale = 0.6]{graphics/process_switch.png}\\
 \section{Process Creation}
 	\begin{itemize}
 		\item Prozesse bilden als Kinder- und Elternprozesse einen Prozessbaum
 		\item Prozesse werden durch einen Process Identifier (pid) erkannt und verwaltet
-		\item Resource Sharing
+		\item Ressource Sharing
 		\begin{itemize}
 			\item Kinder und Eltern teilen \textbf{alle} Resourcen
 			\item Eltern teilen einen Teil ihrer Resourcen mit ihren Kindern
@@ -688,15 +688,15 @@ Beispiele:
 
 \section{Process Termination}
 	\begin{itemize}
-		\item Prozess führt letzte Anweisung aus und lässt sich vom System löschen (\underline{Exit})
+		\item Prozess führt letzte Anweisung aus und lässt sich vom System löschen (\underline{exit})
 		\begin{itemize}
 			\item Rückgabedaten via \underline{wait} an Eltern
-			\item danach wird Speicher des Prozess wieder freigegeben
+			\item danach wird Speicher des Prozesses wieder freigegeben
 		\end{itemize}
 		\item Eltern brechen Kindprozess ab (\underline{abort})
 		\begin{itemize}
 			\item Kind hat die zugesicherten Resourcen überschritten
-			\item Aufgabe des Prozess' wird nicht mehr benötigt
+			\item Aufgabe des Prozesses wird nicht mehr benötigt
 			\item oder (nur bei manchen Betriebssystemen) wird durch das Beenden des Elternprozess' beendet (\underline{cascading termination})
 		\end{itemize}
 	\end{itemize}
