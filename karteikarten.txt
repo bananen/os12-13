@@ -1,0 +1,98 @@
+Was sind die vier Komponenten eines Computersystems?	HW, OS, System- und Applikationsprogramme, Benutzer
+Wofuer steht DMA?	Direct Memory Access
+Kurze Beschreibung von Microkernel	Alle nicht essentiellen Komponenten werden nicht im Kernel sondern als System- und Benutzerlevel Programme implementiert
+Was sind die Inhalte des PCB?	process state, process number, program counter, registers, memory limits, list of open files, ...
+Was besagt das Many-to-One Model?	Viele Benutzer-Threads werden auf genau einen Kernel-Thread abgebildet
+Was besagt das One-to-One Model?	Genau ein Benutzer-Thread wird auf genau einen Kernel-Thread abgebildet
+Was besagt das Many-to-Many Model?	Mehrere Benutzer-Threads werden auf eine kleinere oder gleich große Menge von Kernel-Threads gemultiplext.
+Was sind die Ziele des Benutzers bei OS?	Benutzbarkeit, einfach zu erlernen, Zuverlaessigkeit, Sicherheit, Schnelligkeit
+Was sind die Ziele fuer das System des OS?	Leicht zu designen/implementieren/unterhalten, Flexibilitaet, Zuverlaessigkeit, Fehlerfreiheit, Effizienz
+Was macht das Bootstrap program?	Es initialisiert alle Aspekte des System, insbesondere HW-Komponenten; es laedt den kernel und startet die Ausfuehrung
+Was bewirkt ein interrupt?	Kontrolle wird ueber einen interrupt vector an eine interrupt service routine uebergeben; die interrupt architecture speichert die Adresse der aktuellen Instruktion; einkommende interrupts werden ausgeschaltet
+Was ist multiprogramming?	Jobs werden durch scheduling so organisiert, dass die CPU immer beschaeftigt ist
+Was ist timesharing?	CPU wechselt die jobs so schnell, sodass eine Interaktion mit dem System moeglich ist
+Wofuer ist das OS bei der Verwaltung von Prozessen zustaendig?	Erschaffen und loeschen, suspenden und resumen, Prozessynchronisation und -kommunikation, Behandlung von deadlocks
+Wovon haengt die Speicherhierarchie ab?	Geschwindigkeit, Kosten, Fluechtigkeit
+Was ist eine Policy?	Eine Policy besagt, was getan wird
+Was ist ein Mechanism?	Ein Mechanism besagt, wie etwas getan wird
+Was wird auf dem Stack gespeichert?	Lokale Variablen und Ruecksprungadressen
+Was wird auf dem Heap gespeichert?	Dynamisch allokierte Daten z.B. mit malloc()
+Was wird im Data Segment gespeichert?	Initialisierte und globale Variablen
+Was ist char (*a)[42]?	Ein Pointer auf ein Array mit 42 chars
+Was ist char *b()?	Eine Funktion, welche einen Pointer zurueckgibt, welcher auf ein char zeigt
+Was ist char (*c)()?	Ein Funktionspointer auf eine Funktion, welche einen char zurueckgibt
+Was ist char *(*d(long))(double)?	Eine Funktion, welche von long entgegen nimmt und einen Funktionpointer zurueckgibt. Die Funktion, auf welche gezeigt wird, nimmt ein double entgegen und gibt einen Zeiger auf ein char zurueck
+Vorteile vom monolithischen System	Einfacher Zugriff auf Systemdaten; Kosten von Modulinteraktionen niedrig; erweiterbar ueber Schnittstellen; vorhersehbares Verhalten
+Nachteile von monolithischen Systemen	Kein Schutz zwischen System und Anwendung; Instabilitaet
+Beispiele fuer monolithische Systeme	uCLinux, RTOSe, eCos
+Vorteile vom mehrschichtigen Ansatz	Unabhaengiges Testen und Verifizieren jeder einzelnen Schicht; Korrektheit von Schicht n haengt nur von Schicht n-1 ab
+Nachteile vom mehrschichtigen Ansatz	Nur unidirektionaler Schutz; beidseitige Abhaengigkeit von Schichten verhindert strikte Schichtenbildung
+Beispiele fuer mehrschichtigen Ansatz	THE, Multics, VOCOS
+Vorteile von monolithischen Kernels	Gute Performance; ausreichender Schutz zwischen Anwendungen; erweiterbar ueber Schnittstellen und statische Module
+Nachteile von monolithischen Kernels	Kein Schutz zwischen Kernel-Komponenten; Nebeneffekte durch undokumentierte Interfaces; hohe Komplexitaet durch hohe gegenseitige Abhaengigkeit
+Beispiele fuer monolithische Kernels	Linux, Solaris
+Vorteile von Microkernel Systemen	Einfach zu erweitern; einfache Portierung auf anderen Architekturen; Zuverlaessigkeit; mehrere APIs; Robustheit und Sicherheit; einfaches Testen und Beweisen; bessere Wartbarkeit
+Nachteile von Microkernel Systemen	Performance-Unkosten durch Kommunikation von Benutzerspace zu Kernelspace; schlechte Erfahrungen
+Wofuer steht TLB?	Translation Lookaside Buffer
+Wofuer steht EAT?	Effective Access Time
+Was ist write-through auf Caches bezogen?	Hauptspeicher ist immer auf dem neusten Stand, weshalb Schreiben laenger braucht
+Was ist write-back im Sinne von Caches?	Daten werden nur in Cache geschrieben, Hauptspeicher daher temporaer in inkonsistentem Zustand
+Was ist Voll-Assoziativitaet?	Jede Speicherzelle kann auf jede Cachezeile abgebildet werden, Finden durch Hashing
+Was ist Direct Mapping?	Jeder Block repraesentiert genau einen Satz
+Was ist N-way set Assoziativitaet?	Cachebloecke sind zu Saetzen mit n Bloecken angeordnet, man benoetigt n Vergleiche
+Was sind die 4 Bedingungen fuer Deadlocks?	Mutual exclusion; hold and wait, no preemption; circular wait
+Was versteht man unter Deadlockvorbeugung?	Man sorgt dafuer, dass eine der Bedingungen fuer Deadlocks nicht eintreten kann
+Wofuer steht MMU?	Memory Management Unit
+Welche Arten von cache misses gibt es?	Compulsory miss, Capacity miss, Conflict miss
+Wofuer steht BSS?	Block Storage Segment
+Was wird im BSS gespeichert?	Alle globalen und lokalen statischen Variablen, die nicht initialisiert werden muessen
+Was beinhaltet ein Prozess im Speicher?	Heap, Stack, BSS, Data, roData, Text
+Was sind Beispiele fuer Syscalls aus der POSIX Thread Management API?	<div>pthread_create (thread,attr,start_routine,arg)</div><div>pthread_exit (status)</div><div>pthread_cancel (thread)</div><div>pthread_attr_init (attr)</div><div>pthread_attr_destroy (attr)</div>
+Was sind Beispiele fuer Kerndatentypen?	page table, ready queue, PCB, semaphore, ...
+Was ist Prioritaetsinversion?	Ein Ereignis, bei dem ein hoeher priorer Prozess auf eine Ressource nicht zugreifen kann, da ein niedrig priorer Prozess diese bereits belegt hat, weshalb der hoeher priore Prozess warten muss und es somit zu einer Umkehrung der Prioritaeten kommt
+Was ist ein Spinlock?	<div>Ein Mechanismus zur Prozesssynchronisation. Es ist eine Sperre zum Schutz einer gemeinsam genutzten Ressource durch konkurrierende Prozesse. Umsetzung mittels aktiven Wartens.</div>
+Was enthaelt ein Inode?	Zugriffsrechte, Eigentuemer und Gruppe, Dateityp, Groeße der Datei, Linkzaehler, Datum der letzten Inode-Aenderungen, Verweise auf Cluster (in denen der Inhalt steht)
+Was sind Kriterien fuer Schedulingverfahren?	Prozessorauslastung, Durchsatz, Turnaround time, Waiting time, Response time
+Welche HW-Mechanismen gibt es zur Synchronisation im OS?	Ausschalten von interrupts (Uniprozessor), atomare Instruktionen (Multiprozessor)
+Welche Arten von Fragmentierung gibt es?	Interne und externe Fragmentierung
+Was ist interne Fragmentierung?	Ein Prozess bekommt auf Grund des Pagings mehr Speicher zugeteilt, als er fuer einen bestimmten Block benoetigt
+Was ist externe Fragmentierung?	Insgesamt ist genug Speicher vorhanden, die Loecher sind jedoch verteilt, sodass die Daten nicht am Stueck in den Speicher passen
+Wann tritt ein pagefault auf und wie reagiert das OS?	Wenn das OS auf eine Adresse zugreift, bei welche das validbit auf 0 gesetzt ist; das OS reserviert Speicher, laedt die Daten, es updatet den pagetable, wobei es das validbit setzt und wiederholt die letzte Anweisung des Prozesses
+In welche 4 Typen koennen Caches aufgeteilt werden?	Physically indexed, physically tagged (PIPT); virtually indexed, virtually tagged (VIVT); virtually indexed, physically (VIPT); physically indexed, virtually tagged (PIVT, useless)
+Welche Probleme haben VIVT caches?	aliasing, ambiguity
+Welche Probleme haben PIPT caches?	keine
+Welche Probleme haben PIVT caches?	keine, wird nicht verwendet
+Welche Probleme haben VIPT caches?	aliasing
+Was sind drei notwendige Bedingungen fuer Loesung des Problems des kritischen Abschnitts?	Mutual exclusion, progress, bounded waiting
+Was macht ein long-term scheduler?	Der long-term scheduler (auch job scheduler) waehlt aus, welche Prozesse in die ready queue kommen und wird relativ selten aufgerufen
+Was macht ein short-term scheduler?	Der short-term scheduler (auch CPU scheduler) waehlt aus, welcher Prozess als naechstes ausgefuehrt wird und dispatcht sie auf die verfuegbaren CPUs und wird sehr haeufig aufgerufen
+Wofuer steht APIC?	Advanced programmable interrupt controller
+Wofuer steht KSP?	Kernel Stack Pointer
+Wohin zeigt der Frame Pointer?	Auf den Anfang vom Frame/Stack
+Sind System Calls synchron zum Code?	Ja
+Sind Exceptions synchron zum Code?	Ja
+Sind Interrupts synchron zum Code?	Nein
+Von wem werden System Calls ausgeloest?	Applikationen
+Von wem werden Exceptions ausgeloest?	CPU
+Von wem werden Interrupts ausgeloest?	Geraete/Devices
+Was ist das Ziel von System Calls?	Privilegierten Service von OS bekommen
+Was ist der Zweck von Exceptions?	Bedingung muss von OS behandelt werden
+Was ist das Ziel von interrupts?	Signal von Geraet/Device zu CPU/OS senden
+Was sind 3 Techniken, um als VM privilegierte Instruktionen auszufuehren?	Paravirtualization, Binary Translation, Trap-and-emulate
+Wann ist ein System im safe state?	Wenn es in einem Zustand ist, in dem es nicht zu einem deadlock kommen kann
+Was ist Deadlock Verhinderung/Prevention?	Man negiert mindestens eine der Bedinungen fuer die Entstehung von deadlocks
+Was ist Deadlock Vermeidung/Avoidance?	Entscheide bei jeder Ressourcenallokation, ob das System danach noch im safe state ist. Dies kann nur funktionieren, wenn das System zu jeder Zeit weiß, welche Ressourcen frei sind, welche Ressourcen welchen Prozessen zugeordnet sind und welcher Prozess welche Ressourcen in der Zukunft freigibt bzw. anfordert
+Wo ist der Unterschied zwischen local und global page replacement?	Beim global page replacement kann eine beliebige Seite aus dem Speicher ersetzt werden, beim local page replacement koennen nur Seiten ersetzt werden, welche dem Prozess zugeordnet wurden
+Wofuer stehen rwx bei Verzeichnissen?	r: auflisten, w: Dateien anlegen, x: betreten
+Wie ist die Effective Access Time definiert?	(tau + mue) * alpha + (tau + 2mue) * (1 - alpha) = tau + 2mue - mue * alpha; mit Hit-ratio alpha, einer assoziativen Suche der Dauer tau Zeiteinheiten und einem Speicherzyklus der Dauer mue Zeiteinheiten
+Was ist RAID 0?	Beschleunigung ohne Redundanz, indem Datenbloecke abwechselnd in beteiligte Platten geschrieben werden (Reißverschlussverfahren) und man durch paralleles Lesen einen hoeheren Datendurchsatz hat
+Was ist RAID 1?	Spiegelung und somit volle Redundanz auf mindestens zwei Platten
+Was ist RAID 5?	Striping mit auf Block-Level verteilten Paritaets-Informationen
+Was ist RAID 2?	Bit-Level Striping mit Hamming-Code-basierender Fehlerkorrektur
+Was ist RAID 3?	Byte-Level Striping mit Paritaetsinformationen auf separater Festplatte
+Was ist RAID 4?	Block-Level Striping mit Paritaetsinformationen auf separater Festplatte
+Beispiele fuer privilegierte IA-32 Instruktionen	CLI/STI (Aus- und Einschalten der interrupts), PUSHF/POPF (um CPL (Current Privilege Level) zu setzen)
+Wofuer steht ASID?	Address Space Identifier
+Wofuer steht PFN?	Page/Physical Frame Number
+Was ist ein inverted page table?	Die Erweiterung der Tabelle über den Arbeitsspeicher
+Was ist ein forward pagetable?	Man mappt für jeden Prozess die virtuellen Seiten auf die physischen Seiten des Systems
